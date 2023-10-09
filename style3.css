@@ -1,0 +1,133 @@
+ /* a:link{
+    text-decoration: none;
+}
+a:hover{
+    color: red;
+}
+a{
+    color: green;
+ }  */
+ /* .test2{
+    width: 150px;
+    height: 150px;
+    background-color: aquamarine;
+    border: 10px solid black;
+    background-color: aqua;
+    max-width: 150px;
+    max-height: 5vh;  1vh=1% din viewport
+} */
+/* *{
+    box-sizing: border-box;
+}
+.test2{
+    width: 50%;
+    height: 150px;
+    border: 5px solid green;
+    padding: 20px 20px 20px 20px;
+    background-color: blue;
+    margin-inline: auto;
+    position: relative;
+    top: 50%;
+}
+body{
+    height: 100vh;
+} */
+
+/* table,th,td{
+    border: 1px solid blue;
+
+}
+table{
+    border-collapse: collapse;
+}
+th,td{
+    border: 3px solid red;
+}
+tr:nth-child(odd)
+{
+    background-color: rgb(118, 118, 238);
+}
+tr:hover{
+    background-color: green;
+}
+th{
+    background-color: white;
+}
+tr,td,th{
+    border: none;
+} */
+
+/* .ul1{
+    list-style-type:upper-roman ;
+    list-style-image: url(Ceapa.jpg);
+}
+.ul2{
+    list-style-position: outside;
+}
+.ul3{
+    list-style-position: inside;
+    list-style: square inside;
+}
+.a{
+    position: relative;
+    left: 60px;
+    top: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: burlywood;
+}
+.b{
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    background-color: greenyellow;
+}
+.parrent{
+    position: relative;
+    top: 100px;
+    left: 100px;
+    width: 50px;
+    height: 50px;
+    background-color: red;
+}
+.child{
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    background-color: blue;
+    top: 100px;
+    left: 100px;
+}
+.c{
+    position: sticky;
+    background-color: aquamarine;
+    top: 200px;
+    left: 200px;
+    height: 50px;
+    width: 50px;
+    z-index: 9999999;
+    display: none;
+    visibility: hidden;
+} */
+.content{
+    height: 500px;
+    width: 500px;
+    background-color: burlywood;
+    position: relative;
+}
+.center{
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    height: 50px;
+    width: 50px;
+    background-color: red;
+}
+.bottom{
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    background-color: red;
+    left: 90%;
+    top: 90%;
+}
