@@ -1,0 +1,45 @@
+
+header{
+    padding: 30px;
+    text-align: center;
+    background-color: rgb(122, 89, 156);
+}
+h1{
+    font-size: 50px;
+}
+h2{
+    background-color: rgb(122, 89, 156);
+}
+h5{
+    background-color: rgb(122, 165, 226);
+}
+div{
+    width: 50%;
+    text-align: center;
+    border: 1px solid blue;
+    align-content: center;
+    vertical-align: middle;
+}
+.footer{
+    display: block;
+    float: left;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    background-color: #ddd;
+}
+.navigation{
+    margin: 0;
+    padding: 10px;
+    list-style-type: none;
+    background-color: #ddd;
+    width: 80px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navigation li a{
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 10px;
+}
