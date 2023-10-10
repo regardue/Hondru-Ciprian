@@ -20,13 +20,15 @@ div{
     align-content: center;
     vertical-align: middle;
 }
-.footer{
+footer{
     display: block;
     float: left;
     width: 100%;
     padding: 20px;
     text-align: center;
     background-color: #ddd;
+    position: absolute;
+    bottom: 0;
 }
 .navigation{
     margin: 0;
