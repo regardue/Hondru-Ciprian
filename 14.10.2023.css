@@ -1,0 +1,90 @@
+/* div{
+    width: 50%;
+    border: 1px solid blue;
+    text-align: center;
+    margin: auto;
+} */
+
+/* .nav{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    background-color: aqua;
+    width: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.nav li{
+    display: block;
+    text-align: left;
+    text-decoration: none;
+    color: white;
+    padding: 10px 10px;
+}
+.title1{
+    padding: 30px;
+    text-align: center;
+    background-color: rgb(122, 89, 156);
+}
+.nav a{
+    text-decoration: none;
+} */
+/* h1{
+    font-size: 50px;
+}
+h2{
+    color: rgb(122, 89, 156);
+}
+h5{
+    color: rgb(122, 165, 226);
+} */
+/* footer{
+    display: block;
+    width: 100%;
+    float: left;
+    padding: 20px;
+    text-align: center;
+    background-color: #ddd;
+    color: blue;
+} */
+/* .article{
+    border: 2px solid gray;
+    margin: 10px;
+    padding: 15px;
+    font-family: 'Times New Roman', Times, serif;
+    line-height: 1.6;
+    border-radius: 20px;
+    max-width: fit-content;
+    background-color: burlywood;
+    color: green;
+} */
+/* .button1{
+    background-color: green;
+    color: white;
+}
+.button2{
+    background-color: blue;
+    color: yellow;
+}
+.button3{
+    background-color: red;
+    color: black;
+} */
+
+/* .form{
+    border: 1px solid black;
+    padding: 10px;
+}
+.button{
+    background-color: purple;
+    color: white;
+} */
+.table{
+    border: 1px solid gray;
+}
+.table thead{
+    background-color: lightblue;
+    text-align: center;
+}
+.table tr :nth-child(even){
+background-color: lightgray;
+}
