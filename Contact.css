@@ -33,6 +33,14 @@ h1{
     text-align: center;
     color: blue;
 }
-.imagini{
-    color: green;
+h2{
+    text-align: center;
+    color: brown;
+}
+.message{
+    text-align: center;
+}
+.contact_info{
+    color: rgb(36, 42, 133);
+    font-size: 50px;
 }
