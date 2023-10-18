@@ -1,0 +1,136 @@
+/* div{
+    width: 300px;
+    height: 300px;
+}
+.left{
+    background-color: red;
+    clear: left;
+}
+.right{
+    background-color: blue;
+    clear: left;
+}
+.clear{
+    background-color: green;
+}
+
+img{
+    width: 300px;
+    float: left;
+}
+@media only screen and (max-width:700px){
+.left{
+    float: right;
+}
+.right{
+    float: right;
+}
+} */
+/* div{
+    width: 100px;
+    height: 100px;
+}
+.left{
+    background-color: red;
+}
+.right{
+    background-color: blue;
+}
+.left1{
+    background-color: yellow;
+}
+.right1{
+    background-color: brown;
+}
+.container{
+    width: 100vw;
+    height: 100vh;
+    background-color: aqua;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+} */
+/* .main{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+.menu{
+    background-color: red;
+    width: 20vw;
+}
+.content{
+    width: 80vw;
+    background-color: blue;
+}
+.more_main{
+    display: flex;
+    flex-direction: column;
+}
+.navbar{
+    width: 100vw;
+    height: 100px;
+    background-color: aqua;
+} */
+/* .main{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+.nume{
+    width: 200px;
+}
+.imagine{
+    width: 200px;
+    height: 200px;
+}
+.rounded_image{
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+} */
+/* .main{
+    width: 1000px;
+    height: 500px;
+    display: flex;
+    border: 3px solid black;
+}
+.div1{
+    background-color: red;
+    flex-grow: 1;
+    order: 4;
+}
+.div2{
+    background-color: blue;
+    flex-grow: 4;
+    order: 3;
+}
+.div3{
+    background-color: green;
+    flex-grow: 2;
+    order: 2;
+}
+.div4{
+    background-color: yellow;
+    flex-grow: 1;
+    order: 1;
+} */
+.main{
+    width: 200px;
+    height: 200px;
+    background-image: linear-gradient(to top right, green , blue , red , yellow );
+    /* box-shadow: 5px 5px orange;
+    transform: scale(20%)
+    translate(50px, 200px)
+    transform: rotate(45deg) */
+    transition: background-color 5s;
+    transition: width 5s;
+}
+div:hover{
+    width: 400px;
+    background-color: orange;
+}
