@@ -1,0 +1,13 @@
+.b{
+    background-color: burlywood;
+    position: relative;
+    margin: 30px;
+}
+.a{
+    position: relative;
+    left: 30px;
+}
+.c{
+    position: relative;
+    left: 30px;
+}
