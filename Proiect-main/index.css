@@ -1,0 +1,41 @@
+.Text{
+    display: inline-flex;
+    padding-right: 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+}
+.Space{
+    font-family: Bellefair;
+    font-size: 150px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: #fff;
+}
+.Text_space{
+    font-family: Barlow Condensed Regular;
+    font-size: 28px;
+    font-style: normal;
+    color: #D0D6F9;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 4.725px;
+    width: 444px;
+}
+.Text_h5{
+    font-family: Barlow Condensed;
+    font-size: 28px;
+    color: #D0D6F9;
+}
+body{
+    margin: 0px;
+    padding: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('background-home-desktop.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
