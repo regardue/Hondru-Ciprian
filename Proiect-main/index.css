@@ -1,33 +1,33 @@
 .Text{
-    display: inline-flex;
+    width: 450px;
+    height: 382px;
+    position: fixed;
+    left: 165px;
+    top: 387px;
     padding-right: 0px;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 24px;
 }
 .Space{
+    margin: 0px;
+    padding-top: 24px;
     font-family: Bellefair;
     font-size: 150px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    color: #fff;
+    color: #fff; 
 }
 .Text_space{
-    font-family: Barlow Condensed Regular;
+    font-family: Barlow Condensed;
     font-size: 28px;
-    font-style: normal;
     color: #D0D6F9;
-    font-weight: 400;
-    line-height: normal;
     letter-spacing: 4.725px;
-    width: 444px;
 }
 .Text_h5{
     font-family: Barlow Condensed;
     font-size: 28px;
     color: #D0D6F9;
+    margin: 0px;
+    padding: 0px;
 }
 body{
     margin: 0px;
@@ -38,4 +38,65 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+}
+.logo{
+    height: 48px;
+    width: 48px;
+    margin-top: 64px;
+    margin-left: 55px;
+}
+.main_navbar{
+    padding-right: 120px;
+    padding-left: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    align-content: center;
+    width: 830px;
+    height: 96px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(40.774227142333984px);
+}
+.main_navbar a{
+    color: #fff;
+    font-family: Barlow Condensed;
+    font-size: 16px;
+    letter-spacing: 2.7px;
+    text-transform: uppercase;
+}
+.move_navbar{
+   position: fixed;
+   right: 0px;
+   top: 50px; 
+}
+.Explore{
+    width: 274px;
+    height: 274px;
+    border-radius: 274px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Explore p{
+    color: #0B0D17;
+    font-family: Bellefair;
+    font-size: 32px;
+    letter-spacing: 2px;
+}
+.Explore_move{
+    position: fixed;
+    right: 164.52px;
+    bottom: 164.52px;
+}
+.hr1{
+    width: 473px;
+    height: 1px;
+    flex-shrink: 0;
+    opacity: 0.2515;
+    background: #fff;
+    position: absolute;
+    top: -298px;
 }
