@@ -1,0 +1,15 @@
+.border-opacity {
+    position: relative;
+    padding: 20px;
+}
+
+/* Apply a border with opacity using a background image */
+.border-opacity::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(transparent 5px, #3498db 2px, #3498db 98%, transparent 98%); /* Adjust the color and opacity as needed */
+}

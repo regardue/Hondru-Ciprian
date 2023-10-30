@@ -18,7 +18,7 @@ body{
     width: 100vw;
     height: 1rem;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     flex-direction: row;
     align-items: center;
 }
@@ -26,7 +26,7 @@ body{
     width: 100vw;
     height: 90vh;
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     flex-direction: row;
 }
 /* .left{
@@ -51,14 +51,13 @@ body{
 }
 .menu li{
     float: left;
-    margin-left: 0.6rem;
     margin-top: 1.5rem;
 }
 .menu ul{
     list-style-type: none;
 }
 .menu li{
-    padding-right: 1rem;
+    padding-right: 1.75rem;
 }
 .menu a{
     color: white;
@@ -89,7 +88,7 @@ body{
 }
 .top_margin{
     width: 100vw;
-    height: 23rem;
+    height: 58.7rem;
 }
 .Nothing{
     height: 30rem;
@@ -152,7 +151,7 @@ body{
 }
 .Moon_Distance{
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     /* background-color: red; */
     height: 200px;
     width: 100%;
@@ -230,6 +229,5 @@ body{
     border-bottom: 0.25rem solid white;
 }
 .Moon_Pick span{
-    text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    text-decoration: dashed;
+    filter: opacity(30%);
 }

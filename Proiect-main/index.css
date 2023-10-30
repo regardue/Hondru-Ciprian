@@ -18,7 +18,7 @@ body{
     width: 100vw;
     height: 1rem;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     flex-direction: row;
     align-items: center;
 }
@@ -39,8 +39,8 @@ body{
 
 }
 .linie{
-    width: 55rem;
-    max-width: 50rem;
+    width: 50rem;
+    /* max-width: 50rem; */
     overflow: visible;
     z-index: 2;
     margin-left: 7%;
@@ -50,14 +50,13 @@ body{
 }
 .menu li{
     float: left;
-    margin-left: 0.6rem;
     margin-top: 1.5rem;
 }
 .menu ul{
     list-style-type: none;
 }
 .menu li{
-    padding-right: 1rem;
+    padding-right: 1.75rem;
 }
 .menu a{
     color: white;
@@ -87,7 +86,7 @@ body{
 }
 .top_margin{
     width: 100vw;
-    height: 2.85rem;
+    height: 5rem;
 }
 .Space1{
     width: 35rem;
@@ -138,11 +137,18 @@ body{
 }
 .Explore_move{
     display: flex;
-    width: 60%;
+    width:50%;
     height: 500px;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
+}
+.Explore_move div:hover{
+    border: 4.5rem solid rgba(77, 81, 85, 0.5);
+    box-shadow: 0 0 10px rgba(77, 81, 85, 0.5)
+}
+.Explore_left{
+    width: 19%;
 }
 
 
