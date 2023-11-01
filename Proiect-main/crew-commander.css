@@ -1,9 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body{
     margin: 0px;
     padding: 0px;
     width: 100vw;
     height: 100vh;
-    background-image: url('background-destination-desktop.jpg');
+    background-image: url('background-crew-desktop.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -22,23 +27,6 @@ body{
     flex-direction: row;
     align-items: center;
 }
-.Text{
-    width: 100vw;
-    height: 90vh;
-    display: flex;
-    /* flex-wrap: wrap; */
-    /* flex-direction: row; */
-}
-/* .left{
-    width: 50%;
-    height: 200px;
-    background-color: red;
-}
-.right{
-    width: 50%;
-    height: 200px;
-    background-color: blue;
-} */
 .linie{
     width: 55rem;
     max-width: 50rem;
@@ -51,13 +39,11 @@ body{
 }
 .menu li{
     float: left;
-    margin-top: 1.5rem;
+    margin-top: 2.4rem;
+    padding-right: 4rem;
 }
 .menu ul{
     list-style-type: none;
-}
-.menu li{
-    padding-right: 1.75rem;
 }
 .menu a{
     color: white;
@@ -68,9 +54,9 @@ body{
 .menu{
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(40.774227142333984px);
-    padding-right: 7.5rem;
+    /* padding-right: 7.5rem; */
     padding-left: 7.5rem;
-    width: 36.2rem;
+    width: 51.2rem;
     height: 6rem;
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(40.774227142333984px);
@@ -88,24 +74,27 @@ body{
 }
 .top_margin{
     width: 100vw;
-    height: 58.7rem;
+    height: 5.5rem;
 }
 .Nothing{
     height: 30rem;
-    flex: 0.5;
+    flex: 0.4;
 }
 .Moon{
-    height: 50rem;
-    flex: 1.3;
+    justify-content: center;
+    height: 100%;
+    flex: 0.2;
+    /* background-color: red; */
 }
 .Moon_text{
     /* background-color: burlywood; */
     height: 30rem;
-    flex: 1.2;
+    flex: 0;
 }
 .Content{
     display: flex;
     flex-direction: row;
+    height: 100vh;
 }
 .number{
     color: #FFF;
@@ -116,11 +105,7 @@ body{
     line-height: normal;
     letter-spacing: 4.725px;
 }
-.Moon_text{
-    padding-right: 9%;
-}
-.Moon_Pick p {
-    width: 50%;
+.Moon_P {
     height: 20px;
     color: #FFF;
     font-family: Barlow Condensed;
@@ -130,7 +115,8 @@ body{
     line-height: normal;
     letter-spacing: 4.725px;
     text-transform: uppercase;
-    margin-left: -60px;
+    /* margin-left: -60px; */
+    white-space: nowrap;
 }
 .Moon_text h1{
     color: #FFF;
@@ -148,63 +134,6 @@ body{
     font-style: normal;
     font-weight: 400;
     line-height: 32px; 
-}
-.Moon_Distance{
-    display: flex;
-    /* flex-wrap: wrap; */
-    /* background-color: red; */
-    height: 200px;
-    width: 100%;
-}
-.Avg{
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 12px;
-    flex: 0.6;
-    color: #D0D6F9;
-    font-family: Barlow Condensed;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 2.362px;
-    text-transform: uppercase;
-}
-.Avg span{
-    color: #FFF;
-    font-family: Bellefair;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-transform: uppercase;
-}
-.Est{
-    display: inline-flex;
-    padding-right: 0px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 12px;
-    color: #D0D6F9;
-    font-family: Barlow Condensed;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 2.362px;
-    text-transform: uppercase;
-}
-.Est span{
-    color: #FFF;
-    font-family: Bellefair;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-transform: uppercase;
 }
 .menu2 li{
     text-transform: uppercase;
@@ -229,5 +158,67 @@ body{
     border-bottom: 0.25rem solid white;
 }
 .Moon_Pick span{
+    filter: opacity(30%);
+}
+.Moon_Pick{
+    width: 50rem;
+    display: flex;
+    flex: 1.2;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: red; */
+}
+.guy_picture img{
+    margin-bottom: 0px;
+}
+.guy_picture{
+    height: 100%;
+    display: flex;
+    flex: 1;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+.Moon_text h2{
+    color: #FFF;
+    font-family: Bellefair;
+    font-size: 65px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+}
+.Crew_text{
+    width: 27rem;
+}
+.buttons_div{
+    width: 10rem;
+    display: flex;
+    justify-content: space-between;
+}
+.Moon_text button{
+    margin-top: 5rem;
+    border: none;
+    background-color: rgba(128, 128, 128, 0.61); 
+    color: #FFF; 
+    border-radius: 50%; 
+    width: 0.75rem; 
+    height: 0.75rem; 
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}
+.Moon_text a{
+    margin-left: -0.3rem;
+    font-size: 15px;
+    color: transparent;
+}
+.buttons_div button:hover{
+    background-color: #fff;
+}
+.Commander_blur  {
+    color: #FFF;
+    font-family: Bellefair;
+    font-size: 40px;
+    text-transform: uppercase;
     filter: opacity(30%);
 }
