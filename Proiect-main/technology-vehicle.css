@@ -1,0 +1,221 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    margin: 0px;
+    padding: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('background-technology-desktop.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.main{
+    display: flex;
+    width: 100vw;
+    height: 100%;
+    flex-direction: column;
+}
+.main_navbar{
+    width: 100vw;
+    height: 1rem;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+}
+.linie{
+    width: 55rem;
+    max-width: 50rem;
+    overflow: visible;
+    z-index: 2;
+    margin-left: 7%;
+}
+.linie hr{
+    width: 53rem;
+}
+.menu li{
+    float: left;
+    margin-top: 2.4rem;
+    padding-right: 4rem;
+}
+.menu ul{
+    list-style-type: none;
+}
+.menu a{
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.menu{
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(40.774227142333984px);
+    /* padding-right: 7.5rem; */
+    padding-left: 7.5rem;
+    width: 51.2rem;
+    height: 6rem;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(40.774227142333984px);
+}
+.menu div:hover{
+    height: 3.4rem;
+    border-bottom: 0.1rem solid white;
+}
+.menu span{
+    font-weight: bold;
+    font-weight: 700;
+}
+.logo{
+    margin-left: 3.77rem;
+}
+.top_margin{
+    width: 100vw;
+    height: 5.5rem;
+}
+.Nothing{
+    height: 30rem;
+    flex: 0.4;
+}
+.Moon{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 53.3rem;
+    flex: 0.7;
+    /* background-color: red; */
+}
+.Moon_text{
+    /* background-color: burlywood; */
+    height: 53.3rem;
+    flex: 0;
+}
+.Content{
+    display: flex;
+    flex-direction: row;
+    
+}
+.number{
+    color: #FFF;
+    font-family: Barlow Condensed;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 4.725px;
+}
+.Moon_P {
+    height: 20px;
+    color: #FFF;
+    font-family: Barlow Condensed;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 4.725px;
+    text-transform: uppercase;
+    margin-left: -10rem;
+    white-space: nowrap;
+}
+.Moon_text h1{
+    color: #FFF;
+    font-family: Bellefair;
+    font-size: 100px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+}
+.Moon_text p{
+    color: #D0D6F9;
+    font-family: Barlow;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 32px; 
+}
+.menu2 li{
+    text-transform: uppercase;
+    float: left;
+    padding-right: 80px;
+    margin-top: 100px;
+}
+.menu2 {
+    margin-left: -30px;
+    list-style-type: none;
+    padding-bottom: 100px;
+}
+.menu2 a{
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+.menu2 div:hover{
+    height: 2.5rem;
+    border-bottom: 0.25rem solid white;
+}
+.Moon_Pick span{
+    filter: opacity(30%);
+}
+.Moon_Pick{
+    width: 53.3rem;
+    display: flex;
+    flex: 1.2;
+    flex-direction: column;
+    justify-content: center;
+}
+.guy_picture img{
+    margin-right: 0px;
+    margin-top: 13rem;
+}
+.guy_picture{
+    height: 53rem;
+    width: auto;
+}
+.Moon_text h2{
+    color: #FFF;
+    font-family: Bellefair;
+    font-size: 65px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+}
+.Crew_text{
+    width: 33rem;
+    height: 15rem;
+}
+.Commander_blur  {
+    color: #D0D6F9;
+    font-family: Bellefair;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+.Buttons a{
+    display: block;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+    text-decoration: none;
+    line-height: 5rem;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    font-family: Bellefair;
+    position: relative;
+}
+.Buttons{
+    width: 10rem;
+    height: 13rem;
+}
+.Buttons a:hover{
+    background-color: #FFF;
+    color: black;
+}

@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body{
     margin: 0px;
     padding: 0px;
@@ -22,25 +27,9 @@ body{
     flex-direction: row;
     align-items: center;
 }
-.Text{
-    width: 100vw;
-    height: 90vh;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-}
-.left{
-    width: 50%;
-    height: 200px;
-}
-.right{
-    width: 50%;
-    height: 200px;
-
-}
 .linie{
-    width: 50rem;
-    /* max-width: 50rem; */
+    width: 55rem;
+    max-width: 50rem;
     overflow: visible;
     z-index: 2;
     margin-left: 7%;
@@ -50,13 +39,11 @@ body{
 }
 .menu li{
     float: left;
-    margin-top: 1.5rem;
+    margin-top: 2.4rem;
+    padding-right: 4rem;
 }
 .menu ul{
     list-style-type: none;
-}
-.menu li{
-    padding-right: 1.75rem;
 }
 .menu a{
     color: white;
@@ -67,9 +54,9 @@ body{
 .menu{
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(40.774227142333984px);
-    padding-right: 120px;
-    padding-left: 120px;
-    width: 36.2rem;
+    /* padding-right: 7.5rem; */
+    padding-left: 7.5rem;
+    width: 51.2rem;
     height: 6rem;
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(40.774227142333984px);
@@ -80,43 +67,45 @@ body{
 }
 .menu span{
     font-weight: bold;
+    font-weight: 700;
 }
 .logo{
     margin-left: 3.77rem;
 }
 .top_margin{
     width: 100vw;
-    height: 5rem;
+    height: 5.5rem;
 }
 .Space1{
     width: 35rem;
     font-family: Barlow Condensed;
-    font-size: 40px;
+    font-size: 35px;
     color: #D0D6F9;
     letter-spacing: 4.725px;
-    margin-left: 50%;
+    margin-left: 15rem;
     text-transform: uppercase;
+    margin-top: 15rem;
 }
 .Space2{
     width: 35rem;
     margin: 0px;
-    padding-top: 1.5rem;
+    padding-top: 2rem;
     font-family: Bellefair;
     font-size: 180px;
     color: #fff; 
-    padding-bottom: 1.5rem;
     height: 172px;
     text-transform: uppercase;
-    margin-left: 50%;
+    margin-left: 15rem;
 }
 .Space3{
+    padding-top: 5rem;
     width: 35rem;
     font-family: Barlow Condensed;
     font-size: 18px;
     color: #D0D6F9;
     letter-spacing: 4.725px;
     line-height: 32px;
-    margin-left: 50%;
+    margin-left: 15rem;
 }
 .Explore{
     width: 274px;
@@ -126,6 +115,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20rem;
+    margin-left: 12rem;
 }
 .Explore a{
     color: #0B0D17;
@@ -138,17 +129,23 @@ body{
 .Explore_move{
     display: flex;
     width:50%;
-    height: 500px;
+    height: 53rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 .Explore_move div:hover{
     border: 4.5rem solid rgba(77, 81, 85, 0.5);
-    box-shadow: 0 0 10px rgba(77, 81, 85, 0.5)
+    box-shadow: 0 0 10px rgba(77, 81, 85, 0.5);
 }
 .Explore_left{
     width: 19%;
+}
+.Text{
+    display: flex;
+}
+.Space_position{
+    height: 53rem;
 }
 
 
