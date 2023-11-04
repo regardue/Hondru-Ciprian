@@ -135,8 +135,8 @@ body{
     align-items: center;
 }
 .Explore_move div:hover{
-    border: 4.5rem solid rgba(77, 81, 85, 0.5);
-    box-shadow: 0 0 10px rgba(77, 81, 85, 0.5);
+    box-shadow: rgba(255, 255, 255, 0.3)0 0 3px 50px;
+    transition: box-shadow 0.6 ease-in-out;
 }
 .Explore_left{
     width: 19%;

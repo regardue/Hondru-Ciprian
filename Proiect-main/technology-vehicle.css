@@ -210,12 +210,14 @@ body{
     margin-bottom: 2rem;
     font-family: Bellefair;
     position: relative;
+    border: 1px solid rgb(255, 255, 255, 0.3);
 }
 .Buttons{
     width: 10rem;
     height: 13rem;
 }
 .Buttons a:hover{
-    background-color: #FFF;
-    color: black;
+    /* background-color: #FFF; */
+    /* color: black; */
+    border: 1px solid white;
 }
