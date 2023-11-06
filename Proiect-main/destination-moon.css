@@ -14,7 +14,7 @@ body{
     background-attachment: fixed;
 }
 .main{
-    display: flex;
+    display: inline;
     width: 100vw;
     height: 100vh;
     flex-direction: column;
@@ -26,58 +26,60 @@ body{
     flex-wrap: nowrap;
     flex-direction: row;
     align-items: center;
+    overflow: show;
 }
 .linie{
-    width: 55rem;
+    width: 50%;
     max-width: 50rem;
     overflow: visible;
     z-index: 2;
     margin-left: 7%;
 }
 .linie hr{
-    width: 53rem;
+    width: 106%;
 }
 .menu li{
     float: left;
-    margin-top: 2.4rem;
-    padding-right: 4rem;
+    margin-top: 5.5%;
+    margin-right: 10%;
 }
 .menu ul{
     list-style-type: none;
+    display: flex;
+    flex-wrap: nowrap;
 }
 .menu a{
     color: white;
-    font-size: 16px;
+    font-size: 1rem;
     text-decoration: none;
     text-transform: uppercase;
 }
 .menu{
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(40.774227142333984px);
+    /* background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(40.774227142333984px); */
     /* padding-right: 7.5rem; */
-    padding-left: 7.5rem;
-    width: 51.2rem;
+    padding-left: 6.4%;
+    width: 50%;
     height: 6rem;
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(40.774227142333984px);
 }
 .menu div:hover{
-    height: 3.4rem;
+    height: 3.6rem;
     border-bottom: 0.1rem solid white;
 }
 .menu span{
     font-weight: bold;
-    font-weight: 700;
 }
 .logo{
-    margin-left: 3.77rem;
+    margin-left: 3.25%;
 }
 .top_margin{
     width: 100vw;
     height: 5.5rem;
 }
 .Moon{
-    height: 53rem;
+    height: 54.1rem;
     flex: 0.7;
 }
 .Moon_text{
