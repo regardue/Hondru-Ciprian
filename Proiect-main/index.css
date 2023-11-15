@@ -195,10 +195,10 @@ body{
 }
 .linie{
     width: 0;
-    visibility: hidden;
+    display: none;
 }
 .Explore_left{
-    visibility: hidden;
+    display: none;
 }
 .Text{
     display: flex;
@@ -207,6 +207,7 @@ body{
     flex-wrap: wrap;
     align-items: center;
     margin-top: 17%;
+    width: 100vw;
 }
 .Explore_move{
     margin: 0;
@@ -215,9 +216,11 @@ body{
 .Explore{
     margin: 0;
     padding: 0;
+    height: 250px;
+    width: 250px;
 }
 .menu span{
-    visibility: hidden;
+    display: none;
 }
 .top_margin{
     height: 0;
@@ -242,6 +245,10 @@ body{
 }
 .Explore_move{
     margin-top: 20%;
+}
+.Explore_left{
+    height: 0px;
+    width: 0px;
 }
 }
 @media only screen and (max-width: 667px){
@@ -297,14 +304,16 @@ body{
     letter-spacing: 1.25px;
 }
 .menu{
-    visibility: hidden;
+    display: none;
 }
 .burger{
     visibility: visible;
     display: flex;
-    width: 100vw;
+    /* width: 100vw; */
     flex: wrap;
     justify-content: flex-end;
-    margin-left: 80px;
+    /* margin-left: 80px; */
+    width: 24px;
+    height: 21px;
 }
 }

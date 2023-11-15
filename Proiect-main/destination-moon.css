@@ -128,6 +128,7 @@ body{
     padding-top: 7rem;
 }
 .Moon_text h1{
+    margin-top: 7rem;
     color: #FFF;
     font-family: Bellefair;
     font-size: 100px;
@@ -225,4 +226,242 @@ body{
 }
 .Moon_Pick span{
     filter: opacity(30%);
+}
+.burger{
+    visibility: hidden;
+}
+@media only screen and (max-width: 1024px){
+body{
+    background-image: url('background-destination-tablet.jpg');
+    height: fit-content;
+}
+.linie{
+    width: 0;
+    visibility: hidden;
+}
+.menu span{
+    visibility: hidden;
+}
+.top_margin{
+    height: 0;
+    width: 0;
+}
+.main_navbar{
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3.5%;
+}
+.menu a{
+    color: #FFF;
+    font-family: Barlow Condensed;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 2.362px;
+}
+.menu li{
+    margin-right: 1px;
+}
+.Moon_text{
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+}
+.Content{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.Moon_Pick{
+    margin: 0px;
+    margin-top: 40px;
+}
+.Moon_Pick p{
+    color: #FFF;
+    font-family: Barlow Condensed;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 3.375px;
+    text-transform: uppercase;
+}
+.Moon_Pick span{
+    margin-left: -16%;
+}
+.Moon_image{
+    margin: 0px;
+    padding: 0px;
+    margin-top: 30px;
+}
+.Moon_text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.menu2{
+    margin: 0px;
+    padding: 0px;
+    color: #FFF;
+    font-family: Barlow Condensed;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 2.7px;
+    margin-left: 50px;
+}
+.Moon_text h1{
+    margin: 0px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+.hr2{
+    width: 573px;
+    color: #D0D6F9;
+    text-align: center;
+    font-family: Barlow;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px; /* 175% */
+    height: auto;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding-bottom: 50px;
+}
+.Moon_Distance{
+    justify-content: space-evenly;
+    height: auto;
+}
+.Moon_image {
+    width: 330px;
+    height: 330px;
+    margin-left: 15%;
+}
+.Avg{
+    gap: 0px;
+    justify-content: flex-start;
+    margin-top: 5%;
+}
+.Est{
+    gap: 0px;
+    justify-content: flex-start;
+    margin-top: 5%;
+}
+}
+@media only screen and (max-width: 667px){
+.main_navbar{
+    margin-top: 50px;
+    height: 0;
+    width: 100vw;
+    /* margin-left: 20px; */
+}
+.menu{
+    display: none;
+}
+.Moon_Pick span{
+    margin: 0px;
+}
+.burger{
+    visibility: visible;
+    display: flex;
+    /* width: 100vw; */
+    flex: wrap;
+    justify-content: flex-end;
+    /* margin-left: 80px; */
+    width: 24px;
+    height: 21px;
+}
+.linie{
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+.Moon_Distance{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Moon_text p{
+    width: auto;
+    color: #D0D6F9;
+    text-align: center;
+    font-family: Barlow;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px; /* 166.667% */
+}
+.Moon_text p{
+    width: 327px;
+    padding-bottom: 30px;
+}
+.menu2 a{
+    color: #FFF;
+    font-family: Barlow Condensed;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 2.362px;
+    align-items: center;
+}
+.menu2{
+    margin: 0px;
+}
+.Moon_Pick p{
+    color: #FFF;
+    font-family: Barlow Condensed;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 2.7px;
+    text-transform: uppercase;
+    margin: 0px;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+}
+.Moon_Pick{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.Moon_text h1{
+    color: #FFF;
+    text-align: center;
+    font-family: Bellefair;
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.Moon_image{
+    margin: 0px;
+}
+.linie{
+    display: none;
+}
+.Moon_image{
+    scale: 55%;
+}
+.menu2 li{
+    padding: 10px;
+    margin: 0px;
+}
+.Avg{
+    align-items: center;
+}
+.Est{
+    align-items: center;
+}
+.Moon_text h1{
+   margin-top: 15px;
+   margin-bottom: 5px; 
+}
+
 }
