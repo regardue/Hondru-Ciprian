@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(38, 38, 58);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: grid;
+    place-content: center;
+}
+.subscribe{
+    display: flex;
+    background-color: white;
+    height: 400px;
+    width: 600px;
+    border-radius: 20px;
+    padding: 20px;
+    /* justify-content: space-between; */
+}
+.subscribe-left, .subscribe-right {
+    flex:1;
+}
+.subscribe-imagine > img{
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    width: auto;
+    border-radius: 20px;
+}
+.subscribe-right{
+    display: flex;
+    justify-content: flex-end;
+}
+.subscribe-button{
+    background-color: rgba(35,39,68,255);
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+.subscribe-email{
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.subscribe-email > input{
+    border-radius: 5px;
+    padding: 12px;
+}
+.subscribe-email > label{
+    font-weight: bold;
+}
+@media screen and (max-width: 400px){
+    .subscribe{
+        flex-direction: column-reverse;
+        height: 100%;
+        justify-content: flex-end;
+        padding: 0;
+    }
+    body{
+        height: 100vh;
+        display: flex;
+    }
+    .subscribe-left, .subscribe-right {
+        flex: none;
+    }
+}
