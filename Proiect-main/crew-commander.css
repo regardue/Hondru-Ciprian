@@ -13,6 +13,9 @@ body{
     background-size: cover;
     background-attachment: fixed;
 }
+.burger{
+    display: none;
+}
 .main{
     display: inline;
     width: 100vw;
@@ -356,6 +359,9 @@ body{
     display: block;
     overflow: hidden;
 }
+.burger{
+    display: none;
+}
 }
 @media only screen and (max-width: 710px){
 .main_navbar{
@@ -446,8 +452,15 @@ body{
 .guy_picture{
     scale: 30%;
     position: absolute;
-    bottom: 365px;
-    left: 120px;
+    bottom: 110px;
+    left: -315px;
+    width: 1000px;
+    height: 700px;
+    border-bottom: 1px solid #fff;
+}
+.guy_picture > img{
+    position: absolute;
+    left: 245px;
 }
 .Moon_Pick{
     position: absolute;
@@ -466,4 +479,5 @@ body{
 .buttons_div{
     width: 6rem;
 }
+
 }
