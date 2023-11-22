@@ -21,12 +21,15 @@ body{
 }
 .main_navbar{
     width: 100vw;
-    height: 1rem;
+    height: auto;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
     align-items: center;
-    overflow: show;
+}
+.top_margin{
+    width: 100vw;
+    height: 3rem;
 }
 .linie{
     width: 50%;
@@ -39,9 +42,9 @@ body{
     width: 106%;
 }
 .menu li{
-    float: left;
+    display: flex;
     margin-top: 5.5%;
-    margin-right: 10%;
+    margin-right: 7%;
 }
 .menu ul{
     list-style-type: none;
@@ -53,6 +56,14 @@ body{
     font-size: 1rem;
     text-decoration: none;
     text-transform: uppercase;
+    color: #FFF;
+    font-family: Barlow Condensed;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 2.7px;
+    width: fit-content;
 }
 .menu{
     /* background: rgba(255, 255, 255, 0.04);
@@ -74,23 +85,20 @@ body{
 .logo{
     margin-left: 3.25%;
 }
-.top_margin{
-    width: 100vw;
-    height: 5.5rem;
-}
+
 .Nothing{
     height: 30rem;
     flex: 0.4;
 }
 .Moon{
     justify-content: center;
-    height: 53.3rem;
-    flex: 0.4;
+    /* height: 53.3rem; */
+    flex: 0.2;
     /* background-color: red; */
 }
 .Moon_text{
     /* background-color: burlywood; */
-    height: 53.3rem;
+    /* height: 53.3rem; */
     flex: 0;
 }
 .Content{
@@ -119,6 +127,7 @@ body{
     text-transform: uppercase;
     /* margin-left: -60px; */
     white-space: nowrap;
+    margin-top: 8%;
 }
 .Moon_text h1{
     color: #FFF;
@@ -174,11 +183,14 @@ body{
     margin-bottom: 0px;
 }
 .guy_picture{
-    height: 54.1rem;
-    display: flex;
+    /* height: 54.1rem; */
+    /* display: flex; */
     flex: 1;
-    align-items: flex-end;
-    justify-content: flex-start;
+    /* align-items: flex-end;
+    justify-content: flex-start; */
+    position: fixed;
+    bottom: 0;
+    left: 60%;
 }
 .Moon_text h2{
     color: #FFF;
@@ -224,16 +236,19 @@ body{
     font-size: 40px;
     text-transform: uppercase;
     filter: opacity(30%);
-    margin-top: 20%;
+    margin-top: 12%;
 }
 @media only screen and (max-width: 1024px){
 body{
     background-image: url('background-crew-tablet.jpg');
     height: 100vh;
 }
+.Moon{
+    display: none;
+}
 .linie{
     width: 0;
-    visibility: hidden;
+    display: none;
 }
 .menu span{
     visibility: hidden;
@@ -329,8 +344,9 @@ body{
     scale: 75%;
     position: fixed;
     bottom: 0;
+    left: 30%;
     height: 0;
-    width: 50%;
+    width: 0;
 }
 .guy_picture > img{
     position: fixed;
@@ -343,26 +359,28 @@ body{
 }
 @media only screen and (max-width: 710px){
 .main_navbar{
-    margin-top: 50px;
-    height: 0;
+    /* margin-top: 50px; */
+    /* height: 0; */
     width: 100vw;
     /* margin-left: 20px; */
+    margin: 0;
+}
+.logo{
+    margin-top: 3.25%;
 }
 .menu{
     display: none;
+}
+.Crew_text{
+    width: 80vw;
 }
 .Moon_Pick span{
     margin: 0px;
 }
 .burger{
+    display: inline;
     visibility: visible;
-    display: flex;
-    /* width: 100vw; */
-    flex: wrap;
-    justify-content: flex-end;
-    /* margin-left: 80px; */
-    width: 24px;
-    height: 21px;
+    margin-right: 20px;
 }
 .linie{
     display: none;
@@ -373,7 +391,8 @@ body{
 }
 .Content{
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
 }
 .Moon_P{
     margin: 0;
@@ -425,10 +444,26 @@ body{
     line-height: 25px; /* 166.667% */
 }
 .guy_picture{
-    scale: 40%;
-    width: 100vw;
+    scale: 30%;
+    position: absolute;
+    bottom: 365px;
+    left: 120px;
 }
-.Crew_text{
-    width: auto;
+.Moon_Pick{
+    position: absolute;
+    top: 370px;
+    left: 40px;
+}
+.Moon_P{
+    position: absolute;
+    bottom: 550px;
+    left: 70px;
+}
+.buttons_div{
+    position: absolute;
+    bottom: 300px;
+}
+.buttons_div{
+    width: 6rem;
 }
 }
