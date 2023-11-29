@@ -26,7 +26,10 @@ body{
     flex-wrap: nowrap;
     flex-direction: row;
     align-items: center;
-    overflow: show;
+}
+.top_margin{
+    width: 100vw;
+    height: 3rem;
 }
 .linie{
     width: 50%;
@@ -39,9 +42,9 @@ body{
     width: 106%;
 }
 .menu li{
-    float: left;
+    display: flex;
     margin-top: 5.5%;
-    margin-right: 10%;
+    margin-right: 7%;
 }
 .menu ul{
     list-style-type: none;
@@ -53,6 +56,14 @@ body{
     font-size: 1rem;
     text-decoration: none;
     text-transform: uppercase;
+    color: #FFF;
+    font-family: Barlow Condensed;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 2.7px;
+    width: fit-content;
 }
 .menu{
     /* background: rgba(255, 255, 255, 0.04);
@@ -228,7 +239,7 @@ body{
     filter: opacity(30%);
 }
 .burger{
-    visibility: hidden;
+    display: none;
 }
 @media only screen and (max-width: 1024px){
 body{

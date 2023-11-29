@@ -250,7 +250,6 @@ body{
     display: none;
 }
 .linie{
-    width: 0;
     display: none;
 }
 .menu span{
@@ -263,7 +262,7 @@ body{
 .main_navbar{
     align-items: center;
     justify-content: space-between;
-    margin-top: 3.5%;
+    margin-top: 0;
 }
 .menu a{
     color: #FFF;
