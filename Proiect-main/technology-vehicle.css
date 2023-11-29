@@ -13,6 +13,9 @@ body{
     background-size: cover;
     background-attachment: fixed;
 }
+.burger{
+    display: none;
+}
 .main{
     display: inline;
     width: 100vw;
@@ -21,12 +24,15 @@ body{
 }
 .main_navbar{
     width: 100vw;
-    height: 1rem;
+    height: auto;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
     align-items: center;
-    overflow: show;
+}
+.top_margin{
+    width: 100vw;
+    height: 3rem;
 }
 .linie{
     width: 50%;
@@ -74,25 +80,21 @@ body{
 .logo{
     margin-left: 3.25%;
 }
-.top_margin{
-    width: 100vw;
-    height: 5.5rem;
-}
 .Nothing{
-    height: 30rem;
+    /* height: 30rem; */
     flex: 0.4;
 }
 .Moon{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 53.3rem;
+    /* height: 53.3rem; */
     flex: 0.7;
     /* background-color: red; */
 }
 .Moon_text{
     /* background-color: burlywood; */
-    height: 53.3rem;
+    /* height: 53.3rem; */
     flex: 0;
 }
 .Content{
@@ -121,6 +123,7 @@ body{
     text-transform: uppercase;
     margin-left: -10rem;
     white-space: nowrap;
+    margin-bottom: 13rem;
 }
 .Moon_text h1{
     color: #FFF;
@@ -176,7 +179,7 @@ body{
     margin-top: 13rem;
 }
 .guy_picture{
-    height: 54.1rem;
+    /* height: 54.1rem; */
     width: auto;
 }
 .Moon_text h2{
@@ -187,6 +190,8 @@ body{
     font-weight: 400;
     line-height: normal;
     text-transform: uppercase;
+    margin-top: 0rem;
+    margin-bottom: 3rem;
 }
 .Crew_text{
     width: 33rem;
@@ -228,3 +233,236 @@ body{
     background-color: white;
     color: black;
 } */
+@media only screen and (max-width: 1024px){
+body{
+    background-image: url('background-technology-tablet.jpg');
+    height: 100vh;
+}
+.linie{
+    width: 0;
+    display: none;
+}
+.menu span{
+    visibility: hidden;
+}
+.top_margin{
+    height: 0;
+    width: 0;
+}
+.main_navbar{
+    align-items: center;
+    justify-content: space-between;
+    /* margin-top: 3.5%; */
+}
+.menu a{
+    color: #FFF;
+    font-family: Barlow Condensed;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 2.362px;
+}
+.menu li{
+    margin-right: 1px;
+}
+.Content{
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.Moon_Pick{
+    width: auto;
+}
+.Moon_P{
+    color: #FFF;
+    font-family: Barlow Condensed;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 3.375px;
+    text-transform: uppercase;
+    margin-top: 40px;
+    margin-left: -10%;
+}
+.Moon_text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.guy_picture > img{
+    margin: 0;
+    width: 100%; /* Make sure the image fills the container */
+    height: 100%; /* Make sure the image fills the container */
+    opacity: 0; /* Hide the original image */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.guy_picture{
+    width: 100%; /* Set the width of the container */
+    height: 320px; /* Set the height of the container */
+    background-image: url('image-launch-vehicle-landscape.jpg'); /* Replace 'path/to/your/background-image.jpg' with the path to your background image */
+    background-size: cover; /* Adjust the background size as needed */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+    position: relative;
+}
+
+.Moon_P{
+    position: absolute;
+    margin: 0;
+    top: 12%;
+    left: 5%;
+}
+.Moon_P > p{
+    color: #FFF;
+    font-family: Barlow Condensed;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 3.375px;
+    text-transform: uppercase;
+}
+.guy_picture{
+    position: absolute;
+    top: 20%;
+}
+.Commander_blur{
+    position: absolute;
+    top: 66%;
+    left: 40%;
+}
+.Moon_text > h2{
+    margin: 0;
+    color: #FFF;
+    text-align: center;
+    font-family: Bellefair;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+    margin-bottom: 2%;
+}
+.Crew_text > p{
+    color: #D0D6F9;
+    text-align: center;
+    font-family: Barlow;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px; /* 175% */
+    text-align: center;
+}
+.Moon_text{
+    position: absolute;
+    top: 70%;
+    left: 18%;
+}
+.Buttons{
+    display: flex;
+    flex-direction: row;
+    margin-top: 28rem;
+    width: 20rem;
+    justify-content: space-evenly;
+}
+
+}
+
+@media only screen and (max-width: 710px){
+.main_navbar{
+    /* margin-top: 50px; */
+    /* height: 0; */
+    width: 100vw;
+    /* margin-left: 20px; */
+    margin: 0;
+}
+.logo{
+    margin-top: 3.25%;
+}
+.menu{
+    display: none;
+}
+.Moon_P{
+    color: #FFF;
+    font-family: Barlow Condensed;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 2.7px;
+    text-transform: uppercase;
+}
+.Commander_blur{
+    color: #D0D6F9;
+    text-align: center;
+    font-family: Barlow Condensed;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 2.362px;
+    left: 30%;
+    top: 62%;
+}
+.Moon_text > h2{
+    color: #FFF;
+    text-align: center;
+    font-family: Bellefair;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+}
+.Crew_text{
+    width: 330px;
+    position: absolute;
+    left: -50px;
+    top: 30px;
+    height: auto;
+}
+.Moon_text > p{
+    color: #D0D6F9;
+    text-align: center;
+    font-family: Barlow;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px; /* 166.667% */
+}
+.guy_picture{
+    height: 200px;
+}
+.Moon_P{
+    left: 25%;
+}
+.Buttons{
+    margin-top: 18rem;
+    width: 15rem;
+}
+.Buttons > a{
+    height: 50px;
+    width: 50px;
+    line-height: 3rem;
+    font-size: 18px;
+}
+.Moon_text{
+    top: 70%;
+    left: 20%;
+}
+.Moon_text > h2{
+    position: absolute;
+    left: -35px;
+    width: 300px;
+    bottom: 0px;
+}.burger{
+    display: inline;
+    margin-right: 20px;
+}
+
+}
