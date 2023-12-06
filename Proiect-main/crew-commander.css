@@ -1,292 +1,291 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-body{
-    margin: 0px;
-    padding: 0px;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('background-crew-desktop.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+body {
+  margin: 0px;
+  padding: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("background-crew-desktop.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
-.burger{
-    display: none;
+.burger {
+  display: none;
 }
-.main{
-    display: inline;
-    width: 100vw;
-    height: 100vh;
-    flex-direction: column;
+.main {
+  display: inline;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
 }
-.main_navbar{
-    width: 100vw;
-    height: auto;
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    align-items: center;
+.main_navbar {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
 }
-.top_margin{
-    width: 100vw;
-    height: 3rem;
+.top_margin {
+  width: 100vw;
+  height: 3rem;
 }
-.linie{
-    width: 50%;
-    max-width: 50rem;
-    overflow: visible;
-    z-index: 2;
-    margin-left: 7%;
+.linie {
+  width: 50%;
+  max-width: 50rem;
+  overflow: visible;
+  z-index: 2;
+  margin-left: 7%;
 }
-.linie hr{
-    width: 106%;
+.linie hr {
+  width: 106%;
 }
-.menu li{
-    display: flex;
-    margin-top: 5.5%;
-    margin-right: 7%;
+.menu li {
+  display: flex;
+  margin-top: 5.5%;
+  margin-right: 7%;
 }
-.menu ul{
-    list-style-type: none;
-    display: flex;
-    flex-wrap: nowrap;
+.menu ul {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: nowrap;
 }
-.menu a{
-    color: white;
-    font-size: 1rem;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: #FFF;
-    font-family: Barlow Condensed;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 2.7px;
-    width: fit-content;
+.menu a {
+  color: white;
+  font-size: 1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #fff;
+  font-family: Barlow Condensed;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 2.7px;
+  width: fit-content;
 }
-.menu{
-    /* background: rgba(255, 255, 255, 0.04);
+.menu {
+  /* background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(40.774227142333984px); */
-    /* padding-right: 7.5rem; */
-    padding-left: 6.4%;
-    width: 50%;
-    height: 6rem;
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(40.774227142333984px);
+  /* padding-right: 7.5rem; */
+  padding-left: 6.4%;
+  width: 50%;
+  height: 6rem;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(40.774227142333984px);
 }
-.menu div:hover{
-    height: 3.6rem;
-    border-bottom: 0.1rem solid white;
+.menu div:hover {
+  height: 3.6rem;
+  border-bottom: 0.1rem solid white;
 }
-.menu span{
-    font-weight: bold;
+.menu span {
+  font-weight: bold;
 }
-.logo{
-    margin-left: 3.25%;
+.logo {
+  margin-left: 3.25%;
 }
 
-.Nothing{
-    height: 30rem;
-    flex: 0.4;
+.Nothing {
+  height: 30rem;
+  flex: 0.4;
 }
-.Moon{
-    justify-content: center;
-    /* height: 53.3rem; */
-    flex: 0.2;
-    /* background-color: red; */
+.Moon {
+  justify-content: center;
+  /* height: 53.3rem; */
+  flex: 0.2;
+  /* background-color: red; */
 }
-.Moon_text{
-    /* background-color: burlywood; */
-    /* height: 53.3rem; */
-    flex: 0;
+.Moon_text {
+  /* background-color: burlywood; */
+  /* height: 53.3rem; */
+  flex: 0;
 }
-.Content{
-    display: flex;
-    flex-direction: row;
-    
+.Content {
+  display: flex;
+  flex-direction: row;
 }
-.number{
-    color: #FFF;
-    font-family: Barlow Condensed;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 4.725px;
+.number {
+  color: #fff;
+  font-family: Barlow Condensed;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 4.725px;
 }
 .Moon_P {
-    height: 20px;
-    color: #FFF;
-    font-family: Barlow Condensed;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 4.725px;
-    text-transform: uppercase;
-    /* margin-left: -60px; */
-    white-space: nowrap;
-    margin-top: 8%;
+  height: 20px;
+  color: #fff;
+  font-family: Barlow Condensed;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 4.725px;
+  text-transform: uppercase;
+  /* margin-left: -60px; */
+  white-space: nowrap;
+  margin-top: 8%;
 }
-.Moon_text h1{
-    color: #FFF;
-    font-family: Bellefair;
-    font-size: 100px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-transform: uppercase;
+.Moon_text h1 {
+  color: #fff;
+  font-family: Bellefair;
+  font-size: 100px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
 }
-.Moon_text p{
-    color: #D0D6F9;
-    font-family: Barlow;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 32px; 
+.Moon_text p {
+  color: #d0d6f9;
+  font-family: Barlow;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
 }
-.menu2 li{
-    text-transform: uppercase;
-    float: left;
-    padding-right: 80px;
-    margin-top: 100px;
+.menu2 li {
+  text-transform: uppercase;
+  float: left;
+  padding-right: 80px;
+  margin-top: 100px;
 }
 .menu2 {
-    margin-left: -30px;
-    list-style-type: none;
-    padding-bottom: 100px;
+  margin-left: -30px;
+  list-style-type: none;
+  padding-bottom: 100px;
 }
-.menu2 a{
-    color: white;
-    font-size: 16px;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: 400;
+.menu2 a {
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 400;
 }
-.menu2 div:hover{
-    height: 2.5rem;
-    border-bottom: 0.25rem solid white;
+.menu2 div:hover {
+  height: 2.5rem;
+  border-bottom: 0.25rem solid white;
 }
-.Moon_Pick span{
-    filter: opacity(30%);
+.Moon_Pick span {
+  filter: opacity(30%);
 }
-.Moon_Pick{
-    width: 53.3rem;
-    display: flex;
-    flex: 1.2;
-    flex-direction: column;
-    justify-content: center;
-    /* background-color: red; */
+.Moon_Pick {
+  width: 53.3rem;
+  display: flex;
+  flex: 1.2;
+  flex-direction: column;
+  justify-content: center;
+  /* background-color: red; */
 }
-.guy_picture img{
-    margin-bottom: 0px;
+.guy_picture img {
+  margin-bottom: 0px;
 }
-.guy_picture{
-    /* height: 54.1rem; */
-    /* display: flex; */
-    flex: 1;
-    /* align-items: flex-end;
+.guy_picture {
+  /* height: 54.1rem; */
+  /* display: flex; */
+  flex: 1;
+  /* align-items: flex-end;
     justify-content: flex-start; */
-    position: fixed;
-    bottom: 0;
-    left: 60%;
+  position: fixed;
+  bottom: 0;
+  left: 60%;
 }
-.Moon_text h2{
-    color: #FFF;
-    font-family: Bellefair;
-    font-size: 65px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-transform: uppercase;
+.Moon_text h2 {
+  color: #fff;
+  font-family: Bellefair;
+  font-size: 65px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
 }
-.Crew_text{
-    width: 27rem;
+.Crew_text {
+  width: 27rem;
 }
-.buttons_div{
-    width: 10rem;
-    display: flex;
-    justify-content: space-between;
+.buttons_div {
+  width: 10rem;
+  display: flex;
+  justify-content: space-between;
 }
-.Moon_text button{
-    margin-top: 5rem;
-    border: none;
-    background-color: rgba(128, 128, 128, 0.61); 
-    color: #FFF; 
-    border-radius: 50%; 
-    width: 0.75rem; 
-    height: 0.75rem; 
-    cursor: pointer;
-    font-size: 16px;
-    text-align: center;
+.Moon_text button {
+  margin-top: 5rem;
+  border: none;
+  background-color: rgba(128, 128, 128, 0.61);
+  color: #fff;
+  border-radius: 50%;
+  width: 0.75rem;
+  height: 0.75rem;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
 }
-.Moon_text a{
-    margin-left: -0.3rem;
-    font-size: 15px;
-    font-weight: bold;
-    color: transparent;
+.Moon_text a {
+  margin-left: -0.3rem;
+  font-size: 15px;
+  font-weight: bold;
+  color: transparent;
 }
-.buttons_div button:hover{
-    background-color: #fff;
+.buttons_div button:hover {
+  background-color: #fff;
 }
-.Commander_blur  {
-    color: #FFF;
-    font-family: Bellefair;
-    font-size: 40px;
-    text-transform: uppercase;
-    filter: opacity(30%);
-    margin-top: 12%;
+.Commander_blur {
+  color: #fff;
+  font-family: Bellefair;
+  font-size: 40px;
+  text-transform: uppercase;
+  filter: opacity(30%);
+  margin-top: 12%;
 }
-@media only screen and (max-width: 1024px){
-body{
-    background-image: url('background-crew-tablet.jpg');
+@media only screen and (max-width: 1024px) {
+  body {
+    background-image: url("background-crew-tablet.jpg");
     height: 100vh;
-}
-.Moon{
+  }
+  .Moon {
     display: none;
-}
-.linie{
+  }
+  .linie {
     display: none;
-}
-.menu span{
+  }
+  .menu span {
     visibility: hidden;
-}
-.top_margin{
+  }
+  .top_margin {
     height: 0;
     width: 0;
-}
-.main_navbar{
+  }
+  .main_navbar {
     align-items: center;
     justify-content: space-between;
     margin-top: 0;
-}
-.menu a{
-    color: #FFF;
+  }
+  .menu a {
+    color: #fff;
     font-family: Barlow Condensed;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     letter-spacing: 2.362px;
-}
-.menu li{
+  }
+  .menu li {
     margin-right: 1px;
-}
-.Content{
+  }
+  .Content {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
-}
-.Moon_Pick{
+  }
+  .Moon_Pick {
     width: auto;
-}
-.Moon_P{
-    color: #FFF;
+  }
+  .Moon_P {
+    color: #fff;
     font-family: Barlow Condensed;
     font-size: 20px;
     font-style: normal;
@@ -296,14 +295,14 @@ body{
     text-transform: uppercase;
     margin-top: 40px;
     margin-left: -27%;
-}
-.Moon_text{
+  }
+  .Moon_text {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.Commander_blur{
-    color: #FFF;
+  }
+  .Commander_blur {
+    color: #fff;
     text-align: center;
     font-family: Bellefair;
     font-size: 24px;
@@ -315,9 +314,9 @@ body{
     flex-direction: column;
     align-items: center;
     margin-top: 15%;
-}
-.Moon_text > h2{
-    color: #FFF;
+  }
+  .Moon_text > h2 {
+    color: #fff;
     text-align: center;
     font-family: Bellefair;
     font-size: 40px;
@@ -325,23 +324,23 @@ body{
     font-weight: 400;
     line-height: normal;
     text-transform: uppercase;
-}
-.Moon_text > p{
-    color: #D0D6F9;
+  }
+  .Moon_text > p {
+    color: #d0d6f9;
     text-align: center;
     font-family: Barlow;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 28px; /* 175% */
-}
-.buttons_div{
+  }
+  .buttons_div {
     height: 0;
-}
-.buttons_div > button{
+  }
+  .buttons_div > button {
     margin-top: 10px;
-}
-.guy_picture{
+  }
+  .guy_picture {
     display: flex;
     scale: 75%;
     position: fixed;
@@ -349,59 +348,59 @@ body{
     left: 30%;
     height: 0;
     width: 0;
-}
-.guy_picture > img{
+  }
+  .guy_picture > img {
     position: fixed;
     bottom: 0;
-}
-.main{
+  }
+  .main {
     display: block;
     overflow: hidden;
-}
-.burger{
+  }
+  .burger {
     display: none;
+  }
 }
-}
-@media only screen and (max-width: 710px){
-.main_navbar{
+@media only screen and (max-width: 710px) {
+  .main_navbar {
     /* margin-top: 50px; */
     /* height: 0; */
     width: 100vw;
     /* margin-left: 20px; */
     margin: 0;
-}
-.logo{
+  }
+  .logo {
     margin-top: 3.25%;
-}
-.menu{
+  }
+  .menu {
     display: none;
-}
-.Crew_text{
+  }
+  .Crew_text {
     width: 80vw;
-}
-.Moon_Pick span{
+  }
+  .Moon_Pick span {
     margin: 0px;
-}
-.burger{
+  }
+  .burger {
     display: inline;
     visibility: visible;
     margin-right: 20px;
-}
-.linie{
+  }
+  .linie {
     display: none;
-}
-.main{
+  }
+  .main {
     display: unset;
     overflow: visible;
-}
-.Content{
+  }
+  .Content {
     display: flex;
     flex-direction: row-reverse;
     flex-wrap: nowrap;
-}
-.Moon_P{
+  }
+  .Moon_P {
     margin: 0;
-    color: #FFF;
+    color: #fff;
     font-family: Barlow Condensed;
     font-size: 16px;
     font-style: normal;
@@ -409,18 +408,18 @@ body{
     line-height: normal;
     letter-spacing: 2.7px;
     text-transform: uppercase;
-}
-.Moon_P > span{
-    color: #FFF;
+  }
+  .Moon_P > span {
+    color: #fff;
     font-family: Barlow Condensed;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
     letter-spacing: 2.7px;
-}
-.Commander_blur{
-    color: #FFF;
+  }
+  .Commander_blur {
+    color: #fff;
     text-align: center;
     font-family: Bellefair;
     font-size: 16px;
@@ -428,9 +427,9 @@ body{
     font-weight: 400;
     line-height: normal;
     text-transform: uppercase;
-}
-.Moon_text > h2{
-    color: #FFF;
+  }
+  .Moon_text > h2 {
+    color: #fff;
     text-align: center;
     font-family: Bellefair;
     font-size: 24px;
@@ -438,17 +437,17 @@ body{
     font-weight: 400;
     line-height: normal;
     text-transform: uppercase;
-}
-.Moon_text > p{
-    color: #D0D6F9;
+  }
+  .Moon_text > p {
+    color: #d0d6f9;
     text-align: center;
     font-family: Barlow;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
     line-height: 25px; /* 166.667% */
-}
-.guy_picture{
+  }
+  .guy_picture {
     scale: 30%;
     position: absolute;
     bottom: 110px;
@@ -456,27 +455,26 @@ body{
     width: 1000px;
     height: 700px;
     border-bottom: 1px solid #fff;
-}
-.guy_picture > img{
+  }
+  .guy_picture > img {
     position: absolute;
     left: 245px;
-}
-.Moon_Pick{
+  }
+  .Moon_Pick {
     position: absolute;
     top: 370px;
     left: 40px;
-}
-.Moon_P{
+  }
+  .Moon_P {
     position: absolute;
-    bottom: 550px;
+    bottom: 570px;
     left: 70px;
-}
-.buttons_div{
+  }
+  .buttons_div {
     position: absolute;
     bottom: 300px;
-}
-.buttons_div{
+  }
+  .buttons_div {
     width: 6rem;
-}
-
+  }
 }
