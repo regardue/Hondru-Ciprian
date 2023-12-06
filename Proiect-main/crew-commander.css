@@ -335,7 +335,7 @@ body {
     line-height: 28px; /* 175% */
   }
   .buttons_div {
-    height: 0;
+    height: auto;
   }
   .buttons_div > button {
     margin-top: 10px;
