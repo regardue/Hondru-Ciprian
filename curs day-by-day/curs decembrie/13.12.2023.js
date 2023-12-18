@@ -127,4 +127,4 @@ function clic(){
 // tema pentru acasa
 // js -- js home practice > 1-2-3-4 + 1-2
 
-// intrebare mircea - cine e adana?
+// 
