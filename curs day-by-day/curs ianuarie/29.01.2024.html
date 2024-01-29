@@ -12,25 +12,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<style>
+    .hidden{display:none;}
+    .show{display:block;}
+</style>
+
 </head>
 
 <body>
 <i class="bi bi-4-circle-fill"></i>
-    <h1>Register form</h1>
+    <h1 class="hidden">Register form</h1>
     <input type="text" placeholder="Insert name" id="name">
     <input type="text" placeholder="Insert surname" id="surname"><br>
     <input type="email" placeholder="Insert email" id="email"><br>
     <input type="text" placeholder="Phone number" id="phone"><br>
-    <button onclick="Click()" id="buttonLogin">Login</button>
-    <button onclick="Click2()" id="buttonLogin2">Login</button>
+    <button onclick="Show()" id="buttonLogin">Show</button>
+    <button onclick="Hide()" id="buttonLogin2">Hide</button>
 
-<table>
+<table id="table">
     <tr>
         <td id="fname">sadsa</td>
         <td id="lname">32423423</td>
     </tr>
 </table>
 
+
+
+<ul>
+    <li>Lorem ipsum dolor sit amet.</li>
+    <li id="xd">Lorem ipsum dolor sit amet consectetur.</li>
+    <li>Lorem ipsum, dolor sit amet consectetur adipisicing.</li>
+</ul>
+<button onclick="Hi()" id="Hi">Hi</button>
+<button onclick="Remove()">Xyz</button>
+<button onclick="addTable()">table</button>
 
 
 </body>
