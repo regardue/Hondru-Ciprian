@@ -8,7 +8,6 @@
 //     alert("WELCOME")
 // }
 
-
 // function Show(){
 //     let newButton = document.createElement("button");
 //     newButton.textContent="My new Button";
@@ -29,7 +28,6 @@
 // {
 //     alert("Hello!");
 // }
-
 
 // function AlertFunction()
 // {
@@ -52,62 +50,112 @@
 //     this.age=age;
 // }
 
-
 let submit = document.querySelector("#submit");
-submit.addEventListener("click",Save);
+submit.addEventListener("click", Save);
 
-function Save (){
-    let username = document.getElementById("inp_username");
-    let email = document.getElementById("inp_email");
-    let firstname = document.getElementById("inp_firstname");
-    let lastname = document.getElementById("inp_lastname");
-    let age = document.getElementById("inp_age");
+function Save() {
+  let username = document.getElementById("inp_username");
+  let email = document.getElementById("inp_email");
+  let firstname = document.getElementById("inp_firstname");
+  let lastname = document.getElementById("inp_lastname");
+  let age = document.getElementById("inp_age");
 
-    let userData = new User(username.value,email.value,firstname.value,lastname.value,age.value);
-    // console.log(userData)
+  let userData = new User(
+    username.value,
+    email.value,
+    firstname.value,
+    lastname.value,
+    age.value
+  );
+  // console.log(userData)
 
-    // if(userData.username!="" && userData.email!="")
-    if(areInputsField())
-    {
-        let users = [];
-            users = JSON.parse(localStorage.getItem("user"));
-        
-            if(!users){
-                users = [];
-            }
-            users.push(userData);
-            localStorage.setItem("user", JSON.stringify(users))
-            clearInputs();
+  // if(userData.username!="" && userData.email!="")
+  if (areInputsField()) {
+    let users = [];
+    users = JSON.parse(localStorage.getItem("user"));
+    // if (!validateInputLength(username))
+    //   return true;
+    // if (!validateInputLength(email))
+    //   return true;
+    // if (!validateInputLength(firstname))
+    //   return true;
+    // if (!validateInputLength(lastname))
+    //   return true;
+
+    let boolTest = false;
+    boolTest =
+      validateInputLength(username) &&
+      validateInputLength(email) &&
+      validateInputLength(firstname) &&
+      validateInputLength(lastname);
+    if (!boolTest) {
+      return true;
     }
-    else{
-        alert("Completati toate campurile!")
+
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.value)) {
+      return true;
     }
-
-
+    if (usernameAlreadyExists(username.value)) {
+      alert("Username already exists");
+      return;
+    }
+    if (!users) {
+      users = [];
+    }
+    users.push(userData);
+    localStorage.setItem("user", JSON.stringify(users));
+    clearInputs();
+    window.location.href="login.html"
+  } else {
+    alert("Completati toate campurile!");
+  }
 }
 
-function clearInputs(){
-    let inputs = document.querySelectorAll("input")
-    for(i=0;i<inputs.length;i++){
-        inputs[i].value="";
-    }
+function clearInputs() {
+  let inputs = document.querySelectorAll("input");
+  for (i = 0; i < inputs.length; i++) {
+    inputs[i].value = "";
+  }
 }
 
-function areInputsField(){
-    let inputs = document.querySelectorAll("input")
-    for(i=0;i<inputs.length;i++){
-        if(inputs[i].value==""){
-            return false;
-        }
+function areInputsField() {
+  let inputs = document.querySelectorAll("input");
+  for (i = 0; i < inputs.length; i++) {
+    if (inputs[i].value == "") {
+      return false;
     }
+  }
+  return true;
+}
+
+function User(username, email, firstname, lastname, age) {
+  this.username = username;
+  this.email = email;
+  this.firstname = firstname;
+  this.lastname = lastname;
+  this.age = age;
+}
+
+function validateInputLength(input) {
+  let value = input.value;
+  if (value.length > 3) {
+    input.style.border = "1px solid black";
     return true;
+  }
+  input.style.border = "2px solid red";
+  return false;
 }
 
-function User(username,email,firstname,lastname,age){
-    this.username=username;
-    this.email=email;
-    this.firstname=firstname;
-    this.lastname=lastname;
-    this.age=age;
+function usernameAlreadyExists(username) {
+  let storage = localStorage.getItem("user");
+  if (storage) {
+    storage = JSON.parse(storage);
+    for (let ele of storage) {
+      if (ele.username.toLowerCase() == username.toLowerCase()) {
+        return true;
+      }
+    }
+    return false;
+  }
+  return false;
 }
-
