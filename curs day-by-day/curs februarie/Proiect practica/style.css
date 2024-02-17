@@ -40,3 +40,13 @@ button {
   margin-left: 5rem;
   border-radius: 10%;
 }
+.list__container__class{
+  display: flex;
+  max-width: 100vw;
+  margin-bottom: 5%;
+}
+.list_container__item{
+  border: 1px solid white;
+  height: 200px;
+  width: 200px;
+}
