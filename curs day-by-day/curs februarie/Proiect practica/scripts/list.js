@@ -5,7 +5,7 @@ function Button() {
   let list__title = document.createElement("h3"); //list title
   list__title.textContent = list__title__value;
   list__title.style.color = "Red";
-  list__title.style.fontSize = "40px"
+  list__title.style.fontSize = "40px";
   let new__list = document.createElement("ul"); //list itself
   let items = ["Item 1", "Item 2", "Item 3"]; //list items
   items.forEach(function (itemText) {
