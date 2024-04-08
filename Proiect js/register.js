@@ -29,6 +29,8 @@ function Confirm() {
   let firstName = document.getElementById("firstName").value;
   let lastName = document.getElementById("lastName").value;
   let birthDate = getBirthDate();
+  let nameRegex = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
+  let emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
   let loginInformations = new Logins(
     email,
@@ -37,12 +39,14 @@ function Confirm() {
     lastName,
     birthDate
   );
-
+  // validations
   if (!areInputsField()) {
     return false;
   }
-  if(checkDuplicateEmail(email)){
-    toastr["error"]("Looks like the e-mail is already taken, please choose another e-mail");
+  if (checkDuplicateEmail(email)) {
+    toastr["error"](
+      "Looks like the e-mail is already taken, please choose another e-mail"
+    );
     return false;
   }
   if (password !== confirmPassword) {
@@ -58,17 +62,16 @@ function Confirm() {
   if (!IsItString(lastName)) {
     return false;
   }
-  if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+  if (!emailRegex.test(email)) {
     toastr["error"]("Please enter a valid email adress.");
     return false;
   }
-  let nameRegex = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
   if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
     toastr["error"]("Please enter only letters for first and last name!");
     return false;
   }
   let loginInfo = [];
-  loginInfo = JSON.parse(localStorage.getItem("storage"));
+  loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
   if (!loginInfo) {
     loginInfo = [];
   }
@@ -86,7 +89,7 @@ function Logins(email, password, firstName, lastName, birthDate) {
   this.birthDate = birthDate;
 }
 
-// validare pentru ca toate campurile sa contina ceva
+// validation for all inputs to have something inside
 
 function areInputsField() {
   let inputs = document.querySelectorAll("input");
@@ -99,7 +102,7 @@ function areInputsField() {
   return true;
 }
 
-// validare pentru lungimea de minim 8 charactere
+// validation for character length to be minimum 8
 
 function validateLength(input) {
   if (input.length >= 8) {
@@ -121,31 +124,57 @@ function IsItString(input) {
 
 document.addEventListener("DOMContentLoaded", function () {
   let currentYear = new Date().getFullYear();
-  for (i = currentYear - 18; i >= currentYear - 120; i--) {
+  for (let i = currentYear - 18; i >= currentYear - 120; i--) {
     let option = document.createElement("option");
     option.text = i;
     option.value = i;
     yearSelect.add(option);
   }
-  for (i = 1; i <= 12; i++) {
+  for (let i = 1; i <= 12; i++) {
     let option = document.createElement("option");
     option.text = i;
     option.value = i;
     monthSelect.add(option);
   }
-// dinamically select the day
+  // dinamically select the day
   function updateDays() {
     let year = parseInt(yearSelect.value);
     let month = parseInt(monthSelect.value);
+    let currentYear = new Date().getFullYear();
+    let currentMonth = new Date().getMonth() + 1;
+    let currentDay = new Date().getDate();
+    // calculate minimum age to be 18
+    let minBirthYear = currentYear - 18;
+    if (month > currentMonth || (month == currentMonth && currentDay > 1)) {
+      minBirthYear -= 1; // if birthday month hasnt passed yet, ask the user to be 1 year older;
+    }
+    let maxBirthYear = currentYear - 120;
+    if (year < maxBirthYear) {
+      year = maxBirthYear;
+    } else if (year > minBirthYear) {
+      year = minBirthYear;
+    }
+
     let daysInMonth = new Date(year, month, 0).getDate();
     daySelect.innerHTML = "";
-    for (i = 1; i <= daysInMonth; i++) {
+
+    for (let i = 1; i <= daysInMonth; i++) {
       let option = document.createElement("option");
       option.text = i;
       option.value = i;
+      console.log(month, currentMonth);
+      if (year == minBirthYear && month > currentMonth) {
+        //disable options for earlier months than propper 18 age
+        option.disabled = true;
+      }
+      if (year == minBirthYear && month == currentMonth && i > currentDay) {
+        // disable options for earlier days than propper 18 age
+        option.disabled = true;
+      }
       daySelect.add(option);
     }
   }
+
   yearSelect.addEventListener("change", updateDays);
   monthSelect.addEventListener("change", updateDays);
 });
@@ -155,16 +184,15 @@ function getBirthDate() {
   let month = document.getElementById("birthMonth").value;
   let day = document.getElementById("birthDay").value;
   // pad month and day leading with 0 if necessary
-  month = month.padStart(2,'0');
-  day = day.padStart(2, '0');
+  month = month.padStart(2, "0");
+  day = day.padStart(2, "0");
   return year + "-" + month + "-" + day;
 }
 // check email
-function checkDuplicateEmail(email){
+function checkDuplicateEmail(email) {
   let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
-  let duplicate = loginInfo.some(function(user){
+  let duplicate = loginInfo.some(function (user) {
     return user.email === email;
-  })
+  });
   return duplicate;
 }
-
