@@ -15,7 +15,7 @@ toastr.options = {
   showMethod: "fadeIn",
   hideMethod: "fadeOut",
 };
-toastr["error"]("Error", "My error message");
-toastr["info"]("Info", "My info message");
-toastr["success"]("Success", "My Success message");
-toastr["warning"]("Info", "My warning message");
+// toastr["error"]("Error", "My error message");
+// toastr["info"]("Info", "My info message");
+// toastr["success"]("Success", "My Success message");
+// toastr["warning"]("Info", "My warning message");

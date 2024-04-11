@@ -78,7 +78,9 @@ function Confirm() {
   loginInfo.push(loginInformations);
   localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
   toastr["success"]("Success", "Congratulations, you now have an account!");
-  window.location.href = "login.html";
+  setTimeout(function(){
+    window.location.href = "login.html";
+  }, 5000);
 }
 
 function Logins(email, password, firstName, lastName, birthDate) {

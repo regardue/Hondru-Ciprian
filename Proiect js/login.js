@@ -15,11 +15,29 @@ toastr.options = {
   showMethod: "fadeIn",
   hideMethod: "fadeOut",
 };
+
 let login = document.getElementById("login");
-login.addEventListener("click", Login);
+login.addEventListener("click", submit);
 let email = document.getElementById("email");
 let password = document.getElementById("password");
 
-function Login(){
 
+
+function submit(){
+  let loginInfo = localStorage.getItem("loginInfo");
+  loginInfo = JSON.parse(loginInfo);
+  //   console.log(loginInfo);
+  let user = loginInfo.filter(
+    (x) => x.email == email.value && x.password == password.value
+  );
+  console.log(user);
+  if (user.length > 0) {
+    // console.log("Login Succesful!");
+    toastr["success"]("Success", "Welcome to our RentEase");
+    setTimeout(function(){
+      window.location.href = "index.html";
+    }, 5000);    
+  } else {
+    toastr["error"]("Error", "Invalid email or password!");
+  }
 }
