@@ -37,7 +37,8 @@ function Confirm() {
     password,
     firstName,
     lastName,
-    birthDate
+    birthDate,
+    ""
   );
   // validations
   if (!areInputsField()) {
@@ -83,12 +84,13 @@ function Confirm() {
   }, 5000);
 }
 
-function Logins(email, password, firstName, lastName, birthDate) {
+function Logins(email, password, firstName, lastName, birthDate, apartments) {
   this.email = email;
   this.password = password;
   this.firstName = firstName;
   this.lastName = lastName;
   this.birthDate = birthDate;
+  this.apartments = apartments;
 }
 
 // validation for all inputs to have something inside

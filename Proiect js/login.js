@@ -21,23 +21,27 @@ login.addEventListener("click", submit);
 let email = document.getElementById("email");
 let password = document.getElementById("password");
 
-
-
-function submit(){
+function submit() {
   let loginInfo = localStorage.getItem("loginInfo");
   loginInfo = JSON.parse(loginInfo);
   //   console.log(loginInfo);
   let user = loginInfo.filter(
     (x) => x.email == email.value && x.password == password.value
   );
-  console.log(user);
+  // console.log(user);
   if (user.length > 0) {
     // console.log("Login Succesful!");
     toastr["success"]("Success", "Welcome to our RentEase");
-    setTimeout(function(){
+    loginUser(user[0].email);
+    setTimeout(function () {
       window.location.href = "index.html";
-    }, 5000);    
+    }, 5000);
   } else {
     toastr["error"]("Error", "Invalid email or password!");
   }
+}
+
+// save the user with his own username
+function loginUser(username){
+  localStorage.setItem("loggedInUser", username);
 }
