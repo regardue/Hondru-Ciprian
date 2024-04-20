@@ -140,7 +140,9 @@ document.addEventListener("DOMContentLoaded", function () {
     option.value = i;
     monthSelect.add(option);
   }
+
   // dinamically select the day
+
   function updateDays() {
     let year = parseInt(yearSelect.value);
     let month = parseInt(monthSelect.value);
@@ -182,7 +184,9 @@ document.addEventListener("DOMContentLoaded", function () {
   yearSelect.addEventListener("change", updateDays);
   monthSelect.addEventListener("change", updateDays);
 });
+
 // add your birthdate dropdown to localstorage, adding a 0 if there is a single digit number
+
 function getBirthDate() {
   let year = document.getElementById("birthYear").value;
   let month = document.getElementById("birthMonth").value;
@@ -192,7 +196,9 @@ function getBirthDate() {
   day = day.padStart(2, "0");
   return year + "-" + month + "-" + day;
 }
+
 // check email
+
 function checkDuplicateEmail(email) {
   let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
   let duplicate = loginInfo.some(function (user) {

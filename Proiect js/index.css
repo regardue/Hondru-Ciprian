@@ -1,0 +1,8 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.add__new__flat {
+  display: none;
+}

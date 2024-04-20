@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="index.js" defer></script>
+    <link rel="stylesheet" href="index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -12,7 +13,7 @@
 <body>
     <header>
         <div class="navbar">
-            <button id="addNewFlat">Add new flat</button>
+            <button onclick="addFlat()">Add new flat</button>
             <button id="viewFlats">View flats</button>
             <button id="myProfile">My profile</button>
             <button id="welcomeUser">Welcome, user</button>
@@ -20,25 +21,28 @@
         </div>
     </header>
     <main>
-        <div id="addContainer">
-            <p>City:</p>
-            <input type="text" id="addCity">
-            <p>Street name:</p>
-            <input type="text" id="addStreetName">
-            <p>Street number:</p>
-            <input type="text" id="addStreetNumber">
-            <p>Area Size:</p>
-            <input type="text" id="addAreaSize">
-            <p>Has AC <input type="checkbox" id="addYesCheckbox" value="yes"></p>
-            <!-- <span>Yes</span><input type="checkbox" id="addYesCheckbox" value="yes"> -->
-            <!-- <span>No</span><input type="checkbox" id="addNoCheckbox" value="no"> -->
-            <p>Year built:</p>
-            <input type="text" id="addYearBuilt">
-            <p>Rent price:</p>
-            <input type="text" id="addRentPrice">
-            <p>Date available:</p>
-            <input type="date" id="addDateAvailable">
-            <p><button onclick="Save()">Save</button></p>
+        <div class="add__container" id="addContainer">
+            <div class="add__new__flat" id="addNewFlat">
+                <span class="close__add__flat" onclick="closeAddFlat()">X</span>
+                <p>City:</p>
+                <input type="text" id="addCity">
+                <p>Street name:</p>
+                <input type="text" id="addStreetName">
+                <p>Street number:</p>
+                <input type="text" id="addStreetNumber">
+                <p>Area Size(m<sup>2</sup>):</p>
+                <input type="text" id="addAreaSize">
+                <p>Has AC <input type="checkbox" id="addYesCheckbox" value="yes"></p>
+                <!-- <span>Yes</span><input type="checkbox" id="addYesCheckbox" value="yes"> -->
+                <!-- <span>No</span><input type="checkbox" id="addNoCheckbox" value="no"> -->
+                <p>Year built:</p>
+                <input type="text" id="addYearBuilt">
+                <p>Rent price($):</p>
+                <input type="text" id="addRentPrice">
+                <p>Date available:</p>
+                <input type="date" id="addDateAvailable">
+                <p><button onclick="Save()">Save</button></p>
+                </div>
         </div>
     </main>
 </body>
