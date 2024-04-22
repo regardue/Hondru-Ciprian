@@ -28,14 +28,28 @@ let acExists = document.getElementById("addYesCheckbox");
 let buildingYear = document.getElementById("addYearBuilt");
 let rentPrice = document.getElementById("addRentPrice");
 let avaDate = document.getElementById("addDateAvailable");
+let uniqueIdCounter = 0;
 
-function addFlat(){ // add new flat button
-  addNewFlat.style.display = "block";
+function addFlat() {
+  // add new flat button
+  addContainer.style.display = "block";
 }
 
-function closeAddFlat(){ // close button for popup
-  addNewFlat.style.display = "none";
+function closeAddFlat() {
+  // close button for popup
+  addContainer.style.display = "none";
+  // clear inputs
+  cityName.value = "";
+  streetName.value = "";
+  streetNumber.value = "";
+  areaSize.value = "";
+  acExists.value = "";
+  buildingYear.value = "";
+  rentPrice.value = "";
+  avaDate.value = "";
 }
+
+// make the add flats button
 
 function Save() {
   let currentUser = getLoggedInUser();
@@ -87,11 +101,14 @@ function Save() {
   );
   capitalFirstLetter(newApartment, "cityName");
   capitalFirstLetter(newApartment, "streetName");
-  if (isDuplicateApartment(newApartment)) { // do i want duplicates? yes/no
+  if (isDuplicateApartment(newApartment)) {
+    // do i want duplicates? yes/no
     // toastr["error"]("Oops! It seems you've already saved this apartment.");
     // return false;
     if (
-      confirm("Oops! It seems you've already saved this apartment. Do you want to proceed and save a duplicate?")
+      confirm(
+        "Oops! It seems you've already saved this apartment. Do you want to proceed and save a duplicate?"
+      )
     ) {
       saveApartment(newApartment);
     } else {
@@ -100,6 +117,13 @@ function Save() {
   } else {
     saveApartment(newApartment);
   }
+  // create new row in the table after you add a new flat
+  let existingTable = document.getElementById("apartmentTable");
+  if (existingTable) {
+    removeApartmentTable();
+    createApartmentTable();
+  }
+  closeAddFlat();
 }
 
 // save the apartment in your list
@@ -107,8 +131,8 @@ function Save() {
 function saveApartment(apartment) {
   let currentUser = getLoggedInUser();
   loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
-  let currentUserInfo = loginInfo.find((user) => user.email == currentUser);
-  if (currentUserInfo) {
+  let currentUserInfo = loginInfo.find((x) => x.email == currentUser);
+  if (currentUserInfo && apartment) {
     currentUserInfo.apartments = currentUserInfo.apartments || [];
     currentUserInfo.apartments.push(apartment);
   }
@@ -116,7 +140,35 @@ function saveApartment(apartment) {
   toastr["success"]("Apartment successfully saved.");
 }
 
-function List(cityName, streetName, streetNumber, areaSize, acExists, buildingYear, rentPrice, avaDate, favourite) {
+function generateUniqueId() {
+  let currentUser = getLoggedInUser();
+  let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
+  let maxId = 0;
+  loginInfo.forEach((userInfo) => {
+    if (userInfo.email === currentUser && userInfo.apartments) {
+      userInfo.apartments.forEach((apartment) => {
+        const id = parseInt(apartment.apartmentId);
+        if (id > maxId) {
+          maxId = id;
+        }
+      });
+    }
+  });
+  maxId++;
+  return maxId.toString();
+}
+
+function List(
+  cityName,
+  streetName,
+  streetNumber,
+  areaSize,
+  acExists,
+  buildingYear,
+  rentPrice,
+  avaDate,
+  favourite
+) {
   this.cityName = cityName;
   this.streetName = streetName;
   this.streetNumber = streetNumber;
@@ -126,6 +178,7 @@ function List(cityName, streetName, streetNumber, areaSize, acExists, buildingYe
   this.rentPrice = rentPrice;
   this.avaDate = avaDate;
   this.favourite = favourite;
+  this.apartmentId = generateUniqueId();
 }
 
 function getLoggedInUser() {
@@ -149,9 +202,9 @@ logoutButton.addEventListener("click", function () {
 // validation for all inputs to have something inside
 
 function areInputsField() {
-  let inputs = document.querySelectorAll("input");
+  let inputs = document.querySelectorAll("#addFlat input");
   for (i = 0; i < inputs.length; i++) {
-    if (inputs[i].value.trim() === "") {
+    if (inputs[i].value.trim() == "") {
       toastr["error"]("Please fill in all the fields.");
       return false;
     }
@@ -210,4 +263,167 @@ function isDuplicateApartment(newApartment) {
     }
   }
   return false; // no duplicate found
+}
+
+// make the view flats button functionability
+
+// create one table row
+
+function createApartmentRow(tableBody, apartment) {
+  let row = tableBody.insertRow();
+  Object.entries(apartment).forEach(([key, value]) => {
+    if(key == "apartmentId"){
+      return;
+    }
+    let cell = row.insertCell();
+    if (key == "acExists") {
+      // change true / false from ac to yes / no
+      cell.textContent = value ? "Yes" : "Sadge";
+    } // reformat date
+    else if (key == "avaDate") {
+      let [year, month, day] = value.split("-");
+      let formattedDate = `${day}-${month}-${year}`;
+      cell.textContent = formattedDate;
+    } // add $ sign
+    else if (key == "rentPrice") {
+      cell.textContent = value + "$";
+    } // add star icon / replace
+    else if (key == "favourite") {
+      let starIcon = document.createElement("span");
+      starIcon.classList.add("star-icon");
+      starIcon.innerHTML = value ? "&#9733;" : "&#9734;";
+      cell.appendChild(starIcon);
+      starIcon.addEventListener("click", function () {
+        apartment.favourite = !apartment.favourite;
+        starIcon.innerHTML = apartment.favourite ? "&#9733;" : "&#9734;";
+        updateFavouriteStatus(apartment.apartmentId, apartment.favourite);
+      });
+    } else {
+      cell.textContent = value;
+    }
+  });
+
+  // add delete button
+
+  let deleteCell = row.insertCell();
+  let deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+  deleteButton.classList.add("delete__button");
+  // set a delete button to each unique id of your list
+  deleteButton.dataset.apartmentId = apartment.apartmentId;
+  deleteCell.appendChild(deleteButton);
+
+  // delete row from table when you delete an apartment
+  deleteButton.addEventListener("click", function () {
+    let apartmentId = deleteButton.dataset.apartmentId;
+    if (deleteApartment(apartmentId)) {
+      tableBody.removeChild(row);
+    }
+  });
+}
+
+// create a row for each apartment saved
+
+function createApartmentRows(tableBody, apartments) {
+  apartments.forEach((apartment) => {
+    createApartmentRow(tableBody, apartment);
+  });
+}
+
+// create the table
+
+function createApartmentTable() {
+  let table = document.createElement("table");
+  table.id = "apartmentTable";
+  table.classList.add("apartment__table");
+
+  // create the table head
+
+  let tableHead = table.createTHead().insertRow();
+  let headers = [
+    "City Name",
+    "Street Name",
+    "Street Number",
+    "Area Size",
+    "Does it have AC?",
+    "Building Year",
+    "Rent Price",
+    "Date Available",
+    "Favourite",
+    "Delete",
+  ];
+
+  //
+
+  headers.forEach((headerText) => {
+    let th = document.createElement("th");
+    th.textContent = headerText;
+    tableHead.appendChild(th);
+  });
+
+  // create table body
+
+  let tableBody = table.createTBody();
+  let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
+  loginInfo.forEach((user) => {
+    createApartmentRows(tableBody, user.apartments);
+  });
+  document.body.appendChild(table);
+}
+
+function removeApartmentTable() {
+  let table = document.getElementById("apartmentTable");
+  if (table) {
+    table.remove();
+  }
+}
+
+function toggleApartmentTable() {
+  let table = document.getElementById("apartmentTable");
+  if (!table) {
+    createApartmentTable();
+  } else {
+    removeApartmentTable();
+  }
+}
+
+function viewFlatsButtonClick() {
+  toggleApartmentTable();
+}
+document
+  .getElementById("viewFlats")
+  .addEventListener("click", viewFlatsButtonClick);
+
+function deleteApartment(apartmentId) {
+  let currentUser = getLoggedInUser();
+  let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
+  let currentUserInfo = loginInfo.find((x) => x.email == currentUser);
+  if (currentUserInfo) {
+    let index = currentUserInfo.apartments.findIndex(
+      (apartment) => apartment.apartmentId == apartmentId
+    );
+    if (index != -1) {
+      currentUserInfo.apartments.splice(index, 1);
+      localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
+      toastr["success"]("Apartment successfully deleted.");
+      return true;
+    }
+  }
+  toastr["error"]("Failed to delete apartment.");
+  return false;
+}
+
+// save favourite prefference to localstorage
+
+function updateFavouriteStatus(apartmentId, favouriteStatus){
+  let currentUser = getLoggedInUser()
+  let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
+  let currentUserInfo = loginInfo.find((x) => x.email == currentUser);
+  if( currentUserInfo){
+    let apartmentIndex = currentUserInfo.apartments.findIndex((apartment) => apartment.apartmentId == apartmentId);
+    if(apartmentIndex != -1){
+      currentUserInfo.apartments[apartmentIndex].favourite = favouriteStatus;
+      localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
+    }
+  }
 }
