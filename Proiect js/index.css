@@ -42,3 +42,6 @@
 .star-icon:hover, .close__add__flat:hover {
   cursor: pointer;
 }
+.password__change__form{
+  display: none;
+}

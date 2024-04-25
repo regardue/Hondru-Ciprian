@@ -28,7 +28,11 @@ let acExists = document.getElementById("addYesCheckbox");
 let buildingYear = document.getElementById("addYearBuilt");
 let rentPrice = document.getElementById("addRentPrice");
 let avaDate = document.getElementById("addDateAvailable");
+let myProfileButton = document.getElementById("myProfile");
+let viewFlats = document.getElementById("viewFlats")
+let passwordChangeForm = document.getElementById("passwordChangeForm");
 let uniqueIdCounter = 0;
+welcomeMessage();
 
 function addFlat() {
   // add new flat button
@@ -272,7 +276,7 @@ function isDuplicateApartment(newApartment) {
 function createApartmentRow(tableBody, apartment) {
   let row = tableBody.insertRow();
   Object.entries(apartment).forEach(([key, value]) => {
-    if(key == "apartmentId"){
+    if (key == "apartmentId") {
       return;
     }
     let cell = row.insertCell();
@@ -378,21 +382,14 @@ function removeApartmentTable() {
   }
 }
 
-function toggleApartmentTable() {
+function viewFlatsButtonClick() {
   let table = document.getElementById("apartmentTable");
   if (!table) {
     createApartmentTable();
-  } else {
-    removeApartmentTable();
   }
 }
 
-function viewFlatsButtonClick() {
-  toggleApartmentTable();
-}
-document
-  .getElementById("viewFlats")
-  .addEventListener("click", viewFlatsButtonClick);
+// viewFlats.addEventListener("click", viewFlatsButtonClick);
 
 function deleteApartment(apartmentId) {
   let currentUser = getLoggedInUser();
@@ -415,15 +412,84 @@ function deleteApartment(apartmentId) {
 
 // save favourite prefference to localstorage
 
-function updateFavouriteStatus(apartmentId, favouriteStatus){
-  let currentUser = getLoggedInUser()
+function updateFavouriteStatus(apartmentId, favouriteStatus) {
+  let currentUser = getLoggedInUser();
   let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
   let currentUserInfo = loginInfo.find((x) => x.email == currentUser);
-  if( currentUserInfo){
-    let apartmentIndex = currentUserInfo.apartments.findIndex((apartment) => apartment.apartmentId == apartmentId);
-    if(apartmentIndex != -1){
+  if (currentUserInfo) {
+    let apartmentIndex = currentUserInfo.apartments.findIndex(
+      (apartment) => apartment.apartmentId == apartmentId
+    );
+    if (apartmentIndex != -1) {
       currentUserInfo.apartments[apartmentIndex].favourite = favouriteStatus;
       localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
     }
+  }
+}
+
+// display welcome message
+
+function welcomeMessage() {
+  let loggedInUser = getLoggedInUser();
+  if (loggedInUser) {
+    let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
+    let currentUserInfo = loginInfo.find((x) => x.email == loggedInUser);
+    if (currentUserInfo) {
+      let welcomeButton = document.getElementById("welcomeUser");
+      if (welcomeButton) {
+        welcomeButton.textContent =
+          "Welcome, " +
+          currentUserInfo.lastName +
+          " " +
+          currentUserInfo.firstName +
+          "!";
+      }
+    }
+  }
+}
+
+// My Profile Button
+
+function profileButtonClick(){
+  if (passwordChangeForm.style.display != "flex"){
+    passwordChangeForm.style.display = "flex";
+  }
+  // else{
+  //   passwordChangeForm.style.display = "none";
+  // }
+}
+
+// myProfileButton.addEventListener("click", profileButtonClick);
+
+function manageButtonSwitches(){
+  let table = document.getElementById("apartmentTable");
+  let profileFormDisplay = passwordChangeForm.style.display;
+  if(table){
+    if(this.id == "viewFlats"){
+      return;
+    }
+    if(this.id == "myProfile" && profileFormDisplay != "flex"){
+      removeApartmentTable();
+      passwordChangeForm.style.display = "flex";
+    }
+  }
+  else{
+    if(profileFormDisplay == "flex"){
+      return;
+    }
+    if(this.id == "viewFlats"){
+      createApartmentTable();
+    }
+  }
+}
+
+myProfileButton.addEventListener("click", manageButtonSwitches);
+viewFlats.addEventListener("click", manageButtonSwitches);
+
+function manageButtonSwitches(){
+  let table = document.getElementById("apartmentTable");
+  let profileFormDisplay = passwordChangeForm.style.display;
+  if(table){
+    
   }
 }
