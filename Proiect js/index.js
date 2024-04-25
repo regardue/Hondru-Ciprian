@@ -369,8 +369,15 @@ function createApartmentTable() {
 
   let tableBody = table.createTBody();
   let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
-  loginInfo.forEach((user) => {
-    createApartmentRows(tableBody, user.apartments);
+  // console.log(loginInfo.apartments)
+  let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
+  let loggedUserData = loginInfo.find((user) => user.email == loggedInUser)
+  if(loggedUserData.apartments.length == 0){
+    // console.log("xyx")
+    addFlat();
+    return;
+  }
+  loginInfo.forEach((user) => {createApartmentRows(tableBody, user.apartments);
   });
   document.body.appendChild(table);
 }
@@ -386,10 +393,14 @@ function viewFlatsButtonClick() {
   let table = document.getElementById("apartmentTable");
   if (!table) {
     createApartmentTable();
+    passwordChangeForm.style.display = "none";
+  }
+  else{
+    removeApartmentTable();
   }
 }
 
-// viewFlats.addEventListener("click", viewFlatsButtonClick);
+viewFlats.addEventListener("click", viewFlatsButtonClick);
 
 function deleteApartment(apartmentId) {
   let currentUser = getLoggedInUser();
@@ -453,43 +464,12 @@ function welcomeMessage() {
 function profileButtonClick(){
   if (passwordChangeForm.style.display != "flex"){
     passwordChangeForm.style.display = "flex";
-  }
-  // else{
-  //   passwordChangeForm.style.display = "none";
-  // }
-}
-
-// myProfileButton.addEventListener("click", profileButtonClick);
-
-function manageButtonSwitches(){
-  let table = document.getElementById("apartmentTable");
-  let profileFormDisplay = passwordChangeForm.style.display;
-  if(table){
-    if(this.id == "viewFlats"){
-      return;
-    }
-    if(this.id == "myProfile" && profileFormDisplay != "flex"){
-      removeApartmentTable();
-      passwordChangeForm.style.display = "flex";
-    }
+    removeApartmentTable();
   }
   else{
-    if(profileFormDisplay == "flex"){
-      return;
-    }
-    if(this.id == "viewFlats"){
-      createApartmentTable();
-    }
+    passwordChangeForm.style.display = "none";
   }
 }
 
-myProfileButton.addEventListener("click", manageButtonSwitches);
-viewFlats.addEventListener("click", manageButtonSwitches);
+myProfileButton.addEventListener("click", profileButtonClick);
 
-function manageButtonSwitches(){
-  let table = document.getElementById("apartmentTable");
-  let profileFormDisplay = passwordChangeForm.style.display;
-  if(table){
-    
-  }
-}

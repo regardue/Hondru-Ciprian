@@ -42,6 +42,6 @@ function submit() {
 }
 
 // save the user with his own username
-function loginUser(username){
-  localStorage.setItem("loggedInUser", username);
+function loginUser(username) {
+  localStorage.setItem("loggedInUser", JSON.stringify(username));
 }
