@@ -29,7 +29,7 @@ let buildingYear = document.getElementById("addYearBuilt");
 let rentPrice = document.getElementById("addRentPrice");
 let avaDate = document.getElementById("addDateAvailable");
 let myProfileButton = document.getElementById("myProfile");
-let viewFlats = document.getElementById("viewFlats")
+let viewFlats = document.getElementById("viewFlats");
 let passwordChangeForm = document.getElementById("passwordChangeForm");
 let uniqueIdCounter = 0;
 welcomeMessage();
@@ -186,7 +186,13 @@ function List(
 }
 
 function getLoggedInUser() {
-  return localStorage.getItem("loggedInUser");
+  // return localStorage.getItem("loggedInUser");
+  let loggedInUserString = localStorage.getItem("loggedInUser");
+  if (loggedInUserString) {
+    return JSON.parse(loggedInUserString);
+  } else {
+    return null;
+  }
 }
 
 // log out of the current user
@@ -345,23 +351,26 @@ function createApartmentTable() {
 
   let tableHead = table.createTHead().insertRow();
   let headers = [
-    "City Name",
-    "Street Name",
-    "Street Number",
-    "Area Size",
-    "Does it have AC?",
-    "Building Year",
-    "Rent Price",
-    "Date Available",
-    "Favourite",
-    "Delete",
+    { text: "City Name", sortBy: "cityName" },
+    { text: "Street Name", sortBy: "streetName" },
+    { text: "Street Number", sortBy: "streetNumber" },
+    { text: "Area Size", sortBy: "areaSize" },
+    { text: "Does it have AC?", sortBy: "acExists" },
+    { text: "Building Year", sortBy: "buildingYear" },
+    { text: "Rent Price", sortBy: "rentPrice" },
+    { text: "Date Available", sortBy: "avaDate" },
+    { text: "Favourite", sortBy: "favourite" },
+    { text: "Delete", sortBy: null },
   ];
 
   //
 
-  headers.forEach((headerText) => {
+  headers.forEach((header) => {
     let th = document.createElement("th");
-    th.textContent = headerText;
+    th.textContent = header.text;
+    th.addEventListener("click", function () {
+      sortApartmentsBy(header.sortBy);
+    });
     tableHead.appendChild(th);
   });
 
@@ -369,18 +378,98 @@ function createApartmentTable() {
 
   let tableBody = table.createTBody();
   let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
-  // console.log(loginInfo.apartments)
-  let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
-  let loggedUserData = loginInfo.find((user) => user.email == loggedInUser)
-  if(loggedUserData.apartments.length == 0){
-    // console.log("xyx")
+  let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  let loggedUserData = loginInfo.find((user) => user.email == loggedInUser);
+  if (!loggedUserData || loggedUserData.apartments.length == 0) {
+    toastr["info"]("Please add some apartments first!");
     addFlat();
     return;
   }
-  loginInfo.forEach((user) => {createApartmentRows(tableBody, user.apartments);
-  });
+  // loginInfo.forEach((user) => {createApartmentRows(tableBody, user.apartments);
+  // });
+  createApartmentRows(tableBody, loggedUserData.apartments);
   document.body.appendChild(table);
 }
+
+// document.addEventListener("DOMContentLoaded", function(){
+//   let tableHeaders = document.querySelectorAll("#apartmentTable th");
+//   tableHeaders.forEach((header, index) => {
+//     header.addEventListener("click", function(){
+//       sortApartmentsBy(index);
+//     });
+//   });
+// });
+
+document.addEventListener("click", function(event){
+  if(event.target.tagName == "TH"){
+    let columnIndex = Array.from(event.target.parentNode.children).indexOf(event.target);
+    sortApartmentsBy(columnIndex);
+  }
+});
+
+function sortApartmentsBy(n){
+  let table = document.getElementById("apartmentTable");
+  let rows = Array.from(table.rows).slice(1);
+  let switching = true;
+  let dir = "asc";
+  while(switching){
+    switching = false;
+    for (let i = 0; i < rows.length - 1; i++){
+      // let shouldSwitch = false; //
+      let x = rows[i].getElementsByTagName("TD")[n];
+      let y = rows[i+1].getElementsByTagName("TD")[n];
+      if(dir == "asc" && x && y){
+        if(x.textContent.toLowerCase() > y.textContent.toLowerCase()){
+          table.tBodies[0].insertBefore(rows[i + 1], rows[i]);
+          [rows[i], rows[i + 1]] = [rows[i + 1], rows[i]]; // Swap rows in array
+          switching = true;
+        }
+      }
+      else if (dir == "desc" && x && y){
+        if(x.textContent.toLowerCase() < y.textContent.toLowerCase()){
+          table.tBodies[0].insertBefore(rows[i], rows[i + 1]);
+          [rows[i], rows[i + 1]] = [rows[i + 1], rows[i]]; // Swap rows in array
+          switching = true;
+        }
+      }
+    }
+      if(!switching && dir === "asc"){
+        dir = "desc";
+        switching = true;
+      }
+  }
+}
+
+// function sortApartmentsBy(index){
+//   // console.log(index)
+//   let tableBody = document.querySelector("#apartmentTable tbody");
+//   let rows = Array.from(tableBody.rows);
+//   rows.sort((a,b) => {
+//     let cellA = a.cells[index];
+//     let cellB = b.cells[index];
+//     // console.log(cellA);
+//     // console.log(cellB);
+//     if(!cellA || !cellB){
+//       return 0;
+//     }
+//     let valueA = cellA.textContent.toString();
+//     let valueB = cellB.textContent.toString();
+//     // console.log(valueA);
+//     // console.log(valueB);
+
+//     if(!isNaN(parseFloat(valueA))){
+//       valueA = parseFloat(valueA);
+//       valueB = parseFloat(valueB);
+//     }
+//     else if(Date.parse(valueA)){
+//       valueA = new Date(valueA);
+//       valueB = new Date(valueB);
+//     }
+//     return valueA > valueB ? 1 : valueA < valueB ? -1 : 0;
+//   });
+//   tableBody.innerHTML = "";
+//   rows.forEach((row) => tableBody.appendChild(row));
+// }
 
 function removeApartmentTable() {
   let table = document.getElementById("apartmentTable");
@@ -394,8 +483,7 @@ function viewFlatsButtonClick() {
   if (!table) {
     createApartmentTable();
     passwordChangeForm.style.display = "none";
-  }
-  else{
+  } else {
     removeApartmentTable();
   }
 }
@@ -461,15 +549,13 @@ function welcomeMessage() {
 
 // My Profile Button
 
-function profileButtonClick(){
-  if (passwordChangeForm.style.display != "flex"){
+function profileButtonClick() {
+  if (passwordChangeForm.style.display != "flex") {
     passwordChangeForm.style.display = "flex";
     removeApartmentTable();
-  }
-  else{
+  } else {
     passwordChangeForm.style.display = "none";
   }
 }
 
 myProfileButton.addEventListener("click", profileButtonClick);
-
