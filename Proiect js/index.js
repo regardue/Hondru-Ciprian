@@ -20,6 +20,7 @@ toastr.options = {
 // toastr["success"]("Success", "My Success message");
 // toastr["warning"]("Info", "My warning message");
 
+// DOM elements
 let cityName = document.getElementById("addCity");
 let streetName = document.getElementById("addStreetName");
 let streetNumber = document.getElementById("addStreetNumber");
@@ -186,7 +187,6 @@ function List(
 }
 
 function getLoggedInUser() {
-  // return localStorage.getItem("loggedInUser");
   let loggedInUserString = localStorage.getItem("loggedInUser");
   if (loggedInUserString) {
     return JSON.parse(loggedInUserString);
@@ -391,85 +391,44 @@ function createApartmentTable() {
   document.body.appendChild(table);
 }
 
-// document.addEventListener("DOMContentLoaded", function(){
-//   let tableHeaders = document.querySelectorAll("#apartmentTable th");
-//   tableHeaders.forEach((header, index) => {
-//     header.addEventListener("click", function(){
-//       sortApartmentsBy(index);
-//     });
-//   });
-// });
+function sortApartmentsBy() {
+  let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
+  let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  for (let user of loginInfo) {
+    if (user && user.apartments && user.email == loggedInUser) {
+      // Sort apartments by building year
+      user.apartments.sort((a, b) => {
+        // Parse buildingYear as integers for comparison
+        let yearA = parseInt(a.buildingYear);
+        let yearB = parseInt(b.buildingYear);
 
-document.addEventListener("click", function(event){
-  if(event.target.tagName == "TH"){
-    let columnIndex = Array.from(event.target.parentNode.children).indexOf(event.target);
-    sortApartmentsBy(columnIndex);
-  }
-});
+        // Compare buildingYear values
+        if (yearA < yearB) {
+          return 1;
+        } else if (yearA > yearB) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
 
-function sortApartmentsBy(n){
-  let table = document.getElementById("apartmentTable");
-  let rows = Array.from(table.rows).slice(1);
-  let switching = true;
-  let dir = "asc";
-  while(switching){
-    switching = false;
-    for (let i = 0; i < rows.length - 1; i++){
-      // let shouldSwitch = false; //
-      let x = rows[i].getElementsByTagName("TD")[n];
-      let y = rows[i+1].getElementsByTagName("TD")[n];
-      if(dir == "asc" && x && y){
-        if(x.textContent.toLowerCase() > y.textContent.toLowerCase()){
-          table.tBodies[0].insertBefore(rows[i + 1], rows[i]);
-          [rows[i], rows[i + 1]] = [rows[i + 1], rows[i]]; // Swap rows in array
-          switching = true;
-        }
-      }
-      else if (dir == "desc" && x && y){
-        if(x.textContent.toLowerCase() < y.textContent.toLowerCase()){
-          table.tBodies[0].insertBefore(rows[i], rows[i + 1]);
-          [rows[i], rows[i + 1]] = [rows[i + 1], rows[i]]; // Swap rows in array
-          switching = true;
-        }
-      }
+      // Recreate the apartment table with sorted data
+
+      localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
+      removeApartmentTable();
+      createApartmentTable();
     }
-      if(!switching && dir === "asc"){
-        dir = "desc";
-        switching = true;
-      }
   }
 }
 
-// function sortApartmentsBy(index){
-//   // console.log(index)
-//   let tableBody = document.querySelector("#apartmentTable tbody");
-//   let rows = Array.from(tableBody.rows);
-//   rows.sort((a,b) => {
-//     let cellA = a.cells[index];
-//     let cellB = b.cells[index];
-//     // console.log(cellA);
-//     // console.log(cellB);
-//     if(!cellA || !cellB){
-//       return 0;
-//     }
-//     let valueA = cellA.textContent.toString();
-//     let valueB = cellB.textContent.toString();
-//     // console.log(valueA);
-//     // console.log(valueB);
-
-//     if(!isNaN(parseFloat(valueA))){
-//       valueA = parseFloat(valueA);
-//       valueB = parseFloat(valueB);
-//     }
-//     else if(Date.parse(valueA)){
-//       valueA = new Date(valueA);
-//       valueB = new Date(valueB);
-//     }
-//     return valueA > valueB ? 1 : valueA < valueB ? -1 : 0;
-//   });
-//   tableBody.innerHTML = "";
-//   rows.forEach((row) => tableBody.appendChild(row));
-// }
+document.addEventListener("DOMContentLoaded", function () {
+  let tableHeaders = document.querySelectorAll("#apartmentTable th");
+  tableHeaders.forEach((header, index) => {
+    header.addEventListener("click", function () {
+      sortApartmentsBy(index);
+    });
+  });
+});
 
 function removeApartmentTable() {
   let table = document.getElementById("apartmentTable");
