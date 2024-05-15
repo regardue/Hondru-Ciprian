@@ -16,6 +16,7 @@
             <button onclick="addFlat()">Add new flat</button>
             <button id="viewFlats">View flats</button>
             <button id="myProfile">My profile</button>
+            <button id="favourites">Favourites</button>
             <button id="welcomeUser">Welcome, user</button>
             <button id="logoutButton">Logout</button>
         </div>
@@ -45,10 +46,21 @@
                 </div>
         </div>
         <div id="passwordChangeForm" class="password__change__form">
+            <p>Current password:</p>
             <input type="password" id="currentPassword" placeholder="Current Password">
+            <p>New password:</p>
             <input type="password" id="newPassword" placeholder="">
-            <input type="password" id="repeatNewPassword" placeholder="">
-            <button onclick="changePassword()">Change Password</button>
+            <p>Repeat new password:</p>
+            <input type="password" id="repeatPassword" placeholder="">
+            <!-- <button onclick="changePassword()">Change Password</button> -->
+            <p>Email:</p>
+            <input type="text" id="newEmail">
+            <p>Birth Date:</p>
+            <select id="newBirthDay"></select>
+            <select id="newBirthMonth"></select>
+            <select id="newBirthYear"></select>
+            <br>
+            <button onclick="changeInfo()">Save</button>
         </div>
     </main>
 </body>

@@ -33,7 +33,7 @@ let myProfileButton = document.getElementById("myProfile");
 let viewFlats = document.getElementById("viewFlats");
 let passwordChangeForm = document.getElementById("passwordChangeForm");
 let uniqueIdCounter = 0;
-welcomeMessage();
+let favouritesButton = document.getElementById("favourites");
 
 function addFlat() {
   // add new flat button
@@ -275,8 +275,6 @@ function isDuplicateApartment(newApartment) {
   return false; // no duplicate found
 }
 
-// make the view flats button functionability
-
 // create one table row
 
 function createApartmentRow(tableBody, apartment) {
@@ -319,11 +317,14 @@ function createApartmentRow(tableBody, apartment) {
   let deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete";
   deleteButton.classList.add("delete__button");
+
   // set a delete button to each unique id of your list
+
   deleteButton.dataset.apartmentId = apartment.apartmentId;
   deleteCell.appendChild(deleteButton);
 
   // delete row from table when you delete an apartment
+
   deleteButton.addEventListener("click", function () {
     let apartmentId = deleteButton.dataset.apartmentId;
     if (deleteApartment(apartmentId)) {
@@ -342,7 +343,12 @@ function createApartmentRows(tableBody, apartments) {
 
 // create the table
 
-function createApartmentTable() {
+let currentTable = null;
+let currentFavouritesTable = null;
+
+function createApartmentTable(filterFavourites = false) {
+  removeApartmentTable();
+
   let table = document.createElement("table");
   table.id = "apartmentTable";
   table.classList.add("apartment__table");
@@ -363,14 +369,11 @@ function createApartmentTable() {
     { text: "Delete", sortBy: null },
   ];
 
-  //
+  // create table header
 
   headers.forEach((header) => {
     let th = document.createElement("th");
     th.textContent = header.text;
-    th.addEventListener("click", function () {
-      sortApartmentsBy(header.sortBy);
-    });
     tableHead.appendChild(th);
   });
 
@@ -379,75 +382,126 @@ function createApartmentTable() {
   let tableBody = table.createTBody();
   let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
   let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-  let loggedUserData = loginInfo.find((user) => user.email == loggedInUser);
-  if (!loggedUserData || loggedUserData.apartments.length == 0) {
+  if(!loggedInUser){
+    toastr["error"]("No user logged in!");
+    return;
+  }
+
+  let currentUserInfo = loginInfo.find((user) => user.email == loggedInUser);
+  
+  if(!currentUserInfo || !currentUserInfo.apartments || currentUserInfo.apartments.length == 0){
     toastr["info"]("Please add some apartments first!");
     addFlat();
     return;
+  } 
+
+  let apartmentsToDisplay = currentUserInfo.apartments;
+
+  if(filterFavourites){
+    apartmentsToDisplay = apartmentsToDisplay.filter((apartment) => apartment.favourite);
   }
-  // loginInfo.forEach((user) => {createApartmentRows(tableBody, user.apartments);
-  // });
-  createApartmentRows(tableBody, loggedUserData.apartments);
+  createApartmentRows(tableBody, apartmentsToDisplay);
   document.body.appendChild(table);
-}
 
-function sortApartmentsBy() {
-  let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
-  let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-  for (let user of loginInfo) {
-    if (user && user.apartments && user.email == loggedInUser) {
-      // Sort apartments by building year
-      user.apartments.sort((a, b) => {
-        // Parse buildingYear as integers for comparison
-        let yearA = parseInt(a.buildingYear);
-        let yearB = parseInt(b.buildingYear);
+  // remember what kind of table im showing
 
-        // Compare buildingYear values
-        if (yearA < yearB) {
-          return 1;
-        } else if (yearA > yearB) {
-          return -1;
-        } else {
-          return 0;
-        }
-      });
-
-      // Recreate the apartment table with sorted data
-
-      localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
-      removeApartmentTable();
-      createApartmentTable();
-    }
+  if(filterFavourites){
+    currentFavouritesTable = table;
+  }
+  else{
+    currentTable = table;
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  let tableHeaders = document.querySelectorAll("#apartmentTable th");
-  tableHeaders.forEach((header, index) => {
-    header.addEventListener("click", function () {
-      sortApartmentsBy(index);
-    });
-  });
-});
+// favourites button
+
+
+welcomeMessage();
+
+
+// function sortApartmentsBy() {
+//   let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
+//   let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+//   for (let user of loginInfo) {
+//     if (user && user.apartments && user.email == loggedInUser) {
+//       // Sort apartments by building year
+//       user.apartments.sort((a, b) => {
+//         // Parse buildingYear as integers for comparison
+//         let yearA = parseInt(a.buildingYear);
+//         let yearB = parseInt(b.buildingYear);
+
+//         // Compare buildingYear values
+//         if (yearA < yearB) {
+//           return 1;
+//         } else if (yearA > yearB) {
+//           return -1;
+//         } else {
+//           return 0;
+//         }
+//       });
+
+//       // Recreate the apartment table with sorted data
+
+//       localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
+//       removeApartmentTable();
+//       createApartmentTable();
+//     }
+//   }
+// }
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   let tableHeaders = document.querySelectorAll("#apartmentTable th");
+//   tableHeaders.forEach((header, index) => {
+//     header.addEventListener("click", function () {
+//       sortApartmentsBy(index);
+//     });
+//   });
+// });
 
 function removeApartmentTable() {
-  let table = document.getElementById("apartmentTable");
-  if (table) {
-    table.remove();
+  if (currentTable) {
+    currentTable.remove();
+    currentTable = null;
+  }
+  if(currentFavouritesTable){
+    currentFavouritesTable.remove();
+    currentFavouritesTable = null;
   }
 }
 
-function viewFlatsButtonClick() {
-  let table = document.getElementById("apartmentTable");
-  if (!table) {
-    createApartmentTable();
+let currentTableType = null;
+
+function viewFlatsButtonClick(){
+  if(passwordChangeForm.style.display == "block"){
     passwordChangeForm.style.display = "none";
-  } else {
+  }
+
+  if(currentTableType == "all"){
     removeApartmentTable();
+    currentTableType = null;
+  }
+  else{
+    createApartmentTable();
+    currentTableType = "all"
+  }
+}
+
+function favouritesButtonClick(){
+  if(passwordChangeForm.style.display == "block"){
+    passwordChangeForm.style.display = "none";
+  }
+  if(currentTableType == "favourites"){
+    removeApartmentTable();
+    currentTableType = null;
+  }
+  else{
+    createApartmentTable(true);
+    currentTableType = "favourites";
   }
 }
 
 viewFlats.addEventListener("click", viewFlatsButtonClick);
+favouritesButton.addEventListener("click", favouritesButtonClick);
 
 function deleteApartment(apartmentId) {
   let currentUser = getLoggedInUser();
@@ -509,8 +563,8 @@ function welcomeMessage() {
 // My Profile Button
 
 function profileButtonClick() {
-  if (passwordChangeForm.style.display != "flex") {
-    passwordChangeForm.style.display = "flex";
+  if (passwordChangeForm.style.display != "block") {
+    passwordChangeForm.style.display = "block";
     removeApartmentTable();
   } else {
     passwordChangeForm.style.display = "none";
@@ -518,3 +572,49 @@ function profileButtonClick() {
 }
 
 myProfileButton.addEventListener("click", profileButtonClick);
+
+
+// function changeInfo(){
+//   let currentUser = getLoggedInUser();
+//   if(!currentUser){
+//     console.error("No user is currently logged in!");
+//     return;
+//   }
+//   let currentPassword = document.getElementById("currentPassword").value;
+//   let newPassword = document.getElementById("newPassword").value;
+//   let repeatPassword = document.getElementById("repeatPassword").value;
+//   let newEmail = document.getElementById("newEmail").value;
+//   // let newBirthDate = document.getElementById("newBirthDate").value;
+
+
+//   if(currentPassword.trim() == "" || newPassword.trim() == "" || repeatPassword.trim() == "" || newEmail.trim() == "" || newBirthDate.trim() == ""){
+//     toastr["error"]("Please fill in all fields.");
+//     return;
+//   }
+//   if(newPassword != repeatPassword){
+//     toastr["error"]("Your new passwords don't match.");
+//     return;
+//   }
+
+//   let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
+//   let currentUserInfo = loginInfo.find((user) => user.email == currentUser);
+
+//   if(!currentUserInfo){
+//     console.error("User information not found in local storage.");
+//     return;
+//   }
+
+//   if(currentPassword != currentUserInfo.password){
+//     toastr["error"]("Your current password is incorrect.");
+//     return;
+//   }
+//   currentUserInfo.password = newPassword;
+//   currentUserInfo.email = newEmail;
+//   currentUserInfo.newBirthDate = newBirthDate;
+//   localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
+//   toastr["success"]("User information updated successfully.");
+
+//   document.querySelectorAll("#passwordChangeForm input").forEach((input) => {
+//     input.value = "";
+//   });
+// }
