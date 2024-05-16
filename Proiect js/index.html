@@ -22,6 +22,7 @@
         </div>
     </header>
     <main>
+        <div id="viewFlatsContainer" class="table__container"></div>
         <div class="add__container" id="addContainer">
             <div class="add__new__flat" id="addNewFlat">
                 <span class="close__add__flat" onclick="closeAddFlat()">X</span>
@@ -46,21 +47,18 @@
                 </div>
         </div>
         <div id="passwordChangeForm" class="password__change__form">
-            <p>Current password:</p>
-            <input type="password" id="currentPassword" placeholder="Current Password">
-            <p>New password:</p>
-            <input type="password" id="newPassword" placeholder="">
-            <p>Repeat new password:</p>
-            <input type="password" id="repeatPassword" placeholder="">
-            <!-- <button onclick="changePassword()">Change Password</button> -->
-            <p>Email:</p>
-            <input type="text" id="newEmail">
+            <p>Password:</p>
+            <input type="password" id="newPassword">
+            <p>Repeat Password</p>
+            <input type="password" id="newRepeatPassword" placeholder="">
+            <p>First Name:</p>
+            <input type="text" id="newFirstName" placeholder="">
+            <p>Last Name:</p>
+            <input type="text" id="newLastName">
             <p>Birth Date:</p>
-            <select id="newBirthDay"></select>
-            <select id="newBirthMonth"></select>
-            <select id="newBirthYear"></select>
+            <input type="date" id="newBirthDate">
             <br>
-            <button onclick="changeInfo()">Save</button>
+            <button onclick="changeInfo()">Update Information!</button>
         </div>
     </main>
 </body>

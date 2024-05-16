@@ -2,7 +2,17 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* background-color: rgb(131, 94, 94); */
+}
+body{
+  background-image: url(/widen_1220x0.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
 .add__new__flat {
   background-color: white;
@@ -53,4 +63,52 @@
   transform: translate(-50%, -50%);
   text-align: center;
   padding: 20px;
+  color: white;
 }
+input{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; 
+  font-size: 16px;
+}
+.navbar{
+  width: 70vw;
+  display: flex;
+  justify-content: space-between;
+  height: 10vh;
+  align-items: center;
+  padding: 5%;
+  background-color: rgba(100, 190, 168, 0.726);
+  margin-top: 5%;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.288);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+button{
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-image: linear-gradient(to right, #b46eb1 0%, #9edf55 100%);
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+button:hover {
+  background: orange;
+  transform: translateY(-2px);
+}
+.table__container{
+  background-color: white;
+}
+

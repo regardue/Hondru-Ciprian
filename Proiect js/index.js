@@ -382,88 +382,54 @@ function createApartmentTable(filterFavourites = false) {
   let tableBody = table.createTBody();
   let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
   let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-  if(!loggedInUser){
+  if (!loggedInUser) {
     toastr["error"]("No user logged in!");
     return;
   }
 
   let currentUserInfo = loginInfo.find((user) => user.email == loggedInUser);
-  
-  if(!currentUserInfo || !currentUserInfo.apartments || currentUserInfo.apartments.length == 0){
+
+  if (
+    !currentUserInfo ||
+    !currentUserInfo.apartments ||
+    currentUserInfo.apartments.length == 0
+  ) {
     toastr["info"]("Please add some apartments first!");
     addFlat();
     return;
-  } 
+  }
 
   let apartmentsToDisplay = currentUserInfo.apartments;
 
-  if(filterFavourites){
-    apartmentsToDisplay = apartmentsToDisplay.filter((apartment) => apartment.favourite);
+  if (filterFavourites) {
+    apartmentsToDisplay = apartmentsToDisplay.filter(
+      (apartment) => apartment.favourite
+    );
   }
   createApartmentRows(tableBody, apartmentsToDisplay);
   document.body.appendChild(table);
 
   // remember what kind of table im showing
 
-  if(filterFavourites){
+  if (filterFavourites) {
     currentFavouritesTable = table;
-  }
-  else{
+  } else {
     currentTable = table;
   }
+  document.getElementById("viewFlatsContainer").appendChild(table);
 }
-
-// favourites button
-
 
 welcomeMessage();
 
-
-// function sortApartmentsBy() {
-//   let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
-//   let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-//   for (let user of loginInfo) {
-//     if (user && user.apartments && user.email == loggedInUser) {
-//       // Sort apartments by building year
-//       user.apartments.sort((a, b) => {
-//         // Parse buildingYear as integers for comparison
-//         let yearA = parseInt(a.buildingYear);
-//         let yearB = parseInt(b.buildingYear);
-
-//         // Compare buildingYear values
-//         if (yearA < yearB) {
-//           return 1;
-//         } else if (yearA > yearB) {
-//           return -1;
-//         } else {
-//           return 0;
-//         }
-//       });
-
-//       // Recreate the apartment table with sorted data
-
-//       localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
-//       removeApartmentTable();
-//       createApartmentTable();
-//     }
-//   }
-// }
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   let tableHeaders = document.querySelectorAll("#apartmentTable th");
-//   tableHeaders.forEach((header, index) => {
-//     header.addEventListener("click", function () {
-//       sortApartmentsBy(index);
-//     });
-//   });
-// });
-
 function removeApartmentTable() {
+  // if(passwordChangeForm.style.display = "block"){
+  //   passwordChangeForm.style.display = "none";
+  // }
   if (currentTable) {
     currentTable.remove();
     currentTable = null;
   }
-  if(currentFavouritesTable){
+  if (currentFavouritesTable) {
     currentFavouritesTable.remove();
     currentFavouritesTable = null;
   }
@@ -471,30 +437,28 @@ function removeApartmentTable() {
 
 let currentTableType = null;
 
-function viewFlatsButtonClick(){
-  if(passwordChangeForm.style.display == "block"){
+function viewFlatsButtonClick() {
+  if (passwordChangeForm.style.display == "block") {
     passwordChangeForm.style.display = "none";
   }
 
-  if(currentTableType == "all"){
+  if (currentTableType == "all") {
     removeApartmentTable();
     currentTableType = null;
-  }
-  else{
+  } else {
     createApartmentTable();
-    currentTableType = "all"
+    currentTableType = "all";
   }
 }
 
-function favouritesButtonClick(){
-  if(passwordChangeForm.style.display == "block"){
+function favouritesButtonClick() {
+  if (passwordChangeForm.style.display == "block") {
     passwordChangeForm.style.display = "none";
   }
-  if(currentTableType == "favourites"){
+  if (currentTableType == "favourites") {
     removeApartmentTable();
     currentTableType = null;
-  }
-  else{
+  } else {
     createApartmentTable(true);
     currentTableType = "favourites";
   }
@@ -547,14 +511,14 @@ function welcomeMessage() {
     let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
     let currentUserInfo = loginInfo.find((x) => x.email == loggedInUser);
     if (currentUserInfo) {
+      document.getElementById("newPassword").value = currentUserInfo.password;
+      document.getElementById("newRepeatPassword").value = currentUserInfo.password;
+      document.getElementById("newFirstName").value = currentUserInfo.firstName;
+      document.getElementById("newLastName").value = currentUserInfo.lastName;
+      document.getElementById("newBirthDate").value = currentUserInfo.birthDate;
       let welcomeButton = document.getElementById("welcomeUser");
       if (welcomeButton) {
-        welcomeButton.textContent =
-          "Welcome, " +
-          currentUserInfo.lastName +
-          " " +
-          currentUserInfo.firstName +
-          "!";
+        welcomeButton.textContent ="Welcome, " +currentUserInfo.lastName +" " +currentUserInfo.firstName +"!";
       }
     }
   }
@@ -567,54 +531,39 @@ function profileButtonClick() {
     passwordChangeForm.style.display = "block";
     removeApartmentTable();
   } else {
+    removeApartmentTable();
     passwordChangeForm.style.display = "none";
   }
 }
 
 myProfileButton.addEventListener("click", profileButtonClick);
 
+function changeInfo() {
+  let newPassword = document.getElementById("newPassword").value;
+  let repeatPassword = document.getElementById("newRepeatPassword").value;
+  let newFirstName = document.getElementById("newFirstName").value;
+  let newLastName = document.getElementById("newLastName").value;
+  let newBirthDate = document.getElementById("newBirthDate").value;
 
-// function changeInfo(){
-//   let currentUser = getLoggedInUser();
-//   if(!currentUser){
-//     console.error("No user is currently logged in!");
-//     return;
-//   }
-//   let currentPassword = document.getElementById("currentPassword").value;
-//   let newPassword = document.getElementById("newPassword").value;
-//   let repeatPassword = document.getElementById("repeatPassword").value;
-//   let newEmail = document.getElementById("newEmail").value;
-//   // let newBirthDate = document.getElementById("newBirthDate").value;
+  if(newPassword != repeatPassword){
+    toastr["error"]["Passwords do not match. Please try again."]
+  }
 
+  let loggedInUser = getLoggedInUser();
+  let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
+  let currentUserInfo = loginInfo.find((user) => user.email === loggedInUser);
 
-//   if(currentPassword.trim() == "" || newPassword.trim() == "" || repeatPassword.trim() == "" || newEmail.trim() == "" || newBirthDate.trim() == ""){
-//     toastr["error"]("Please fill in all fields.");
-//     return;
-//   }
-//   if(newPassword != repeatPassword){
-//     toastr["error"]("Your new passwords don't match.");
-//     return;
-//   }
-
-//   let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
-//   let currentUserInfo = loginInfo.find((user) => user.email == currentUser);
-
-//   if(!currentUserInfo){
-//     console.error("User information not found in local storage.");
-//     return;
-//   }
-
-//   if(currentPassword != currentUserInfo.password){
-//     toastr["error"]("Your current password is incorrect.");
-//     return;
-//   }
-//   currentUserInfo.password = newPassword;
-//   currentUserInfo.email = newEmail;
-//   currentUserInfo.newBirthDate = newBirthDate;
-//   localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
-//   toastr["success"]("User information updated successfully.");
-
-//   document.querySelectorAll("#passwordChangeForm input").forEach((input) => {
-//     input.value = "";
-//   });
-// }
+  if (currentUserInfo) {
+    // update user`s info with the new values
+    currentUserInfo.password = newPassword;
+    currentUserInfo.firstName = newFirstName;
+    currentUserInfo.lastName = newLastName;
+    currentUserInfo.birthDate = newBirthDate;
+    // update info in storage
+    localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
+    toastr["success"]("Information updated successfully.");
+  }
+  else{
+    toastr["error"]("User information not found.");
+  }
+}
