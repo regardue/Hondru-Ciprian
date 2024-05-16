@@ -45,3 +45,18 @@ function submit() {
 function loginUser(username) {
   localStorage.setItem("loggedInUser", JSON.stringify(username));
 }
+
+
+function togglePasswordVisibility(inputId) {
+    const input = document.getElementById(inputId);
+    const icon = input.nextElementSibling.querySelector('i');
+
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'fas fa-eye-slash'; // Change icon to eye-slash when showing password
+    } else {
+        input.type = 'password';
+        icon.className = 'fas fa-eye'; // Change icon back to eye when hiding password
+    }
+}
+

@@ -327,9 +327,22 @@ function createApartmentRow(tableBody, apartment) {
 
   deleteButton.addEventListener("click", function () {
     let apartmentId = deleteButton.dataset.apartmentId;
-    if (deleteApartment(apartmentId)) {
-      tableBody.removeChild(row);
-    }
+    let modal = document.getElementById("deleteConfirmationModal");
+    modal.style.display = "block";
+
+    document
+      .getElementById("confirmDeleteBtn")
+      .addEventListener("click", function () {
+        if (deleteApartment(apartmentId)) {
+          tableBody.removeChild(row);
+        }
+        modal.style.display = "none";
+      });
+    document
+      .getElementById("cancelDeleteBtn")
+      .addEventListener("click", function () {
+        modal.style.display = "none";
+      });
   });
 }
 
@@ -422,9 +435,9 @@ function createApartmentTable(filterFavourites = false) {
 welcomeMessage();
 
 function removeApartmentTable() {
-  // if(passwordChangeForm.style.display = "block"){
-  //   passwordChangeForm.style.display = "none";
-  // }
+  if ((passwordChangeForm.style.display = "block")) {
+    passwordChangeForm.style.display = "none";
+  }
   if (currentTable) {
     currentTable.remove();
     currentTable = null;
@@ -441,7 +454,6 @@ function viewFlatsButtonClick() {
   if (passwordChangeForm.style.display == "block") {
     passwordChangeForm.style.display = "none";
   }
-
   if (currentTableType == "all") {
     removeApartmentTable();
     currentTableType = null;
@@ -512,13 +524,19 @@ function welcomeMessage() {
     let currentUserInfo = loginInfo.find((x) => x.email == loggedInUser);
     if (currentUserInfo) {
       document.getElementById("newPassword").value = currentUserInfo.password;
-      document.getElementById("newRepeatPassword").value = currentUserInfo.password;
+      document.getElementById("newRepeatPassword").value =
+        currentUserInfo.password;
       document.getElementById("newFirstName").value = currentUserInfo.firstName;
       document.getElementById("newLastName").value = currentUserInfo.lastName;
       document.getElementById("newBirthDate").value = currentUserInfo.birthDate;
-      let welcomeButton = document.getElementById("welcomeUser");
-      if (welcomeButton) {
-        welcomeButton.textContent ="Welcome, " +currentUserInfo.lastName +" " +currentUserInfo.firstName +"!";
+      let welcomeSpan = document.getElementById("welcomeUser");
+      if (welcomeSpan) {
+        welcomeSpan.textContent =
+          "Welcome, " +
+          currentUserInfo.lastName +
+          " " +
+          currentUserInfo.firstName +
+          "!";
       }
     }
   }
@@ -528,10 +546,10 @@ function welcomeMessage() {
 
 function profileButtonClick() {
   if (passwordChangeForm.style.display != "block") {
+    removeApartmentTable();
+    currentTableType = null;
     passwordChangeForm.style.display = "block";
-    removeApartmentTable();
   } else {
-    removeApartmentTable();
     passwordChangeForm.style.display = "none";
   }
 }
@@ -545,8 +563,8 @@ function changeInfo() {
   let newLastName = document.getElementById("newLastName").value;
   let newBirthDate = document.getElementById("newBirthDate").value;
 
-  if(newPassword != repeatPassword){
-    toastr["error"]["Passwords do not match. Please try again."]
+  if (newPassword != repeatPassword) {
+    toastr["error"]["Passwords do not match. Please try again."];
   }
 
   let loggedInUser = getLoggedInUser();
@@ -562,8 +580,30 @@ function changeInfo() {
     // update info in storage
     localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
     toastr["success"]("Information updated successfully.");
-  }
-  else{
+  } else {
     toastr["error"]("User information not found.");
+  }
+}
+
+function toggleActiveState(button) {
+  button.classList.toggle("active");
+  let buttons = document.querySelectorAll(".button");
+  buttons.forEach((btn) => {
+    if (btn != button) {
+      btn.classList.remove("active");
+    }
+  });
+}
+
+function togglePasswordVisibility(inputId) {
+  const input = document.getElementById(inputId);
+  const icon = input.nextElementSibling.querySelector("i");
+
+  if (input.type === "password") {
+    input.type = "text";
+    icon.className = "fas fa-eye-slash";
+  } else {
+    input.type = "password";
+    icon.className = "fas fa-eye";
   }
 }

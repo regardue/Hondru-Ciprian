@@ -3,18 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>RentEase login</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script src="login.js" defer></script>
+    <link rel="stylesheet" href="login.css">
   </head>
   <body>
     <h1>Login Page</h1>
     <p>E-mail</p>
     <input type="text" id="email">
     <p>Password</p>
-    <input type="password" id="password">
+    <div class="password-container">
+        <input type="password" id="password">
+        <button class="toggle-password" type="button" onclick="togglePasswordVisibility('password')">
+            <i class="fas fa-eye"></i>
+        </button>
+    </div>
     <br><button id="login">Confirm</button>
+    <div class="register__link__container">
+      <p>Don't have an account? <a href="register.html">Go to register page</a></p>
+    </div>
   </body>
 </html>

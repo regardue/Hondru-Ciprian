@@ -1,65 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RentEase</title>
     <script src="index.js" defer></script>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+      rel="stylesheet"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="navbar">
-            <button onclick="addFlat()">Add new flat</button>
-            <button id="viewFlats">View flats</button>
-            <button id="myProfile">My profile</button>
-            <button id="favourites">Favourites</button>
-            <button id="welcomeUser">Welcome, user</button>
-            <button id="logoutButton">Logout</button>
-        </div>
+      <div class="navbar">
+        <button onclick="addFlat()">Add new flat</button>
+        <button id="viewFlats" class="button" onclick="toggleActiveState(this)">
+          View flats
+        </button>
+        <button id="myProfile" class="button" onclick="toggleActiveState(this)">
+          My profile
+        </button>
+        <button
+          id="favourites"
+          class="button"
+          onclick="toggleActiveState(this)"
+        >
+          Favourites
+        </button>
+        <span id="welcomeUser">Welcome, user</span>
+        <button id="logoutButton" onclick="toggleActiveState(this)">
+          Logout
+        </button>
+      </div>
     </header>
     <main>
-        <div id="viewFlatsContainer" class="table__container"></div>
-        <div class="add__container" id="addContainer">
-            <div class="add__new__flat" id="addNewFlat">
-                <span class="close__add__flat" onclick="closeAddFlat()">X</span>
-                <p>City:</p>
-                <input type="text" id="addCity">
-                <p>Street name:</p>
-                <input type="text" id="addStreetName">
-                <p>Street number:</p>
-                <input type="text" id="addStreetNumber">
-                <p>Area Size(m<sup>2</sup>):</p>
-                <input type="text" id="addAreaSize">
-                <p>Has AC <input type="checkbox" id="addYesCheckbox" value="yes"></p>
-                <!-- <span>Yes</span><input type="checkbox" id="addYesCheckbox" value="yes"> -->
-                <!-- <span>No</span><input type="checkbox" id="addNoCheckbox" value="no"> -->
-                <p>Year built:</p>
-                <input type="text" id="addYearBuilt">
-                <p>Rent price($):</p>
-                <input type="text" id="addRentPrice">
-                <p>Date available:</p>
-                <input type="date" id="addDateAvailable">
-                <p><button onclick="Save()">Save</button></p>
-                </div>
+      <div id="deleteConfirmationModal" class="modal">
+        <div class="modal-content">
+          <p>Are you sure you want to delete this apartment?</p>
+          <button id="confirmDeleteBtn">Yes</button>
+          <button id="cancelDeleteBtn">No</button>
         </div>
-        <div id="passwordChangeForm" class="password__change__form">
-            <p>Password:</p>
-            <input type="password" id="newPassword">
-            <p>Repeat Password</p>
-            <input type="password" id="newRepeatPassword" placeholder="">
-            <p>First Name:</p>
-            <input type="text" id="newFirstName" placeholder="">
-            <p>Last Name:</p>
-            <input type="text" id="newLastName">
-            <p>Birth Date:</p>
-            <input type="date" id="newBirthDate">
-            <br>
-            <button onclick="changeInfo()">Update Information!</button>
+      </div>
+      <div id="viewFlatsContainer" class="table__container"></div>
+      <div class="add__container" id="addContainer">
+        <div class="add__new__flat" id="addNewFlat">
+          <span class="close__add__flat" onclick="closeAddFlat()">X</span>
+          <p>City:</p>
+          <input type="text" id="addCity" />
+          <p>Street name:</p>
+          <input type="text" id="addStreetName" />
+          <p>Street number:</p>
+          <input type="text" id="addStreetNumber" />
+          <p>Area Size(m<sup>2</sup>):</p>
+          <input type="text" id="addAreaSize" />
+          <p>
+            Has AC <input type="checkbox" id="addYesCheckbox" value="yes" />
+          </p>
+          <!-- <span>Yes</span><input type="checkbox" id="addYesCheckbox" value="yes"> -->
+          <!-- <span>No</span><input type="checkbox" id="addNoCheckbox" value="no"> -->
+          <p>Year built:</p>
+          <input type="text" id="addYearBuilt" />
+          <p>Rent price($):</p>
+          <input type="text" id="addRentPrice" />
+          <p>Date available:</p>
+          <input type="date" id="addDateAvailable" />
+          <p><button onclick="Save()">Save</button></p>
         </div>
+      </div>
+      <div id="passwordChangeForm" class="password__change__form">
+        <p>Password:</p>
+        <div class="password-container">
+          <input type="password" id="newPassword" />
+          <button
+            class="toggle-password"
+            type="button"
+            onclick="togglePasswordVisibility('newPassword')"
+          >
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+        <p>Repeat Password</p>
+        <div class="password-container">
+          <input type="password" id="newRepeatPassword" placeholder="" />
+          <button
+            class="toggle-password"
+            type="button"
+            onclick="togglePasswordVisibility('newRepeatPassword')"
+          >
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+        <p>First Name:</p>
+        <input type="text" id="newFirstName" placeholder="" />
+        <p>Last Name:</p>
+        <input type="text" id="newLastName" />
+        <p>Birth Date:</p>
+        <input type="date" id="newBirthDate" />
+        <br />
+        <button onclick="changeInfo()">Update Information!</button>
+      </div>
     </main>
-</body>
+  </body>
 </html>

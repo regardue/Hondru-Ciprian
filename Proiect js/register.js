@@ -79,7 +79,7 @@ function Confirm() {
   loginInfo.push(loginInformations);
   localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
   toastr["success"]("Success", "Congratulations, you now have an account!");
-  setTimeout(function(){
+  setTimeout(function () {
     window.location.href = "login.html";
   }, 5000);
 }
@@ -206,3 +206,18 @@ function checkDuplicateEmail(email) {
   });
   return duplicate;
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  function togglePasswordVisibility(inputElement) {
+    const currentType = inputElement.getAttribute("type");
+    const newType = currentType === "password" ? "text" : "password";
+    inputElement.setAttribute("type", newType);
+  }
+  document.querySelectorAll(".toggle-password").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const targetId = button.getAttribute("data-target");
+      const targetInput = document.getElementById(targetId);
+      togglePasswordVisibility(targetInput);
+    });
+  });
+});
