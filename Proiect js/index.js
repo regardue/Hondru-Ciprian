@@ -382,12 +382,41 @@ function createApartmentTable(filterFavourites = false) {
     { text: "Delete", sortBy: null },
   ];
 
+  let sortState = {
+    column: null,
+    direction: null,
+  };
+
   // create table header
 
   headers.forEach((header) => {
     let th = document.createElement("th");
     th.textContent = header.text;
     tableHead.appendChild(th);
+    if (["cityName", "rentPrice", "areaSize"].includes(header.sortBy)) {
+      let sortArrows = document.createElement("span");
+      sortArrows.classList.add("sort-arrows");
+
+      let upArrow = document.createElement("span");
+      upArrow.classList.add("sort-arrow", "up-arrow");
+      upArrow.innerHTML = "&#9650;"; // Up arrow symbol
+
+      let downArrow = document.createElement("span");
+      downArrow.classList.add("sort-arrow", "down-arrow");
+      downArrow.innerHTML = "&#9660;"; // Down arrow symbol
+
+      upArrow.addEventListener("click", function () {
+        sortTable(header.sortBy, true);
+      });
+
+      downArrow.addEventListener("click", function () {
+        sortTable(header.sortBy, false);
+      });
+
+      sortArrows.appendChild(upArrow);
+      sortArrows.appendChild(downArrow);
+      th.appendChild(sortArrows);
+    }
   });
 
   // create table body
@@ -419,6 +448,7 @@ function createApartmentTable(filterFavourites = false) {
       (apartment) => apartment.favourite
     );
   }
+
   createApartmentRows(tableBody, apartmentsToDisplay);
   document.body.appendChild(table);
 
@@ -430,6 +460,44 @@ function createApartmentTable(filterFavourites = false) {
     currentTable = table;
   }
   document.getElementById("viewFlatsContainer").appendChild(table);
+}
+
+function sortTable(sortBy, ascending) {
+  let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
+  let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  if (!loggedInUser) {
+    toastr["error"]("No user logged in!");
+    return;
+  }
+
+  let currentUserInfo = loginInfo.find((user) => user.email == loggedInUser);
+  if (!currentUserInfo || !currentUserInfo.apartments || currentUserInfo.apartments.length == 0) {
+    toastr["info"]("Please add some apartments first!");
+    addFlat();
+    return;
+  }
+
+  currentUserInfo.apartments.sort((a, b) => {
+    let aValue = a[sortBy];
+    let bValue = b[sortBy];
+
+    if (sortBy === "rentPrice" || sortBy === "areaSize") {
+      aValue = parseFloat(aValue.replace("$", ""));
+      bValue = parseFloat(bValue.replace("$", ""));
+    }
+
+    if (ascending) {
+      return aValue > bValue ? 1 : -1;
+    } else {
+      return aValue < bValue ? 1 : -1;
+    }
+  });
+
+  // Update localStorage with the sorted apartments
+  localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
+
+  // Re-create the table to reflect the sorted data
+  createApartmentTable();
 }
 
 welcomeMessage();
@@ -606,4 +674,11 @@ function togglePasswordVisibility(inputId) {
     input.type = "password";
     icon.className = "fas fa-eye";
   }
+}
+
+// burger menu
+
+function toggleMenu() {
+  const navMenu = document.getElementById('navMenu');
+  navMenu.classList.toggle('active');
 }

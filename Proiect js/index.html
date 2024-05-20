@@ -20,24 +20,17 @@
   <body>
     <header>
       <div class="navbar">
-        <button onclick="addFlat()">Add new flat</button>
-        <button id="viewFlats" class="button" onclick="toggleActiveState(this)">
-          View flats
-        </button>
-        <button id="myProfile" class="button" onclick="toggleActiveState(this)">
-          My profile
-        </button>
-        <button
-          id="favourites"
-          class="button"
-          onclick="toggleActiveState(this)"
-        >
-          Favourites
-        </button>
-        <span id="welcomeUser">Welcome, user</span>
-        <button id="logoutButton" onclick="toggleActiveState(this)">
-          Logout
-        </button>
+        
+        <button class="burger-menu" onclick="toggleMenu()">☰</button>
+        <nav id="navMenu">
+          <div class="logo__container"><img src="turtle.png" alt="" id="logo"></div>
+          <button onclick="addFlat()">Add new flat</button>
+          <button id="viewFlats" class="button" onclick="toggleActiveState(this)">View flats</button>
+          <button id="myProfile" class="button" onclick="toggleActiveState(this)">My profile</button>
+          <button id="favourites" class="button" onclick="toggleActiveState(this)">Favourites</button>
+          <span id="welcomeUser">Welcome, user</span>
+          <button id="logoutButton" onclick="toggleActiveState(this)">Logout</button>
+        </nav>
       </div>
     </header>
     <main>
@@ -60,11 +53,7 @@
           <input type="text" id="addStreetNumber" />
           <p>Area Size(m<sup>2</sup>):</p>
           <input type="text" id="addAreaSize" />
-          <p>
-            Has AC <input type="checkbox" id="addYesCheckbox" value="yes" />
-          </p>
-          <!-- <span>Yes</span><input type="checkbox" id="addYesCheckbox" value="yes"> -->
-          <!-- <span>No</span><input type="checkbox" id="addNoCheckbox" value="no"> -->
+          <p>Has AC <input type="checkbox" id="addYesCheckbox" value="yes" /></p>
           <p>Year built:</p>
           <input type="text" id="addYearBuilt" />
           <p>Rent price($):</p>
@@ -78,22 +67,14 @@
         <p>Password:</p>
         <div class="password-container">
           <input type="password" id="newPassword" />
-          <button
-            class="toggle-password"
-            type="button"
-            onclick="togglePasswordVisibility('newPassword')"
-          >
+          <button class="toggle-password" type="button" onclick="togglePasswordVisibility('newPassword')">
             <i class="fas fa-eye"></i>
           </button>
         </div>
         <p>Repeat Password</p>
         <div class="password-container">
           <input type="password" id="newRepeatPassword" placeholder="" />
-          <button
-            class="toggle-password"
-            type="button"
-            onclick="togglePasswordVisibility('newRepeatPassword')"
-          >
+          <button class="toggle-password" type="button" onclick="togglePasswordVisibility('newRepeatPassword')">
             <i class="fas fa-eye"></i>
           </button>
         </div>

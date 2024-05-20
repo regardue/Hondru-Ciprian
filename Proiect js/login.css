@@ -91,3 +91,14 @@ input[type="password"] {
 .toggle-password i:hover {
   color: #333;
 }
+
+.logo__container{
+  position: absolute;
+  top: 6%;
+  left: 6%;
+}
+
+#logo{
+  width: 150px;
+  height: auto;
+}
