@@ -81,7 +81,7 @@ function Confirm() {
   toastr["success"]("Success", "Congratulations, you now have an account!");
   setTimeout(function () {
     window.location.href = "login.html";
-  }, 5000);
+  }, 3000);
 }
 
 function Logins(email, password, firstName, lastName, birthDate, apartments) {
@@ -206,6 +206,8 @@ function checkDuplicateEmail(email) {
   });
   return duplicate;
 }
+
+// password hide/show icon
 
 document.addEventListener("DOMContentLoaded", function () {
   function togglePasswordVisibility(inputElement) {

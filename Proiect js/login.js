@@ -35,7 +35,7 @@ function submit() {
     loginUser(user[0].email);
     setTimeout(function () {
       window.location.href = "index.html";
-    }, 5000);
+    }, 3000);
   } else {
     toastr["error"]("Error", "Invalid email or password!");
   }

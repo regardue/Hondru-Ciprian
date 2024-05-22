@@ -92,13 +92,12 @@ input[type="password"] {
   color: #333;
 }
 
-.logo__container{
-  position: absolute;
-  top: 6%;
-  left: 6%;
+.logo__container {
+  top: 9%;
+  left: 9%;
 }
 
-#logo{
-  width: 150px;
+#logo {
+  width: 5vw;
   height: auto;
 }

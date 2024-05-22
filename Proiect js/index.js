@@ -21,6 +21,7 @@ toastr.options = {
 // toastr["warning"]("Info", "My warning message");
 
 // DOM elements
+
 let cityName = document.getElementById("addCity");
 let streetName = document.getElementById("addStreetName");
 let streetNumber = document.getElementById("addStreetNumber");
@@ -35,15 +36,16 @@ let passwordChangeForm = document.getElementById("passwordChangeForm");
 let uniqueIdCounter = 0;
 let favouritesButton = document.getElementById("favourites");
 
+// display add new flat form
+
 function addFlat() {
-  // add new flat button
   addContainer.style.display = "block";
 }
 
+// hide the add new flat form and clear input fields
+
 function closeAddFlat() {
-  // close button for popup
   addContainer.style.display = "none";
-  // clear inputs
   cityName.value = "";
   streetName.value = "";
   streetNumber.value = "";
@@ -54,10 +56,13 @@ function closeAddFlat() {
   avaDate.value = "";
 }
 
-// make the add flats button
+// save apartment data
 
 function Save() {
   let currentUser = getLoggedInUser();
+
+  // validators
+
   if (!currentUser) {
     console.error("No user is currently logged in!");
     return;
@@ -93,6 +98,9 @@ function Save() {
     toastr["error"]("Rent price must be a number!");
     return false;
   }
+
+  // construct apartment object
+
   let newApartment = new List(
     cityName.value,
     streetName.value,
@@ -106,10 +114,9 @@ function Save() {
   );
   capitalFirstLetter(newApartment, "cityName");
   capitalFirstLetter(newApartment, "streetName");
+
+  // check for duplicate apartments
   if (isDuplicateApartment(newApartment)) {
-    // do i want duplicates? yes/no
-    // toastr["error"]("Oops! It seems you've already saved this apartment.");
-    // return false;
     if (
       confirm(
         "Oops! It seems you've already saved this apartment. Do you want to proceed and save a duplicate?"
@@ -122,7 +129,7 @@ function Save() {
   } else {
     saveApartment(newApartment);
   }
-  // create new row in the table after you add a new flat
+  // create a new row in the table after adding a new flat
   let existingTable = document.getElementById("apartmentTable");
   if (existingTable) {
     removeApartmentTable();
@@ -131,7 +138,7 @@ function Save() {
   closeAddFlat();
 }
 
-// save the apartment in your list
+// save the apartment data to localStorage
 
 function saveApartment(apartment) {
   let currentUser = getLoggedInUser();
@@ -144,6 +151,8 @@ function saveApartment(apartment) {
   localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
   toastr["success"]("Apartment successfully saved.");
 }
+
+// generate unique id for each apartment
 
 function generateUniqueId() {
   let currentUser = getLoggedInUser();
@@ -162,6 +171,8 @@ function generateUniqueId() {
   maxId++;
   return maxId.toString();
 }
+
+// apartment constructor function
 
 function List(
   cityName,
@@ -186,6 +197,8 @@ function List(
   this.apartmentId = generateUniqueId();
 }
 
+// get the currently logged in user
+
 function getLoggedInUser() {
   let loggedInUserString = localStorage.getItem("loggedInUser");
   if (loggedInUserString) {
@@ -195,7 +208,7 @@ function getLoggedInUser() {
   }
 }
 
-// log out of the current user
+// log out the current user
 
 function logoutUser() {
   localStorage.removeItem("loggedInUser");
@@ -209,7 +222,7 @@ logoutButton.addEventListener("click", function () {
   window.location.href = "login.html";
 });
 
-// validation for all inputs to have something inside
+// validate if all input fields have values
 
 function areInputsField() {
   let inputs = document.querySelectorAll("#addFlat input");
@@ -222,13 +235,13 @@ function areInputsField() {
   return true;
 }
 
-// validation for being a number
+// check if input is a number
 
 function isNumber(input) {
   return !isNaN(input);
 }
 
-// year built to be an actual year
+// check if the year built is a valid year
 
 function yearCheck(input) {
   let currentYear = new Date().getFullYear();
@@ -247,7 +260,7 @@ function capitalFirstLetter(object, property) {
   }
 }
 
-// make a new apartment, check if its the same as the last one
+// check if the new apartment is a duplicate
 
 function isDuplicateApartment(newApartment) {
   let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
@@ -275,7 +288,7 @@ function isDuplicateApartment(newApartment) {
   return false; // no duplicate found
 }
 
-// create one table row
+// create a new table row for an apartment
 
 function createApartmentRow(tableBody, apartment) {
   let row = tableBody.insertRow();
@@ -382,11 +395,6 @@ function createApartmentTable(filterFavourites = false) {
     { text: "Delete", sortBy: null },
   ];
 
-  let sortState = {
-    column: null,
-    direction: null,
-  };
-
   // create table header
 
   headers.forEach((header) => {
@@ -471,7 +479,11 @@ function sortTable(sortBy, ascending) {
   }
 
   let currentUserInfo = loginInfo.find((user) => user.email == loggedInUser);
-  if (!currentUserInfo || !currentUserInfo.apartments || currentUserInfo.apartments.length == 0) {
+  if (
+    !currentUserInfo ||
+    !currentUserInfo.apartments ||
+    currentUserInfo.apartments.length == 0
+  ) {
     toastr["info"]("Please add some apartments first!");
     addFlat();
     return;
@@ -679,6 +691,6 @@ function togglePasswordVisibility(inputId) {
 // burger menu
 
 function toggleMenu() {
-  const navMenu = document.getElementById('navMenu');
-  navMenu.classList.toggle('active');
+  const navMenu = document.getElementById("navMenu");
+  navMenu.classList.toggle("active");
 }
