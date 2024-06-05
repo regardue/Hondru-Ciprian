@@ -1,7 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import Ticket from './components/ticket.js';
 import Button from './components/button.js';
+import Incrementor from './components/incrementor.js';
 
 
 const message = "Hello from React";
@@ -23,15 +23,17 @@ function App() {
   return (
     <div>
       {/* <Ticket name={ticket[0].name} concertName={ticket[0].concertName} time={ticket[0].time}></Ticket>
-      <Ticket name={ticket[1].name} concertName={ticket[1].concertName} time={ticket[1].time}></Ticket> */}
+      <Ticket name={ticket[1].name} concertName={ticket[1].concertName} time={ticket[1].time}></Ticket>
       {ticket.map(tick=>{
         return <Ticket name={tick.name} concertName={tick.concertName} time={tick.time}></Ticket>
       })}
-      {/* <Welcome name={"abnjsaagad"} surname={User.surname} ></Welcome>
+      <Welcome name={"abnjsaagad"} surname={User.surname} ></Welcome>
     <h1>{User.name},{User.surname}</h1>
     <h1>{message}</h1>
     <p>{random()}</p>
     <h3 className="test">12341234</h3> */}
+
+    <Incrementor></Incrementor>
     </div>
   );
 }
