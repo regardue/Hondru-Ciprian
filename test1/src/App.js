@@ -2,6 +2,9 @@ import './App.css';
 import Ticket from './components/ticket.js';
 import Button from './components/button.js';
 import Incrementor from './components/incrementor.js';
+import Input from './components/input.js';
+
+import { useState } from 'react';
 
 
 const message = "Hello from React";
@@ -33,7 +36,8 @@ function App() {
     <p>{random()}</p>
     <h3 className="test">12341234</h3> */}
 
-    <Incrementor></Incrementor>
+    {/* <Incrementor></Incrementor> */}
+    <Input></Input>
     </div>
   );
 }
