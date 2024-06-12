@@ -3,6 +3,7 @@ import Ticket from './components/ticket.js';
 import Button from './components/button.js';
 import Incrementor from './components/incrementor.js';
 import Input from './components/input.js';
+import Register from './components/login.js';
 
 import { useState } from 'react';
 
@@ -37,7 +38,9 @@ function App() {
     <h3 className="test">12341234</h3> */}
 
     {/* <Incrementor></Incrementor> */}
-    <Input></Input>
+    {/* <Input></Input> */}
+
+    <><Register></Register></>
     </div>
   );
 }
