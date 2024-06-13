@@ -1,10 +1,8 @@
 // import { useState } from 'react'
 
-function Register(props) {
+function Register() {
   return (
-    <>
-      <button></button>
-    </>
+    <></>
   )
 }
 
