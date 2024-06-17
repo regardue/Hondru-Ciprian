@@ -4,8 +4,12 @@ import Button from './components/button.js';
 import Incrementor from './components/incrementor.js';
 import Input from './components/input.js';
 import Register from './components/login.js';
+import Inc from './components/inc.js';
+import comments from './components/comments.js';
 
 import { useState } from 'react';
+import Todolist from './components/todolist/todolist.js';
+import Comments from './components/comments.js';
 
 
 const message = "Hello from React";
@@ -40,7 +44,13 @@ function App() {
     {/* <Incrementor></Incrementor> */}
     {/* <Input></Input> */}
 
-    <><Register></Register></>
+    {/* <><Register></Register></> */}
+
+    {/* <Todolist></Todolist> */}
+    <Inc></Inc>
+    {/* <Comments></Comments> */}
+
+
     </div>
   );
 }
