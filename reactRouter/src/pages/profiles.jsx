@@ -10,6 +10,7 @@ const Profiles = () => {
         <div>
             <h1>Profile for User</h1>
             <p>My user Indentifier is : {params.userId}</p>
+            {/* {add your content here} */}
         </div>
     );
 };
