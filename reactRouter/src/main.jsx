@@ -7,6 +7,7 @@ import Home from './pages/home.jsx'
 import Profile from './pages/profiles.jsx'
 import Profiles from './pages/profile.jsx'
 import NotFound from './pages/notFound.jsx'
+import Home1 from './pages/home1.jsx'
 
 const router = createBrowserRouter([
   {
@@ -22,10 +23,10 @@ const router = createBrowserRouter([
       element:<Profiles/>
     }]
   },
-  // {
-  //   path:'/myProfile/:userId',
-  //   element:<Profiles/>
-  // }
+  {
+    path:'/home1',
+    element:<Home1/>
+  }
 ]);
 
 

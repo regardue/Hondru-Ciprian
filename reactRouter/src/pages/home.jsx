@@ -8,7 +8,7 @@ const Home = () => {
     
 
     const handleDelete = (row) =>{
-        setRows(rows.filter(x=>x.id!==row.id))
+        setRows(rows.filter(x=>x.id!==row.id));
     }
 
     const options=[
@@ -17,6 +17,7 @@ const Home = () => {
         {label:"Oradea"},
         {label:"Cluj"},
     ]
+
     const [newOptions, setOptions] = useState(options);
     const [nume,setNume]=useState("");
     
@@ -48,7 +49,7 @@ const Home = () => {
 
     const handleClick =()=>{
         // options.push({label:"Constanta"});
-        setOptions((oldOptions) => [...oldOptions,{label:nume}])
+        setNume((oldNume) => [...oldNume,{label:nume}])
     }
     return (
         <div>
