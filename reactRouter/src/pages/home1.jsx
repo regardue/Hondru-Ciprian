@@ -96,40 +96,40 @@ const Home1 = () => {
             pageSizeOptions={[5, 10]}
             checkboxSelection />
             <Dialog open={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
-                <DialogTitle>Edit Row</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        required
-                        name="nume"
-                        label="Nume:"
-                        value={editRow?.nume || ""}
-                        onChange={handleEditChange}
-                        fullWidth
-                        margin="dense"
-                    />
-                    <TextField
-                        required
-                        name="prenume"
-                        label="Prenume:"
-                        value={editRow?.prenume || ""}
-                        onChange={handleEditChange}
-                        fullWidth
-                        margin="dense"
-                    />
-                    <TextField
-                        required
-                        name="facultate"
-                        label="Facultate:"
-                        value={editRow?.facultate || ""}
-                        onChange={handleEditChange}
-                        fullWidth
-                        margin="dense"
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setIsEditModalOpen(false)}>Cancel</Button>
-                    <Button onClick={handleEditSubmit} color="primary">Save</Button>
-                </DialogActions>
+            <DialogTitle>Edit Row</DialogTitle>
+            <DialogContent>
+            <TextField
+            required
+            name="nume"
+            label="Nume:"
+            value={editRow?.nume || ""}
+            onChange={handleEditChange}
+            fullWidth
+            margin="dense"
+            />
+            <TextField
+            required
+            name="prenume"
+            label="Prenume:"
+            value={editRow?.prenume || ""}
+            onChange={handleEditChange}
+            fullWidth
+            margin="dense"
+            />
+            <TextField
+            required
+            name="facultate"
+            label="Facultate:"
+            value={editRow?.facultate || ""}
+            onChange={handleEditChange}
+            fullWidth
+            margin="dense"
+            />
+            </DialogContent>
+            <DialogActions>
+            <Button onClick={() => setIsEditModalOpen(false)}>Cancel</Button>
+            <Button onClick={handleEditSubmit} color="primary">Save</Button>
+            </DialogActions>
             </Dialog>
         </div>
     )
