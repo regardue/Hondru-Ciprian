@@ -72,4 +72,3 @@ function Register() {
 }
 
 export default Register;
-Arteya Dee
