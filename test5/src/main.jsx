@@ -8,11 +8,12 @@ import Register from "./components/register.jsx";
 import Home from "./components/home.jsx";
 import Header from "./components/header.jsx";
 import { AuthProvider } from "./contexts/authContext.jsx";
+import HTTP from "./components/http.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <HTTP />,
   },
   {
     path: "/register",

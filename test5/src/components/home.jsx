@@ -5,6 +5,7 @@ import Header from "./header";
 import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
 import { collection, getDocs, doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase';
+import HTTP from './http';
 
 function Home() {
   const [users, setUsers] = useState([]);
@@ -41,7 +42,7 @@ function Home() {
     } else {
         checkAdminStatus ()
     }
-  }, [isAdmin] );
+  }, [currentUser, navigate] );
 
 
   return (
@@ -73,7 +74,7 @@ function Home() {
                         <Button 
                         variant="contained"
                         color="secondary"
-                        onClick={handleDelete(user.id)}
+                        onClick={() => handleDelete(user.id)}
                         >Delete</Button>
                     </TableCell>
                 )}
