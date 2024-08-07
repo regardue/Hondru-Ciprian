@@ -10,9 +10,9 @@ import { db } from "../firebase";
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [birthday, setBirthday] = useState("");
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
-  const [birthday, setBirthday] = useState("");
   const [isReg, setIsReg] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { currentUser, userLoggedIn } = useAuth();
@@ -35,16 +35,16 @@ function Register() {
           await setDoc(doc(db, "users", user.user.uid), {
             email: email,
             password: password,
+            birthday: birthday,
             firstName: firstName,
             lastName: lastName,
-            birthday: birthday,
             admin: false,
           });
           setEmail("");
           setPassword("");
+          setBirthday("");
           setFirstName("");
           setLastName("");
-          setBirthday("");
           navigate("/");
         })
         .catch((error) => {
@@ -79,6 +79,16 @@ function Register() {
 
 <TextField
         required
+        id="birthday"
+        label="Birthday:"
+        value={birthday}
+        onChange={(e) => {
+          setBirthday(e.target.value);
+        }}
+      />
+
+<TextField
+        required
         id="firstName"
         label="First name:"
         value={firstName}
@@ -94,16 +104,6 @@ function Register() {
         value={lastName}
         onChange={(e) => {
           setLastName(e.target.value);
-        }}
-      />
-
-<TextField
-        required
-        id="birthday"
-        label="Birthday:"
-        value={birthday}
-        onChange={(e) => {
-          setBirthday(e.target.value);
         }}
       />
 
