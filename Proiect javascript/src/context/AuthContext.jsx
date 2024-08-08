@@ -10,6 +10,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -32,13 +33,16 @@ export const AuthProvider = ({ children }) => {
         setCurrentUser(null);
         setIsAdmin(false);
       }
+      setIsLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
+  const isAuthenticated = !!currentUser;
+
   return (
-    <AuthContext.Provider value={{ currentUser, isAdmin }}>
+    <AuthContext.Provider value={{ currentUser, isAdmin, isAuthenticated, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

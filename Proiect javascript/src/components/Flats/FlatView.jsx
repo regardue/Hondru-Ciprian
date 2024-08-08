@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, addDoc, query, where, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "../../services/firebase";
 import { Table, TableBody, TableCell, TableHead, TableRow, Button, Modal, Box } from "@mui/material";
 import MessageBar from "../Messages/MessageBar";
 
 const FlatView = () => {
   const [flats, setFlats] = useState([]);
+  const [favoriteFlats, setFavoriteFlats] = useState(new Set()); // Store favorite flat IDs
   const [selectedFlat, setSelectedFlat] = useState(null);
   const [openMessageBar, setOpenMessageBar] = useState(false);
   const currentUser = auth.currentUser;
@@ -21,8 +22,23 @@ const FlatView = () => {
         console.error("Error fetching flats: ", error);
       }
     };
+
+    const fetchFavorites = async () => {
+      if (currentUser) {
+        const favoritesQuery = query(
+          collection(db, "favorites"),
+          where("userId", "==", currentUser.uid)
+        );
+        const querySnapshot = await getDocs(favoritesQuery);
+        setFavoriteFlats(
+          new Set(querySnapshot.docs.map((doc) => doc.data().flatId))
+        );
+      }
+    };
+
     fetchFlats();
-  }, []);
+    fetchFavorites();
+  }, [currentUser]);
 
   const handleSelectFlat = (flat) => {
     setSelectedFlat(flat);
@@ -34,19 +50,47 @@ const FlatView = () => {
     setSelectedFlat(null);
   };
 
-  const handleAddToFavorites = (flatId) => {
-    // Add logic to handle adding to favorites
-    console.log(`Add flat ${flatId} to favorites`);
+  const handleToggleFavorite = async (flatId) => {
+    try {
+      if (favoriteFlats.has(flatId)) {
+        // If the flat is already in favorites, remove it
+        const favoriteDocQuery = query(
+          collection(db, "favorites"),
+          where("userId", "==", currentUser.uid),
+          where("flatId", "==", flatId)
+        );
+        const favoriteDocSnapshot = await getDocs(favoriteDocQuery);
+        if (!favoriteDocSnapshot.empty) {
+          await deleteDoc(doc(db, "favorites", favoriteDocSnapshot.docs[0].id));
+          setFavoriteFlats((prevFavorites) => {
+            const newFavorites = new Set(prevFavorites);
+            newFavorites.delete(flatId);
+            return newFavorites;
+          });
+          console.log(`Flat ${flatId} removed from favorites`);
+        }
+      } else {
+        // If the flat is not in favorites, add it
+        await addDoc(collection(db, "favorites"), {
+          flatId: flatId,
+          userId: currentUser.uid,
+        });
+        setFavoriteFlats((prevFavorites) => new Set(prevFavorites).add(flatId));
+        console.log(`Flat ${flatId} added to favorites`);
+      }
+    } catch (error) {
+      console.error("Error toggling favorite status: ", error);
+    }
   };
 
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 600,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    bgcolor: "background.paper",
+    border: "2px solid #000",
     boxShadow: 24,
     p: 4,
   };
@@ -66,8 +110,7 @@ const FlatView = () => {
             <TableCell>Rent Price</TableCell>
             <TableCell>Date Available</TableCell>
             <TableCell>Actions</TableCell>
-            
-            <TableCell>Add to Favorites</TableCell> {/* New column header */}
+            <TableCell>Favorite</TableCell> {/* Updated column header */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -81,7 +124,6 @@ const FlatView = () => {
               <TableCell>{flat.yearBuilt}</TableCell>
               <TableCell>{flat.rentPrice}</TableCell>
               <TableCell>{flat.dateAvailable}</TableCell>
-              
               <TableCell>
                 {flat.uid !== currentUser?.uid ? (
                   <Button
@@ -101,14 +143,17 @@ const FlatView = () => {
                   </Button>
                 )}
               </TableCell>
-              
               <TableCell>
-                <Button
-                  onClick={() => handleAddToFavorites(flat.id)}
-                  variant="text" // Using a simple button without specific Material-UI design
-                >
-                  Add to Favorites
-                </Button>
+                {flat.uid !== currentUser?.uid && (
+                  <Button
+                    onClick={() => handleToggleFavorite(flat.id)}
+                    variant="text"
+                  >
+                    {favoriteFlats.has(flat.id)
+                      ? "Remove from Favorites"
+                      : "Add to Favorites"}
+                  </Button>
+                )}
               </TableCell>
             </TableRow>
           ))}
