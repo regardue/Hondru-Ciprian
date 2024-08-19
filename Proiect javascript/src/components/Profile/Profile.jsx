@@ -1,7 +1,8 @@
+// src/components/Profile/Profile.jsx
 import React, { useEffect, useState } from 'react';
 import { db, auth } from '../../services/firebase'; // Ensure to import Firebase config
 import { doc, getDoc } from 'firebase/firestore';
-import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
+import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Container, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Profile = () => {
@@ -11,12 +12,16 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       if (currentUser) {
-        const userDoc = doc(db, 'users', currentUser.uid); // Adjust path based on your collection structure
-        const docSnap = await getDoc(userDoc);
-        if (docSnap.exists()) {
-          setUserData(docSnap.data());
-        } else {
-          console.log('No such document!');
+        try {
+          const userDoc = doc(db, 'users', currentUser.uid); // Adjust path based on your collection structure
+          const docSnap = await getDoc(userDoc);
+          if (docSnap.exists()) {
+            setUserData(docSnap.data());
+          } else {
+            console.log('No such document!');
+          }
+        } catch (error) {
+          console.error('Error fetching user data:', error);
         }
       }
     };
@@ -25,12 +30,23 @@ const Profile = () => {
   }, [currentUser]);
 
   if (!userData) {
-    return <Typography>Loading...</Typography>;
+    return (
+      <Container maxWidth="sm">
+        <Typography variant="h5" align="center" gutterBottom>
+          Loading...
+        </Typography>
+      </Container>
+    );
   }
 
+  // Filter out the 'uid' field from userData
+  const filteredUserData = Object.entries(userData).filter(([key]) => key !== 'uid');
+
   return (
-    <div>
-      <Typography variant="h4">Profile</Typography>
+    <Container maxWidth="md">
+      <Typography variant="h4" gutterBottom>
+        Profile
+      </Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -40,19 +56,21 @@ const Profile = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {Object.keys(userData).map((key) => (
+            {filteredUserData.map(([key, value]) => (
               <TableRow key={key}>
                 <TableCell>{key}</TableCell>
-                <TableCell>{userData[key]}</TableCell>
+                <TableCell>{value || 'N/A'}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <Button component={Link} to="/profile/update" variant="contained" color="primary" sx={{ mt: 2 }}>
-        Edit Profile
-      </Button>
-    </div>
+      <Grid container justifyContent="flex-end" sx={{ mt: 2 }}>
+        <Button component={Link} to="/profile/update" variant="contained" color="primary">
+          Edit Profile
+        </Button>
+      </Grid>
+    </Container>
   );
 };
 

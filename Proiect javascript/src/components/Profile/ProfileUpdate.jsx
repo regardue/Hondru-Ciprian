@@ -1,7 +1,17 @@
+// src/components/Profile/ProfileUpdate.jsx
 import React, { useEffect, useState } from 'react';
 import { db, auth } from '../../services/firebase';
 import { doc, updateDoc, getDoc } from 'firebase/firestore';
-import { TextField, Button, Typography } from '@mui/material';
+import { TextField, Button, Typography, Container, Grid, Paper } from '@mui/material';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+
+// Validation schema using Yup
+const validationSchema = yup.object({
+  // Add validation rules here if needed
+  // Example:
+  // name: yup.string().required('Name is required'),
+});
 
 const ProfileUpdate = () => {
   const [userData, setUserData] = useState({});
@@ -11,14 +21,18 @@ const ProfileUpdate = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       if (currentUser) {
-        const userDoc = doc(db, 'users', currentUser.uid); // Adjust path based on your collection structure
-        const docSnap = await getDoc(userDoc);
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          setUserData(data);
-          setFormData(data);
-        } else {
-          console.log('No such document!');
+        try {
+          const userDoc = doc(db, 'users', currentUser.uid); // Adjust path based on your collection structure
+          const docSnap = await getDoc(userDoc);
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            setUserData(data);
+            setFormData(data);
+          } else {
+            console.log('No such document!');
+          }
+        } catch (error) {
+          console.error('Error fetching user data:', error);
         }
       }
     };
@@ -26,46 +40,68 @@ const ProfileUpdate = () => {
     fetchUserData();
   }, [currentUser]);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (currentUser) {
-      const userDoc = doc(db, 'users', currentUser.uid);
-      await updateDoc(userDoc, formData);
-      alert('Profile updated successfully');
-    }
-  };
+  const formik = useFormik({
+    initialValues: formData,
+    validationSchema,
+    enableReinitialize: true,
+    onSubmit: async (values) => {
+      if (currentUser) {
+        const userDoc = doc(db, 'users', currentUser.uid);
+        try {
+          await updateDoc(userDoc, values);
+          alert('Profile updated successfully');
+        } catch (error) {
+          console.error('Error updating profile:', error);
+        }
+      }
+    },
+  });
 
   if (!userData) {
-    return <Typography>Loading...</Typography>;
+    return (
+      <Container maxWidth="sm">
+        <Typography variant="h5" align="center" gutterBottom>
+          Loading...
+        </Typography>
+      </Container>
+    );
   }
 
+  // Exclude 'uid' from form fields
+  const filteredUserData = Object.keys(userData).filter((key) => key !== 'uid');
+
   return (
-    <div>
-      <Typography variant="h4">Update Profile</Typography>
-      <form onSubmit={handleSubmit}>
-        {Object.keys(userData).map((key) => (
-          <TextField
-            key={key}
-            name={key}
-            label={key}
-            value={formData[key] || ''}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-        ))}
-        <Button type="submit" variant="contained" color="primary">
-          Save Changes
-        </Button>
-      </form>
-    </div>
+    <Container maxWidth="md">
+      <Typography variant="h4" gutterBottom>
+        Update Profile
+      </Typography>
+      <Paper elevation={3} sx={{ padding: 3 }}>
+        <form onSubmit={formik.handleSubmit}>
+          <Grid container spacing={2}>
+            {filteredUserData.map((key) => (
+              <Grid item xs={12} sm={6} key={key}>
+                <TextField
+                  name={key}
+                  label={key.charAt(0).toUpperCase() + key.slice(1)}
+                  value={formik.values[key] || ''}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched[key] && Boolean(formik.errors[key])}
+                  helperText={formik.touched[key] && formik.errors[key]}
+                  fullWidth
+                  margin="normal"
+                />
+              </Grid>
+            ))}
+            <Grid item xs={12}>
+              <Button type="submit" variant="contained" color="primary">
+                Save Changes
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </Paper>
+    </Container>
   );
 };
 
