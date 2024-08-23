@@ -10,6 +10,7 @@ import { toast, ToastContainer } from 'react-toastify'; // Import toast for noti
 import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS for styling
 import GoogleIcon from '../GoogleIcon/GoogleIcon'; // Import the google icon
 import { Divider } from '@mui/material';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 // Validation schema for Formik using yup
 const validationSchema = yup.object({
@@ -181,10 +182,10 @@ const Register = () => {
             InputLabelProps={{ shrink: true }} // Ensure the label is always visible for date input
           />
           <Button color="primary" variant="contained" fullWidth type="submit" sx={{ mt: 2, backgroundColor:'primary.main', '&:hover': {backgroundColor: 'primary.dark'} }}>
-            Register {/* Submit button for registration */}
+            Register 
           </Button>
         </form>
-        <Divider sx={{ my: 2 }} /> {/* Divider for visual separation */}
+        <Divider sx={{ my: 2 }} />
         <Typography variant='body2' align='center' color="text.secondary">
           Or sign in with:
         </Typography>
@@ -196,7 +197,22 @@ const Register = () => {
           sx={{ mt: 2, display:'flex', alignItems: 'center', justifyContent: 'center' }}
         >
           <GoogleIcon sx={{mr:1}} />
-          Sign in with Google {/* Button for Google sign-in */}
+          Sign in with Google 
+        </Button>
+        <Divider sx={{ my: 2 }} />
+        <Typography variant='body2' align='center' color="text.secondary">
+          You can also find us on Twitter
+        </Typography>
+        <Button
+          color="primary"
+          variant="outlined"
+          fullWidth
+          href="https://twitter.com/Finder_flat" 
+          target="_blank" // Open link in a new tab
+          sx={{ mt: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <TwitterIcon sx={{ mr: 1 }} /> 
+          Twitter
         </Button>
       </Box>
     </Container>
