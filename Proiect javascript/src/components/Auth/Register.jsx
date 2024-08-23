@@ -1,42 +1,46 @@
-import React from 'react';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import { Container, TextField, Button, Typography, Box } from '@mui/material';
-import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { auth, db } from '../../services/firebase';
-import { doc, setDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React from 'react'; // Import React to create the component
+import { useFormik } from 'formik'; // Import useFormik hook for form management
+import * as yup from 'yup'; // Import yup for schema validation
+import { Container, TextField, Button, Typography, Box } from '@mui/material'; // Import Material-UI components for UI
+import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'; // Import Firebase authentication functions
+import { auth, db } from '../../services/firebase'; // Import Firebase auth and Firestore database instances
+import { doc, setDoc } from 'firebase/firestore'; // Import Firestore functions to interact with the database
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook for programmatic navigation
+import { toast, ToastContainer } from 'react-toastify'; // Import toast for notifications
+import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS for styling
+import GoogleIcon from '../GoogleIcon/GoogleIcon'; // Import the google icon
+import { Divider } from '@mui/material';
 
-// Validation schema
+// Validation schema for Formik using yup
 const validationSchema = yup.object({
   email: yup
     .string()
-    .email('Enter a valid email')
-    .required('Email is required'),
+    .email('Enter a valid email') // Validate email format
+    .required('Email is required'), // Ensure email is provided
   password: yup
     .string()
-    .min(6, 'Password should be of minimum 6 characters length')
-    .required('Password is required'),
+    .min(6, 'Password should be of minimum 6 characters length') // Ensure password is at least 6 characters long
+    .required('Password is required'), // Ensure password is provided
   firstName: yup
     .string()
-    .required('First name is required'),
+    .required('First name is required'), // Ensure first name is provided
   lastName: yup
     .string()
-    .required('Last name is required'),
+    .required('Last name is required'), // Ensure last name is provided
   birthDate: yup
     .date()
-    .required('Birth date is required')
+    .required('Birth date is required') // Ensure birth date is provided
     .test(
       'age',
       'You must be at least 18 years old',
       function (value) {
+        // Ensure user is at least 18 years old
         return new Date(value) <= new Date(new Date().setFullYear(new Date().getFullYear() - 18));
       }
     ),
 });
 
+// Function to get error messages based on Firebase error codes
 const getErrorMessage = (errorCode) => {
   switch (errorCode) {
     case 'auth/email-already-in-use':
@@ -57,9 +61,9 @@ const getErrorMessage = (errorCode) => {
 };
 
 const Register = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook for navigating programmatically
 
-  // Formik setup
+  // Formik setup for managing form state and validation
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -68,9 +72,10 @@ const Register = () => {
       lastName: '',
       birthDate: '',
     },
-    validationSchema: validationSchema,
+    validationSchema: validationSchema, // Set validation schema
     onSubmit: async (values) => {
       try {
+        // Create a new user with email and password
         const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
         const user = userCredential.user;
 
@@ -83,36 +88,39 @@ const Register = () => {
           birthDate: values.birthDate,
         });
 
+        // Show success message and navigate to home page
         toast.success('Registration successful!');
         navigate('/');
       } catch (err) {
+        // Show error message if registration fails
         const errorMessage = getErrorMessage(err.code);
         toast.error(errorMessage);
       }
     },
   });
 
-  // Google sign-in handler
+  // Function to handle Google sign-in
   const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
+    const provider = new GoogleAuthProvider(); // Create a Google Auth provider
     try {
-      await signInWithPopup(auth, provider);
-      toast.success('Logged in with Google!');
-      navigate('/');
+      await signInWithPopup(auth, provider); // Sign in with Google popup
+      toast.success('Logged in with Google!'); // Show success message
+      navigate('/'); // Navigate to home page
     } catch (err) {
+      // Show error message if Google sign-in fails
       const errorMessage = getErrorMessage(err.code);
       toast.error(errorMessage);
     }
   };
 
   return (
-    <Container maxWidth="sm">
-      <ToastContainer />
-      <Box sx={{ mt: 5 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Register
+    <Container maxWidth="sm" className='custom-container slide-in-right'> {/* Container with max width "sm" for medium screens */}
+      <ToastContainer /> {/* Toast container for displaying notifications */}
+      <Box sx={{ mt: 5, p: 3, boxShadow:3, borderRadius: 2, backgroundColor: 'background.paper'}}> {/* Box component with top margin */}
+        <Typography variant="h4" component="h1" gutterBottom sx={{fontWeight:'bold', textAlign:'center', color:'primary,main'}}>
+          Register {/* Heading for the registration form */}
         </Typography>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit}> {/* Form with Formik's handleSubmit */}
           <TextField
             fullWidth
             id="firstName"
@@ -170,24 +178,29 @@ const Register = () => {
             error={formik.touched.birthDate && Boolean(formik.errors.birthDate)}
             helperText={formik.touched.birthDate && formik.errors.birthDate}
             margin="normal"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: true }} // Ensure the label is always visible for date input
           />
-          <Button color="primary" variant="contained" fullWidth type="submit" sx={{ mt: 2 }}>
-            Register
+          <Button color="primary" variant="contained" fullWidth type="submit" sx={{ mt: 2, backgroundColor:'primary.main', '&:hover': {backgroundColor: 'primary.dark'} }}>
+            Register {/* Submit button for registration */}
           </Button>
         </form>
+        <Divider sx={{ my: 2 }} /> {/* Divider for visual separation */}
+        <Typography variant='body2' align='center' color="text.secondary">
+          Or sign in with:
+        </Typography>
         <Button
           color="secondary"
           variant="outlined"
           fullWidth
           onClick={handleGoogleSignIn}
-          sx={{ mt: 2 }}
+          sx={{ mt: 2, display:'flex', alignItems: 'center', justifyContent: 'center' }}
         >
-          Sign in with Google
+          <GoogleIcon sx={{mr:1}} />
+          Sign in with Google {/* Button for Google sign-in */}
         </Button>
       </Box>
     </Container>
   );
 };
 
-export default Register;
+export default Register; // Export the Register component for use in other parts of the application

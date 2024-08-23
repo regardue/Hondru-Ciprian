@@ -2,9 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { db, auth } from '../../services/firebase';
 import { doc, updateDoc, getDoc } from 'firebase/firestore';
-import { TextField, Button, Typography, Container, Grid, Paper } from '@mui/material';
+import { TextField, Button, Typography, Container, Grid, Paper, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'; // Import toast
 
 // Validation schema using Yup
 const validationSchema = yup.object({
@@ -16,6 +18,8 @@ const validationSchema = yup.object({
 const ProfileUpdate = () => {
   const [userData, setUserData] = useState({});
   const [formData, setFormData] = useState({});
+  const [confirmationOpen, setConfirmationOpen] = useState(false); // State for confirmation dialog
+  const navigate = useNavigate(); // Use navigate hook for redirection
   const currentUser = auth.currentUser;
 
   useEffect(() => {
@@ -44,18 +48,29 @@ const ProfileUpdate = () => {
     initialValues: formData,
     validationSchema,
     enableReinitialize: true,
-    onSubmit: async (values) => {
-      if (currentUser) {
-        const userDoc = doc(db, 'users', currentUser.uid);
-        try {
-          await updateDoc(userDoc, values);
-          alert('Profile updated successfully');
-        } catch (error) {
-          console.error('Error updating profile:', error);
-        }
-      }
+    onSubmit: () => {
+      setConfirmationOpen(true); // Open the confirmation dialog
     },
   });
+
+  const handleConfirmUpdate = async () => {
+    setConfirmationOpen(false); // Close confirmation dialog
+    if (currentUser) {
+      const userDoc = doc(db, 'users', currentUser.uid);
+      try {
+        await updateDoc(userDoc, formik.values);
+        toast.success('Profile updated successfully'); // Show success toast
+        navigate('/profile'); // Navigate to profile page
+      } catch (error) {
+        console.error('Error updating profile:', error);
+        toast.error('Failed to update profile'); // Show error toast
+      }
+    }
+  };
+
+  const handleCloseConfirmation = () => {
+    setConfirmationOpen(false);
+  };
 
   if (!userData) {
     return (
@@ -71,7 +86,7 @@ const ProfileUpdate = () => {
   const filteredUserData = Object.keys(userData).filter((key) => key !== 'uid');
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="sm" className='custom-container slide-in-right'>
       <Typography variant="h4" gutterBottom>
         Update Profile
       </Typography>
@@ -101,6 +116,22 @@ const ProfileUpdate = () => {
           </Grid>
         </form>
       </Paper>
+
+      {/* Confirmation Dialog */}
+      <Dialog open={confirmationOpen} onClose={handleCloseConfirmation}>
+        <DialogTitle>Confirm Changes</DialogTitle>
+        <DialogContent>
+          <Typography>Are you sure you want to save these changes?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseConfirmation} color="secondary">
+            No
+          </Button>
+          <Button onClick={handleConfirmUpdate} variant="contained" color="primary">
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };

@@ -56,6 +56,7 @@ const Header = () => {
 
   const handleLogout = async () => {
     await signOut(auth);
+    navigate('/login');
   };
 
   const handleOpenConfirmation = () => {

@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, doc, updateDoc, deleteDoc, query, where } from 'firebase/firestore';
 import { db, auth } from '../../services/firebase';
 import { DataGrid } from '@mui/x-data-grid';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Grid, Typography, Paper } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Grid, Typography, Paper, FormControlLabel, Checkbox } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-// Validation schema using Yup
+// Validation schema using Yup for form validation
 const validationSchema = yup.object({
   flatName: yup.string().required('Flat name is required'),
   city: yup.string().required('City is required'),
@@ -19,10 +21,14 @@ const validationSchema = yup.object({
 });
 
 const EditFlat = () => {
+  // State to store list of flats and selected flat
   const [flats, setFlats] = useState([]);
   const [selectedFlat, setSelectedFlat] = useState(null);
   const [open, setOpen] = useState(false);
+  const [confirmationOpen, setConfirmationOpen] = useState(false); // State for confirmation dialog
+  const navigate = useNavigate(); // Hook for navigation
 
+  // Fetch flats from Firestore when the component mounts
   useEffect(() => {
     const fetchFlats = async () => {
       if (auth.currentUser) {
@@ -41,7 +47,7 @@ const EditFlat = () => {
     fetchFlats();
   }, []);
 
-  // Set formik values when a flat is selected
+  // Update formik values when selectedFlat changes
   useEffect(() => {
     if (selectedFlat) {
       const flat = flats.find(f => f.id === selectedFlat);
@@ -51,11 +57,13 @@ const EditFlat = () => {
     }
   }, [selectedFlat, flats]);
 
+  // Handler for selecting a flat and opening the edit dialog
   const handleFlatSelect = (flat) => {
     setSelectedFlat(flat.id);
     setOpen(true);
   };
 
+  // Formik setup for managing form state and validation
   const formik = useFormik({
     initialValues: {
       flatName: '',
@@ -70,35 +78,45 @@ const EditFlat = () => {
     validationSchema,
     enableReinitialize: true,
     onSubmit: async (values) => {
-      try {
-        const flatDoc = doc(db, 'apartments', selectedFlat);
-        await updateDoc(flatDoc, values);
-        alert('Flat updated successfully');
-        setOpen(false);
-        await fetchFlats(); // Refresh flats list
-      } catch (error) {
-        console.error('Error updating document: ', error);
-      }
+      setConfirmationOpen(true); // Open the confirmation dialog on form submit
     },
   });
 
+  // Handle update confirmation and perform the update operation
+  const handleConfirmUpdate = async () => {
+    setConfirmationOpen(false); // Close confirmation dialog
+    try {
+      const flatDoc = doc(db, 'apartments', selectedFlat);
+      await updateDoc(flatDoc, formik.values);
+      toast.success('Flat updated successfully'); // Notify user of success
+      navigate('/'); // Navigate to home page
+      await fetchFlats(); // Refresh flats list
+    } catch (error) {
+      console.error('Error updating document: ', error);
+    }
+  };
+
+  // Handle flat deletion
   const handleDelete = async () => {
     if (!selectedFlat) return;
     try {
       await deleteDoc(doc(db, 'apartments', selectedFlat));
-      alert('Flat deleted successfully');
+      toast.success('Flat deleted successfully'); // Notify user of success
       setOpen(false);
-      await fetchFlats(); // Refresh flats list
+      navigate('/'); // Navigate to home page after deletion
     } catch (error) {
       console.error('Error deleting document: ', error);
+      toast.error('Error deleting flat'); // Notify user of error
     }
   };
 
+  // Close the dialog and reset the form
   const handleClose = () => {
     setOpen(false);
     formik.resetForm();
   };
 
+  // Define columns for DataGrid
   const columns = [
     { field: 'flatName', headerName: 'Flat Name', width: 150 },
     { field: 'city', headerName: 'City', width: 100 },
@@ -124,15 +142,30 @@ const EditFlat = () => {
       <Typography variant="h4" gutterBottom>
         Manage Flats
       </Typography>
+      
+      <Grid container spacing={2} style={{ marginBottom: '20px' }}>
+        <Grid item>
+          <Button variant="contained" color="primary" onClick={() => navigate('/flats/new')}>
+            Add New Flat
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="primary" onClick={() => navigate('/flats/1')}>
+            View Flats
+          </Button>
+        </Grid>
+      </Grid>
+      
       <Paper elevation={3} sx={{ padding: 2, marginBottom: 2 }}>
         <div style={{ height: 400, width: '100%' }}>
           <DataGrid rows={flats} columns={columns} pageSize={5} />
         </div>
       </Paper>
 
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+      {/* Dialog for editing a flat */}
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm" className='zoom-in'>
         <DialogTitle>Edit Flat</DialogTitle>
-        <DialogContent>
+        <DialogContent maxWidth="sm" className='custom-container'>
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -217,12 +250,15 @@ const EditFlat = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  name="hasAC"
-                  label="Has AC"
-                  type="checkbox"
+                <FormControlLabel
+                control={
+                  <Checkbox
+                  name='hasAC'
                   checked={formik.values.hasAC}
                   onChange={e => formik.setFieldValue('hasAC', e.target.checked)}
+                  />
+                }
+                label="Has AC"
                 />
               </Grid>
             </Grid>
@@ -237,6 +273,22 @@ const EditFlat = () => {
           </Button>
           <Button onClick={handleDelete} variant="contained" color="error">
             Delete Flat
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Confirmation Dialog for updates */}
+      <Dialog open={confirmationOpen} onClose={() => setConfirmationOpen(false)}>
+        <DialogTitle>Confirm Update</DialogTitle>
+        <DialogContent>
+          <Typography>Are you sure you want to update this flat?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setConfirmationOpen(false)} color="secondary">
+            No
+          </Button>
+          <Button onClick={handleConfirmUpdate} variant="contained" color="primary">
+            Yes
           </Button>
         </DialogActions>
       </Dialog>
