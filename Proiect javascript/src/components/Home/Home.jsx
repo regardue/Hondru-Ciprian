@@ -64,7 +64,7 @@ const Home = () => {
           </Button>
         </Box>
       ) : (
-        <Typography variant="body1" gutterBottom align="center">
+        <Typography variant="h5" gutterBottom color={'white'} align="center">
           Please register or login to access all features.
         </Typography>
       )}

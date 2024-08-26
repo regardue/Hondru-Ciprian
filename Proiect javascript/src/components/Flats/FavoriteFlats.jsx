@@ -58,7 +58,7 @@ const FavoriteFlats = () => {
   ];
 
   return (
-    <Container className='custom-container slide-in-right'>
+    <Container className='custom-container slide-in-right container-more'>
     <div style={{ height: 400, width: '100%' }}>
       <h1>Your Favorite Flats</h1>
       <DataGrid

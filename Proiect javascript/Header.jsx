@@ -22,6 +22,7 @@ import { auth, db } from './src/services/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import styles
+import logo from './src/assets/logo.png';
 
 const Header = () => {
   const { currentUser, isAdmin } = useAuth();
@@ -124,6 +125,12 @@ const Header = () => {
     <>
       <AppBar position="static">
         <Toolbar>
+          <img
+            src={logo}
+            alt="Logo"
+            style={{ height: 100, width: 100, marginRight: '16px', cursor: 'pointer' }}
+            onClick={() => navigate('/')} 
+          />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <NavLink to="/" style={linkStyle}>FlatFinder</NavLink>
           </Typography>

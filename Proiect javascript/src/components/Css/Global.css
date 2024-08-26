@@ -111,13 +111,13 @@ body {
 }
 
 .custom-container {
-  max-width: 600px; /* Equivalent to maxWidth="sm" */
-  margin: 32px auto; /* my: 4 translates to margin-top and margin-bottom of 32px */
-  padding: 24px; /* Equivalent to p:3 which is 24px padding */
-  background: linear-gradient(to right, #ece9e6, #ffffff); /* Gradient background */
-  border-radius: 16px; /* Slightly increased border radius for a softer look */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transitions for hover effects */
+  max-width: 600px;             
+  margin: 32px auto; 
+  padding: 24px; 
+  background: linear-gradient(to right, #ece9e6, #ffffff); 
+  border-radius: 16px; 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .custom-container:hover {
@@ -127,4 +127,8 @@ body {
 
 h1{
   text-align: center;
+}
+
+.container-more{
+  height: 31rem;
 }
