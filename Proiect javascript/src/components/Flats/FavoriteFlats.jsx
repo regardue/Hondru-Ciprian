@@ -59,8 +59,8 @@ const FavoriteFlats = () => {
 
   return (
     <div>
-      <h1>Your Favorite Flats</h1>
-        <Container sx={{ overflow: 'hidden', width: '100%' }} className='custom-container slide-in-right container-more'>
+      <Container sx={{ overflow: 'hidden', width: '100%' }} className='custom-container slide-in-right container-more'>
+        <h1>Your Favorite Flats</h1>
           <div style={{ height: 400, width: '100%' }}>
             <DataGrid
               rows={favoriteFlats} // Data to display in the grid
@@ -71,7 +71,7 @@ const FavoriteFlats = () => {
               sx={{ width: '100%', overflow: 'hidden' }}
             />
           </div>
-        </Container>
+      </Container>
     </div>
   );
 };

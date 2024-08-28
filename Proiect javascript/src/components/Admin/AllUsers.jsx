@@ -8,6 +8,7 @@ import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify'; // Import toast for notifications
 
+
 // Validation schema using Yup to validate form inputs
 const validationSchema = yup.object({
   email: yup.string().email('Invalid email address').required('Email is required'),
