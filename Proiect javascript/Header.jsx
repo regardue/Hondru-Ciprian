@@ -23,6 +23,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import styles
 import logo from './src/assets/logo.png';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Header = () => {
   const { currentUser, isAdmin } = useAuth();
@@ -128,7 +129,7 @@ const Header = () => {
           <img
             src={logo}
             alt="Logo"
-            style={{ height: 100, width: 100, marginRight: '16px', cursor: 'pointer' }}
+            style={{ height: 50, width: 50, marginRight: '16px', cursor: 'pointer' }}
             onClick={() => navigate('/')} 
           />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -200,7 +201,7 @@ const Header = () => {
                     </NavLink>
                   )}
                   <Button color="inherit" onClick={handleLogout}>Logout</Button>
-                  <Button color="inherit" onClick={handleOpenConfirmation}>Delete Account</Button>
+                  <Button endIcon={<DeleteIcon />} color="inherit" onClick={handleOpenConfirmation}>Delete Account</Button>
                 </>
               ) : (
                 <>

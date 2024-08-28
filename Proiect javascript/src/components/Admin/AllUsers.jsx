@@ -97,7 +97,7 @@ const AllUsers = () => {
 
   return (
     <Container maxWidth="lg">
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom textAlign={"center"}>
         All Users
       </Typography>
       <Paper elevation={3} sx={{ padding: 3 }}>

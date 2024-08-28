@@ -58,18 +58,21 @@ const FavoriteFlats = () => {
   ];
 
   return (
-    <Container className='custom-container slide-in-right container-more'>
-    <div style={{ height: 400, width: '100%' }}>
+    <div>
       <h1>Your Favorite Flats</h1>
-      <DataGrid
-        rows={favoriteFlats} // Data to display in the grid
-        columns={columns} // Column configuration
-        pageSize={5} // Number of rows per page
-        rowsPerPageOptions={[5, 10]} // Options for number of rows per page
-        checkboxSelection // Enable row selection via checkboxes
-      />
+        <Container sx={{ overflow: 'hidden', width: '100%' }} className='custom-container slide-in-right container-more'>
+          <div style={{ height: 400, width: '100%' }}>
+            <DataGrid
+              rows={favoriteFlats} // Data to display in the grid
+              columns={columns} // Column configuration
+              pageSize={5} // Number of rows per page
+              rowsPerPageOptions={[5, 10]} // Options for number of rows per page
+              checkboxSelection // Enable row selection via checkboxes
+              sx={{ width: '100%', overflow: 'hidden' }}
+            />
+          </div>
+        </Container>
     </div>
-    </Container>
   );
 };
 

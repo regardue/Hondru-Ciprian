@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs, addDoc, query, where, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "../../services/firebase";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button, Modal, Box, useMediaQuery } from "@mui/material";
+import { Button, Modal, Box, useMediaQuery, Container } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import MessageBar from "../Messages/MessageBar"; // Component to handle messaging
@@ -187,7 +187,7 @@ const FlatView = () => {
           Edit Flat
         </Button>
       </div>
-
+      <Container sx={{ bgcolor: 'background.paper', borderRadius: 2, boxShadow: 3, p: 3, width:'100vw', maxWidth: '100vw', minWidth: '100vw', overflowX: 'auto' }}>
       {/* DataGrid to display flats */} 
       <div style={{ height: isMobile ? 400 : 500, width: '100%', overflowX: 'auto' }}>
         <div style={{ minWidth: '700px' }}> {/* Ensure minimum width for horizontal scroll */}
@@ -201,6 +201,7 @@ const FlatView = () => {
           />
         </div>
       </div>
+      </Container>
 
       {/* Modal for messaging */}
       <Modal

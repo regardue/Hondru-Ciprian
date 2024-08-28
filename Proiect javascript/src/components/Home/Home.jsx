@@ -20,13 +20,13 @@ const Home = () => {
       </Box>
 
       {/* Features Section */}
-      <Typography variant="h4" gutterBottom align="center">
+      <Typography variant="h3" gutterBottom align="center">
         Features
       </Typography>
       <Grid container spacing={4} sx={{ mb: 4 }}>
         <Grid item xs={12} md={4}>
           <Box className="text-section" sx={{ p: 2, borderRadius: 2, boxShadow: 2, textAlign: 'center' }}>
-            <Typography variant="h6">Add New Flats</Typography>
+            <Typography variant="h5">Track Your Apartment Choices</Typography>
             <Typography variant="body1">
               Focus on tracking your personal potential apartments.
             </Typography>
@@ -34,7 +34,7 @@ const Home = () => {
         </Grid>
         <Grid item xs={12} md={4}>
           <Box className="text-section" sx={{ p: 2, borderRadius: 2, boxShadow: 2, textAlign: 'center' }}>
-            <Typography variant="h6">Edit Existing Listings</Typography>
+            <Typography variant="h5">Manage Your Listings</Typography>
             <Typography variant="body1">
               Update and manage your existing listings to ensure they remain accurate and appealing.
             </Typography>
@@ -42,7 +42,7 @@ const Home = () => {
         </Grid>
         <Grid item xs={12} md={4}>
           <Box className="text-section" sx={{ p: 2, borderRadius: 2, boxShadow: 2, textAlign: 'center' }}>
-            <Typography variant="h6">Explore Available Flats</Typography>
+            <Typography variant="h5">Discover New Apartments</Typography>
             <Typography variant="body1">
               Browse our extensive collection of flats to find the perfect home for you.
             </Typography>
@@ -53,13 +53,13 @@ const Home = () => {
       {/* Conditional Buttons for Logged-In Users */}
       {currentUser ? (
         <Box sx={{ textAlign: 'center', mb: 4 }}>
-          <Button variant="contained" color="primary" onClick={() => navigate('/flats/new')} sx={{ mr: 2 }}>
+          <Button size='large' variant="contained" color="primary" onClick={() => navigate('/flats/new')} sx={{ mr: 8, fontSize:'1.5rem', padding:'1rem 3rem' }}>
             Add New Flat
           </Button>
-          <Button variant="contained" color="primary" onClick={() => navigate('/flats/1/edit')} sx={{ mr: 2 }}>
+          <Button size='large' variant="contained" color="primary" onClick={() => navigate('/flats/1/edit')} sx={{ mr: 8, fontSize:'1.5rem', padding:'1rem 3rem' }}>
             Edit Flat
           </Button>
-          <Button variant="contained" color="primary" onClick={() => navigate('/flats/1')}>
+          <Button size='large' variant="contained" color="primary" onClick={() => navigate('/flats/1')} sx={{ fontSize:'1.5rem', padding:'1rem 3rem' }}>
             View Flats
           </Button>
         </Box>
