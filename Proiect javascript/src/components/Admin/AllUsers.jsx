@@ -97,11 +97,11 @@ const AllUsers = () => {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" className='bounce-in'>
+      <Paper elevation={3} sx={{ padding: 3 }}>
       <Typography variant="h4" gutterBottom textAlign={"center"}>
         All Users
       </Typography>
-      <Paper elevation={3} sx={{ padding: 3 }}>
         <Table>
           <TableHead>
             <TableRow>

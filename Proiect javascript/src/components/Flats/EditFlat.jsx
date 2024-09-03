@@ -138,32 +138,31 @@ const EditFlat = () => {
   ];
 
   return (
-    <div>
-      <Typography variant="h4" gutterBottom>
-        Manage Flats
-      </Typography>
-      
-      <Grid container spacing={2} style={{ marginBottom: '20px' }}>
+    <div>     
+      <Grid container spacing={2} style={{ marginBottom: '20px', marginTop: '20px' }}>
         <Grid item>
-          <Button variant="contained" color="primary" onClick={() => navigate('/flats/new')}>
+          <Button variant="contained" color="primary" onClick={() => navigate('/flats/new')} className='zoom-in'>
             Add New Flat
           </Button>
         </Grid>
         <Grid item>
-          <Button variant="contained" color="primary" onClick={() => navigate('/flats/1')}>
+          <Button variant="contained" color="primary" onClick={() => navigate('/flats/1')} className='zoom-in'>
             View Flats
           </Button>
         </Grid>
       </Grid>
       
-      <Paper elevation={3} sx={{ padding: 2, marginBottom: 2 }}>
+      <Paper elevation={3} sx={{ padding: 2, marginBottom: 2 }} className='fade-in'>
+        <Typography variant="h4" gutterBottom textAlign={"center"}>
+          Manage Flats
+        </Typography>
         <div style={{ height: 400, width: '100%' }}>
           <DataGrid rows={flats} columns={columns} pageSize={5} />
         </div>
       </Paper>
 
       {/* Dialog for editing a flat */}
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm" className='zoom-in'>
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle>Edit Flat</DialogTitle>
         <DialogContent maxWidth="sm" className='custom-container'>
           <form onSubmit={formik.handleSubmit}>

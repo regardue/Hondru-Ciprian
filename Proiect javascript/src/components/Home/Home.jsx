@@ -1,7 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Typography, Grid, Box } from '@mui/material';
+import { Button, Typography, Grid, Box, Paper } from '@mui/material';
 import { useAuth } from '../../context/AuthContext'; 
+
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -59,7 +61,7 @@ const Home = () => {
           <Button size='large' variant="contained" color="primary" onClick={() => navigate('/flats/1/edit')} sx={{ mr: { xs: 0, md: 2 }, mb: { xs: 2, md: 0 }, fontSize: { xs: '1rem', md: '1.5rem' }, padding: { xs: '0.5rem 1.5rem', md: '1rem 3rem' } }}>
             Edit Flat
           </Button>
-          <Button size='large' variant="contained" color="primary" onClick={() => navigate('/flats/1')} sx={{ fontSize: { xs: '1rem', md: '1.5rem' }, padding: { xs: '0.5rem 1.5rem', md: '1rem 3rem' } }}>
+          <Button size='large' variant="contained" color="primary" onClick={() => navigate('/flats/1')} sx={{ mr: { xs: 0, md: 2 }, mb: { xs: 2, md: 0 }, fontSize: { xs: '1rem', md: '1.5rem' }, padding: { xs: '0.5rem 1.5rem', md: '1rem 3rem' } }}>
             View Flats
           </Button>
         </Box>
@@ -70,14 +72,15 @@ const Home = () => {
       )}
 
       {/* Testimonials Section */}
-      <Box sx={{ textAlign: 'center', mb: { xs: 2, md: 4 } }}>
-        <Typography variant="h6" color={'white'} gutterBottom sx={{ fontSize: { xs: '1rem', md: '1.5rem' } }}>
+      
+      <Box className='text-section' sx={{ textAlign: 'center', mb: { xs: 2, md: 4 }, mx:'auto', maxWidth:'42rem' }}>
+        <Typography variant="h6" gutterBottom sx={{ fontSize: { xs: '1rem', md: '1.5rem' } }}>
           What Our Users Say
         </Typography>
-        <Typography variant="body2" color={'white'} sx={{ fontSize: { xs: '0.8rem', md: '1rem' } }}>
+        <Typography variant="body2" sx={{ fontSize: { xs: '0.8rem', md: '1rem' } }}>
           "FlatFinder helped me find my perfect home! The process was smooth and easy."
         </Typography>
-        <Typography variant="body2" color={'white'} sx={{ fontStyle: 'italic', mt: 1, fontSize: { xs: '0.8rem', md: '1rem' } }}>
+        <Typography variant="body2" sx={{ fontStyle: 'italic', mt: 1, fontSize: { xs: '0.8rem', md: '1rem' } }}>
           - Satisfied User
         </Typography>
       </Box>
