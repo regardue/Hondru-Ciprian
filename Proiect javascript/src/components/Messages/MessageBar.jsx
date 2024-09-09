@@ -31,7 +31,7 @@ const MessageBar = ({ flatId, receiverUid, currentUserUid }) => {
 
     const messageData = {
       flatId,
-      fullName: currentUser.displayName || "Anonymous", // Use user's display name or "Anonymous"
+      fullName: currentUser.displayName || "", // Use user's display name or "Anonymous"
       senderEmail: currentUser.email,
       senderUid: currentUser.uid,
       receiverUid,
@@ -68,7 +68,7 @@ const MessageBar = ({ flatId, receiverUid, currentUserUid }) => {
 
     const replyData = {
       flatId,
-      fullName: currentUser.displayName || "Anonymous", // Use user's display name or "Anonymous"
+      fullName: currentUser.displayName || "", // Use user's display name or "Anonymous"
       senderEmail: currentUser.email,
       senderUid: currentUser.uid,
       receiverUid: selectedMessage.senderUid, // Reply is sent to the original sender
@@ -152,7 +152,7 @@ const MessageBar = ({ flatId, receiverUid, currentUserUid }) => {
         {messages.map((msg) => (
           <div key={msg.id}>
             <ListItem>
-              <strong>{msg.fullName || "Anonymous"} ({msg.senderEmail}):</strong> {msg.content}
+              <strong>{msg.fullName || ""} ({msg.senderEmail}):</strong> {msg.content}
               {receiverUid === currentUserUid && (
                 <Button
                   onClick={() => {
@@ -171,7 +171,7 @@ const MessageBar = ({ flatId, receiverUid, currentUserUid }) => {
             {messages.filter(reply => reply.parentMessageId === msg.id).map(reply => (
               <ListItem key={reply.id} sx={{ pl: 4 }}>
                 <Typography variant="body2">
-                  <strong>{reply.fullName || "Anonymous"} ({reply.senderEmail}):</strong> {reply.content}
+                  <strong>{reply.fullName || ""} ({reply.senderEmail}):</strong> {reply.content}
                 </Typography>
               </ListItem>
             ))}

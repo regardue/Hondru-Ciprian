@@ -67,7 +67,7 @@ const FavoriteFlats = () => {
               columns={columns} // Column configuration
               pageSize={5} // Number of rows per page
               rowsPerPageOptions={[5, 10]} // Options for number of rows per page
-              checkboxSelection // Enable row selection via checkboxes
+              disableSelectionOnClick // Disable row selection via checkboxes
               sx={{ width: '100%', overflow: 'hidden' }}
             />
           </div>

@@ -201,7 +201,7 @@ const FlatView = () => {
             columns={columns}
             pageSize={isMobile ? 3 : 5}
             rowsPerPageOptions={[3, 5, 10]}
-            checkboxSelection
+            disableSelectionOnClick
             disableColumnMenu={isMobile} // Disable column menu on mobile
           />
         </div>
