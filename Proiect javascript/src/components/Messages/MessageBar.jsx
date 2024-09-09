@@ -31,7 +31,7 @@ const MessageBar = ({ flatId, receiverUid, currentUserUid }) => {
 
     const messageData = {
       flatId,
-      fullName: currentUser.displayName || "", // Use user's display name or "Anonymous"
+      fullName: currentUser.displayName || "", // Use user's display name or ""
       senderEmail: currentUser.email,
       senderUid: currentUser.uid,
       receiverUid,
@@ -68,7 +68,7 @@ const MessageBar = ({ flatId, receiverUid, currentUserUid }) => {
 
     const replyData = {
       flatId,
-      fullName: currentUser.displayName || "", // Use user's display name or "Anonymous"
+      fullName: currentUser.displayName || "", // Use user's display name or ""
       senderEmail: currentUser.email,
       senderUid: currentUser.uid,
       receiverUid: selectedMessage.senderUid, // Reply is sent to the original sender
@@ -132,7 +132,7 @@ const MessageBar = ({ flatId, receiverUid, currentUserUid }) => {
         <div>
           <Typography variant="h6">Reply to:</Typography>
           <Typography>
-            <strong>{selectedMessage.fullName || "Anonymous"} ({selectedMessage.senderEmail}):</strong> {selectedMessage.content}
+            <strong>{selectedMessage.fullName || ""} ({selectedMessage.senderEmail}):</strong> {selectedMessage.content}
           </Typography>
           <TextField
             value={replyContent}
