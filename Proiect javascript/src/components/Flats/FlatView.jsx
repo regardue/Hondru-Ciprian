@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs, addDoc, query, where, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "../../services/firebase";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button, Modal, Box, useMediaQuery, Container, Typography } from "@mui/material";
+import { Checkbox, Modal, Box, useMediaQuery, Container, Typography } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
+import { FavoriteBorder, Favorite, BookmarkBorder, Bookmark } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import MessageBar from "../Messages/MessageBar"; // Component to handle messaging
+import { Button } from '@mui/material';
 
 
 const FlatView = () => {
@@ -123,14 +125,12 @@ const FlatView = () => {
       flex: 1,
       minWidth: 150,
       renderCell: (params) => (
-        <Button
+        <Checkbox
+          icon={<BookmarkBorder />}
+          checkedIcon={<Bookmark />}
+          checked={selectedFlat?.id === params.row.id}
           onClick={() => handleSelectFlat(params.row)}
-          variant="contained"
-          color="secondary"
-          size={isMobile ? "small" : "medium"} // Adjust button size based on screen size
-        >
-          {params.row.uid !== currentUser?.uid ? "Send Message" : "View Messages"}
-        </Button>
+        />
       ),
     },
     {
@@ -140,13 +140,12 @@ const FlatView = () => {
       minWidth: 130,
       renderCell: (params) => (
         params.row.uid !== currentUser?.uid && (
-          <Button
+          <Checkbox
+            icon={<FavoriteBorder />}
+            checkedIcon={<Favorite />}
+            checked={favoriteFlats.has(params.row.id)}
             onClick={() => handleToggleFavorite(params.row)}
-            variant="text"
-            size={isMobile ? "small" : "medium"} // Adjust button size based on screen size
-          >
-            {favoriteFlats.has(params.row.id) ? "Remove from Favorites" : "Add to Favorites"}
-          </Button>
+          />
         )
       ),
     },
@@ -167,8 +166,6 @@ const FlatView = () => {
 
   return (
     <div>
-      
-
       {/* Navigation Buttons */}
       <div style={{ marginBottom: '20px', marginTop: '20px' }}>
         <Button
@@ -189,8 +186,8 @@ const FlatView = () => {
           Edit Flat
         </Button>
       </div>
+
       <Container sx={{ bgcolor: 'background.paper', borderRadius: 2, boxShadow: 3, p: 3, width:'100vw', maxWidth: '100vw', minWidth: '100vw', overflowX: 'auto' }} className='fade-in'>
-      {/* DataGrid to display flats */} 
       <Typography variant="h4" gutterBottom textAlign={"center"}>
         All Flats
       </Typography>
@@ -201,7 +198,7 @@ const FlatView = () => {
             columns={columns}
             pageSize={isMobile ? 3 : 5}
             rowsPerPageOptions={[3, 5, 10]}
-            disableSelectionOnClick
+            disableRowSelectionOnClick
             disableColumnMenu={isMobile} // Disable column menu on mobile
           />
         </div>
