@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../../services/firebase';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
-import { Table, TableBody, TableCell, TableHead, TableRow, Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Container, Paper, Typography } from '@mui/material';
+import { Table, TableBody, TableCell, TableHead, TableRow, Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Container, Paper, Typography, TablePagination, TableContainer } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -25,6 +25,10 @@ const AllUsers = () => {
   const [editingUser, setEditingUser] = useState(null);
   // State to control the visibility of the confirmation dialog
   const [confirmationOpen, setConfirmationOpen] = useState(false);
+  // State for current page
+  const [page, setPage] = useState(0);
+  // State to control the number of rows per page
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   // Hook for programmatic navigation
   const navigate = useNavigate();
 
@@ -96,42 +100,67 @@ const AllUsers = () => {
     formik.resetForm();
   };
 
+  // Handle page change
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  }
+
+  // Handle rows per page change
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0); // Reset page to 0 when changing rows per page
+  }
+
+  // Determine the users to display on the current page
+  const paginatedUsers = users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
   return (
     <Container maxWidth="lg" className='bounce-in'>
-      <Paper elevation={3} sx={{ padding: 3 }}>
+      <Paper elevation={3} sx={{ padding: 3, height: '70vh' }}>
       <Typography variant="h4" gutterBottom textAlign={"center"}>
         All Users
       </Typography>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Email</TableCell>
-              <TableCell>First Name</TableCell>
-              <TableCell>Last Name</TableCell>
-              <TableCell>Date of Birth</TableCell>
-              <TableCell>Password</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users.map(user => (
-              <TableRow key={user.id}>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>{user.firstName}</TableCell>
-                <TableCell>{user.lastName}</TableCell>
-                <TableCell>{user.birthdate}</TableCell>
-                <TableCell>******</TableCell> {/* Hide password for security reasons */}
-                <TableCell>
-                  {user.isAdmin ? (
-                    <Button disabled>Edit</Button>
-                  ) : (
-                    <Button onClick={() => handleEditClick(user)}>Edit</Button>
-                  )}
-                </TableCell>
+      <TableContainer sx={{ maxHeight: '85%' }}> {/* Limit table container height */}
+          <Table stickyHeader> {/* stickyHeader keeps the headers visible while scrolling */}
+            <TableHead>
+              <TableRow>
+                <TableCell>Email</TableCell>
+                <TableCell>First Name</TableCell>
+                <TableCell>Last Name</TableCell>
+                <TableCell>Date of Birth</TableCell>
+                <TableCell>Password</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+            <TableBody>
+              {paginatedUsers.map(user => (
+                <TableRow key={user.id}>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.firstName}</TableCell>
+                  <TableCell>{user.lastName}</TableCell>
+                  <TableCell>{user.birthdate}</TableCell>
+                  <TableCell>******</TableCell>
+                  <TableCell>
+                    {user.isAdmin ? (
+                      <Button disabled>Edit</Button>
+                    ) : (
+                      <Button onClick={() => handleEditClick(user)}>Edit</Button>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        {/* Add TablePagination below the table */}
+        <TablePagination
+          component="div"
+          count={users.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </Paper>
 
       {/* Dialog for editing user */}

@@ -111,8 +111,8 @@ const FlatView = () => {
 
   // Define columns for DataGrid
   const columns = [
-    { field: 'flatName', headerName: 'Flat Name', flex: 1, minWidth: 150 },
-    { field: 'city', headerName: 'City', flex: 1, minWidth: 130 },
+    { field: 'flatName', headerName: 'Flat Name', flex: 1, minWidth: 150, sortable: true,filterable: true },
+    { field: 'city', headerName: 'City', flex: 1, minWidth: 130, sortable: true, filterable: true },
     { field: 'streetName', headerName: 'Street Name', flex: 1, minWidth: 130 },
     { field: 'streetNumber', headerName: 'Street Number', flex: 1, minWidth: 130 },
     { field: 'hasAC', headerName: 'Has AC', flex: 0.5, minWidth: 90, renderCell: (params) => (params.value ? "Yes" : "No") },
@@ -200,6 +200,8 @@ const FlatView = () => {
             rowsPerPageOptions={[3, 5, 10]}
             disableRowSelectionOnClick
             disableColumnMenu={isMobile} // Disable column menu on mobile
+            sortingMode="client"
+            filterMode="client"
           />
         </div>
       </div>
